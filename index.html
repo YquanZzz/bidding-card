@@ -4273,7 +4273,7 @@
     var musicClickLastTime = 0;
     document.getElementById('btnMusic').onclick = function() {
       var now = Date.now();
-      if (now - musicClickLastTime > 1500) musicClickCount = 0;
+      if (now - musicClickLastTime > 3000) musicClickCount = 0;
       musicClickLastTime = now;
       musicClickCount++;
       if (musicClickCount >= 5) {
