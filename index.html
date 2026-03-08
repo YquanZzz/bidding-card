@@ -2363,6 +2363,12 @@
       startBgmIfNeeded();
       gameOverTime = 0;
       gameOverAgainScheduled = false;
+      [0, 2, 3].forEach(function(idx) {
+        var el = document.getElementById('player' + idx);
+        if (el) el.classList.remove('zhizhi-rap-shake');
+      });
+      var felt = document.querySelector('.felt');
+      if (felt) felt.classList.remove('felt-shake-rap');
       if (gameOverBubbleTimeoutId) { clearTimeout(gameOverBubbleTimeoutId); gameOverBubbleTimeoutId = null; }
       if (gameOverBubbleIntervalId) { clearInterval(gameOverBubbleIntervalId); gameOverBubbleIntervalId = null; }
       deck = makeDeck();
@@ -3345,6 +3351,10 @@
       if (otherNotesWrap && otherNotesWrap.parentNode) otherNotesWrap.parentNode.removeChild(otherNotesWrap);
       var felt = document.querySelector('.felt');
       if (felt) felt.classList.add('felt-shake-rap');
+      [0, 2, 3].forEach(function(idx) {
+        var el = document.getElementById('player' + idx);
+        if (el) el.classList.add('zhizhi-rap-shake');
+      });
       function scheduleBar() {
         for (var i = 0; i < ZHIZHI_RAP_BEAT.length; i++) {
           (function(ev) {
@@ -3361,15 +3371,6 @@
       zhizhiRapOtherNotesTimeoutId = setTimeout(function() {
         zhizhiRapOtherNotesTimeoutId = null;
         if (!document.getElementById('zhizhiVictoryWrap')) return;
-        var stagger = [0, 380, 720];
-        for (var s = 0; s < otherPlayerIndices.length; s++) {
-          (function(idx, delay) {
-            setTimeout(function() {
-              var el = document.getElementById('player' + idx);
-              if (el && document.getElementById('zhizhiVictoryWrap')) el.classList.add('zhizhi-rap-shake');
-            }, delay);
-          })(otherPlayerIndices[s], stagger[s]);
-        }
         var wrap = document.createElement('div');
         wrap.id = 'zhizhiOtherPlayerNotes';
         wrap.style.cssText = 'position:fixed;left:0;top:0;width:100%;height:100%;pointer-events:none;z-index:9998;';
@@ -3405,12 +3406,6 @@
       if (zhizhiRapOtherNotesIntervalId) { clearInterval(zhizhiRapOtherNotesIntervalId); zhizhiRapOtherNotesIntervalId = null; }
       var otherNotesWrap = document.getElementById('zhizhiOtherPlayerNotes');
       if (otherNotesWrap && otherNotesWrap.parentNode) otherNotesWrap.parentNode.removeChild(otherNotesWrap);
-      [0, 2, 3].forEach(function(idx) {
-        var el = document.getElementById('player' + idx);
-        if (el) el.classList.remove('zhizhi-rap-shake');
-      });
-      var felt = document.querySelector('.felt');
-      if (felt) felt.classList.remove('felt-shake-rap');
     }
     function stopZhizhiVictoryAnimation() {
       if (zhizhiVictoryRafId != null) {
@@ -4010,6 +4005,7 @@
         if (i === 3 && document.body.classList.contains('xiaobai-left-seat')) baseClass += ' xiaobai-on-table';
         if (i === 1 && document.getElementById('zhizhiVictoryWrap')) baseClass += ' zhizhi-on-table';
         if (i === 2 && document.getElementById('sansVictoryWrap')) baseClass += ' sans-on-table';
+        if ([0, 2, 3].indexOf(i) >= 0 && gameOver && gameOverWinnerIndex === 1) baseClass += ' zhizhi-rap-shake';
         div.className = baseClass;
         if (p.score >= TARGET_SCORE) div.classList.add('winner'); else div.classList.remove('winner');
         if (i === 3 && document.getElementById('xiaobaiVictoryWrap')) div.classList.remove('winner');
