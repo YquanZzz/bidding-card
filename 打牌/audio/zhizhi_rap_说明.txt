@@ -1,0 +1,5 @@
+【吱吱匪帮说唱 BGM】
+
+说明：
+  吱吱胜利动画进入桌子、开始左右巡逻时，会自动播放程序生成的匪帮说唱节奏 BGM（低音鼓点循环），无需放置任何音频文件。
+  若需自定义 BGM，可在 index.html 中修改 ZHIZHI_RAP_BEAT 与 playZhizhiRapNote。
