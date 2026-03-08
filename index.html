@@ -169,6 +169,15 @@
     .felt.felt-shake-light {
       animation: feltShakeLight 0.22s ease-out;
     }
+    @keyframes feltShakeRap {
+      0%, 100% { transform: translate(-50%, -50%); }
+      25% { transform: translate(-50%, -50%) translate(-1px, 0); }
+      50% { transform: translate(-50%, -50%) translate(1px, 1px); }
+      75% { transform: translate(-50%, -50%) translate(0, -1px); }
+    }
+    .felt.felt-shake-rap {
+      animation: feltShakeRap 0.4s ease-in-out infinite;
+    }
     .deck-and-card {
       position: absolute;
       left: 50%;
@@ -378,6 +387,23 @@
         inset 0 0 0 2px var(--gb-dark),
         2px 2px 0 var(--gb-shadow);
     }
+    .chip-burst-particle {
+      position: fixed;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--gb-lightest);
+      box-shadow: 0 0 0 1px var(--gb-lightest), 0 0 4px 1px rgba(155, 188, 15, 0.6);
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      animation: chip-burst-out 0.4s ease-out forwards;
+      image-rendering: pixelated;
+      image-rendering: crisp-edges;
+    }
+    @keyframes chip-burst-out {
+      0% { transform: translate(-50%, -50%) scale(0.3); opacity: 1; }
+      100% { transform: translate(-50%, -50%) translate(var(--tx), var(--ty)) scale(0.8); opacity: 0; }
+    }
     .chip-fly-layer {
       position: fixed;
       left: 0;
@@ -400,6 +426,396 @@
       box-shadow: inset 0 0 0 2px var(--gb-dark), 2px 2px 0 var(--gb-shadow);
       transition: left 0.35s ease-out, top 0.35s ease-out;
     }
+    .xiaobai-victory-wrap {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 54vmin;
+      height: 54vmin;
+      min-width: 180px;
+      min-height: 180px;
+      max-width: 90%;
+      aspect-ratio: 1;
+      pointer-events: none;
+      z-index: 25;
+      overflow: visible;
+    }
+    .xiaobai-victory-wrap.xiaobai-caught-overlay {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      transform: none;
+      min-width: 0;
+      min-height: 0;
+      max-width: none;
+      aspect-ratio: auto;
+    }
+    .xiaobai-victory-wrap .table-bubble {
+      position: absolute;
+      left: 0;
+      top: 0;
+      transform: translate(-50%, 0);
+      padding: 8px 12px;
+      background: var(--gb-lightest);
+      border: 3px solid var(--gb-darkest);
+      box-shadow: 3px 3px 0 var(--gb-shadow);
+      font-size: 9px;
+      font-weight: bold;
+      color: var(--gb-text);
+      white-space: nowrap;
+      z-index: 30;
+    }
+    .xiaobai-victory-wrap .table-bubble::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 6px solid transparent;
+      border-top-color: var(--gb-darkest);
+    }
+    .xiaobai-victory-wrap .table-bubble.bubble-shake-loop,
+    .table-bubble-fixed.bubble-shake-loop {
+      animation: bubbleShake 0.35s ease-in-out infinite;
+    }
+    @keyframes bubblePop {
+      0% { transform: translate(-50%, 0) scale(0.6); opacity: 0; }
+      50% { transform: translate(-50%, 0) scale(1.15); opacity: 1; }
+      100% { transform: translate(-50%, 0) scale(1); opacity: 1; }
+    }
+    .xiaobai-victory-wrap .table-bubble.bubble-pop {
+      animation: bubblePop 0.2s ease-out forwards;
+    }
+    .table-bubble-fixed {
+      position: fixed;
+      left: 0;
+      top: 0;
+      transform: translate(-50%, 0);
+      padding: 8px 12px;
+      background: var(--gb-lightest);
+      border: 3px solid var(--gb-darkest);
+      box-shadow: 3px 3px 0 var(--gb-shadow);
+      font-size: 9px;
+      font-weight: bold;
+      color: var(--gb-text);
+      white-space: nowrap;
+      z-index: 99999;
+      pointer-events: none;
+      display: block;
+      visibility: visible;
+      opacity: 1;
+    }
+    @keyframes bubbleBounceFixed {
+      0% { transform: translate(-50%, 0) scale(0); opacity: 0; }
+      55% { transform: translate(-50%, 0) scale(1.15); opacity: 1; }
+      75% { transform: translate(-50%, 0) scale(0.92); opacity: 1; }
+      100% { transform: translate(-50%, 0) scale(1); opacity: 1; }
+    }
+    .table-bubble-fixed.bubble-animate-in {
+      animation: bubbleBounceFixed 0.38s ease-out forwards;
+      transform-origin: bottom center;
+    }
+    .table-bubble-fixed::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 6px solid transparent;
+      border-top-color: var(--gb-darkest);
+    }
+    .xiaobai-victory-wrap .xiaobai-avatar {
+      position: absolute;
+      width: 36px;
+      height: 36px;
+      left: 0;
+      top: 0;
+      transform: translate(-50%, -50%);
+      background: var(--gb-lightest);
+      border: 3px solid var(--gb-darkest);
+      border-radius: 0;
+      box-shadow: 3px 3px 0 var(--gb-shadow);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .xiaobai-victory-wrap.xiaobai-caught-overlay .xiaobai-avatar {
+      transition: transform 0.22s ease-out;
+    }
+    .xiaobai-victory-wrap .xiaobai-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      image-rendering: pixelated;
+      filter: url(#avatarGreenFilter);
+    }
+    .xiaobai-victory-wrap .xiaobai-ball {
+      position: absolute;
+      width: 22px;
+      height: 22px;
+      left: 0;
+      top: 0;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background: var(--gb-lightest);
+      border: 2px solid var(--gb-darkest);
+      box-shadow: 2px 2px 0 var(--gb-shadow), inset -2px -2px 0 rgba(15,56,15,0.2);
+    }
+    .xiaobai-victory-wrap .xiaobai-ball.mouse {
+      width: 24px;
+      height: 20px;
+      border-radius: 50% 50% 45% 45%;
+      background: var(--gb-light);
+      border: 2px solid var(--gb-darkest);
+      box-shadow: 2px 2px 0 var(--gb-shadow);
+    }
+    .xiaobai-victory-wrap .xiaobai-ball.mouse::before,
+    .xiaobai-victory-wrap .xiaobai-ball.mouse::after {
+      content: '';
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      top: -5px;
+      border-radius: 50%;
+      background: var(--gb-light);
+      border: 2px solid var(--gb-darkest);
+      box-shadow: 1px 1px 0 var(--gb-shadow);
+    }
+    .xiaobai-victory-wrap .xiaobai-ball.mouse::before {
+      left: -4px;
+    }
+    .xiaobai-victory-wrap .xiaobai-ball.mouse::after {
+      right: -4px;
+      left: auto;
+    }
+    .xiaobai-victory-wrap .xiaobai-ball.mouse .mouse-tail {
+      position: absolute;
+      width: 14px;
+      height: 4px;
+      left: 50%;
+      bottom: -2px;
+      transform: translateX(-50%) rotate(15deg);
+      border-radius: 2px;
+      background: var(--gb-darkest);
+      box-shadow: 1px 0 0 var(--gb-shadow);
+    }
+    /* 被抓目标：自定义头像，无边框，透明底 */
+    .xiaobai-victory-wrap .xiaobai-ball.caught-avatar {
+      width: 24px;
+      height: 24px;
+      border-radius: 0;
+      background: transparent;
+      border: none;
+      box-shadow: none;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .xiaobai-victory-wrap .xiaobai-ball.caught-avatar img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: contain;
+      image-rendering: pixelated;
+      image-rendering: crisp-edges;
+      filter: url(#avatarGreenFilter);
+    }
+    @keyframes caughtShake {
+      0%, 100% { transform: translate(-50%, -50%) translate(0, 0); }
+      25% { transform: translate(-50%, -50%) translate(-2px, -1px); }
+      50% { transform: translate(-50%, -50%) translate(2px, 1px); }
+      75% { transform: translate(-50%, -50%) translate(-1px, 2px); }
+    }
+    .xiaobai-victory-wrap .xiaobai-ball.caught-avatar.caught-shake {
+      animation: caughtShake 0.2s ease-in-out infinite;
+    }
+    .xiaobai-victory-wrap.xiaobai-caught-overlay .xiaobai-ball.caught-avatar {
+      transition: transform 0.22s ease-out;
+    }
+    .player.xiaobai-on-table .player-avatar { visibility: hidden; }
+    .zhizhi-victory-wrap {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 25;
+      overflow: visible;
+    }
+    .zhizhi-victory-wrap .zhizhi-avatar {
+      position: absolute;
+      width: 36px;
+      height: 36px;
+      left: 0;
+      top: 0;
+      transform: translate(-50%, -50%);
+      background: var(--gb-lightest);
+      border: 3px solid var(--gb-darkest);
+      border-radius: 0;
+      box-shadow: 3px 3px 0 var(--gb-shadow);
+      overflow: visible;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .zhizhi-victory-wrap .zhizhi-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      image-rendering: pixelated;
+      filter: url(#avatarGreenFilter);
+    }
+    @keyframes zhizhiMicWobble {
+      0%, 100% { transform: translateY(0) rotate(-4deg); }
+      50% { transform: translateY(-1px) rotate(4deg); }
+    }
+    .zhizhi-victory-wrap .zhizhi-avatar-mic {
+      position: absolute;
+      right: -16px;
+      bottom: -16px;
+      width: 11px;
+      height: 11px;
+      object-fit: contain;
+      image-rendering: pixelated;
+      z-index: 2;
+      pointer-events: none;
+      animation: zhizhiMicWobble 0.5s ease-in-out infinite;
+    }
+    .zhizhi-victory-wrap .zhizhi-note {
+      position: absolute;
+      font-size: 18px;
+      color: var(--gb-darkest);
+      line-height: 1;
+      pointer-events: none;
+      z-index: 30;
+      animation: zhizhiNoteFloat 1.5s ease-out forwards;
+    }
+    @keyframes zhizhiNoteFloat {
+      0% { transform: rotate(var(--note-rotate, 0deg)) translateY(0) scale(0.85); opacity: 1; }
+      65% { transform: rotate(var(--note-rotate, 0deg)) translateY(-18px) scale(1); opacity: 1; }
+      100% { transform: rotate(var(--note-rotate, 0deg)) translateY(-32px) scale(1); opacity: 0; }
+    }
+    .zhizhi-player-note {
+      position: fixed;
+      font-size: 18px;
+      color: var(--gb-darkest);
+      line-height: 1;
+      pointer-events: none;
+      z-index: 9998;
+      animation: zhizhiNoteFloat 1.5s ease-out forwards;
+      transform-origin: center bottom;
+    }
+    .player.zhizhi-on-table .player-avatar { visibility: hidden; }
+    .sans-victory-wrap {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 25;
+      overflow: visible;
+    }
+    .sans-victory-wrap .sans-avatar {
+      position: absolute;
+      width: 36px;
+      height: 36px;
+      left: 0;
+      top: 0;
+      transform: translate(-50%, -50%);
+      background: var(--gb-lightest);
+      border: 3px solid var(--gb-darkest);
+      border-radius: 0;
+      box-shadow: 3px 3px 0 var(--gb-shadow);
+      overflow: visible;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .sans-victory-wrap .sans-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      image-rendering: pixelated;
+      filter: url(#avatarGreenFilter);
+    }
+    .sans-victory-wrap.sans-face-overlay {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .sans-victory-wrap.sans-face-overlay .sans-avatar {
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%) scale(1);
+    }
+    .sans-victory-wrap .sans-dialogue-bubble {
+      position: absolute;
+      left: 50%;
+      bottom: 52%;
+      transform: translateX(-50%);
+      margin-bottom: 2px;
+      max-width: 90%;
+      padding: 6px 10px 10px;
+      background: var(--gb-lightest);
+      border: 3px solid var(--gb-darkest);
+      box-shadow: 3px 3px 0 var(--gb-shadow);
+      color: var(--gb-text);
+      pointer-events: none;
+      z-index: 20;
+    }
+    .sans-victory-wrap .sans-dialogue-bubble::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 6px solid transparent;
+      border-top-color: var(--gb-darkest);
+    }
+    .sans-victory-wrap .sans-dialogue-line {
+      text-align: center;
+      font-size: 10px;
+      font-family: "Press Start 2P", monospace;
+      line-height: 1.7;
+      padding: 0;
+    }
+    .sans-victory-wrap .sans-dialogue-line .sans-char {
+      display: inline-block;
+      opacity: 0;
+      animation: sansCharIn 0.15s ease-out forwards;
+    }
+    .sans-victory-wrap .sans-dialogue-line .sans-char-heavy {
+      font-weight: 900;
+      text-shadow: 1px 1px 0 var(--gb-shadow);
+      animation: sansCharIn 0.15s ease-out forwards, sansHeavyJitter 0.14s ease-in-out 0.18s infinite;
+    }
+    @keyframes sansHeavyJitter {
+      0%, 100% { transform: translate(0, 0); }
+      12.5% { transform: translate(2px, -2px); }
+      25% { transform: translate(-2px, 1px); }
+      37.5% { transform: translate(1px, 2px); }
+      50% { transform: translate(-1px, -1px); }
+      62.5% { transform: translate(-2px, -2px); }
+      75% { transform: translate(2px, 1px); }
+      87.5% { transform: translate(-1px, 2px); }
+    }
+    @keyframes sansCharIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    .player.sans-on-table .player-avatar { visibility: hidden; }
     .table-pass-indicators {
       position: absolute;
       left: 0;
@@ -515,6 +931,13 @@
       -webkit-tap-highlight-color: transparent;
       touch-action: manipulation;
     }
+    button, .btn-start, .game-over-panel .btn-again {
+      transition: transform 0.1s ease-out;
+      transform-origin: center center;
+    }
+    button:active:not(.btn-start-hit), .btn-start:active:not(.btn-start-hit), .game-over-panel .btn-again:active {
+      transform: scale(0.94);
+    }
     .btn-bid {
       min-width: 44px;
       height: 36px;
@@ -598,6 +1021,15 @@
       50% { transform: translateY(-1px); }
     }
     .player.winner .player-avatar { animation: winnerShake 0.15s ease-in-out infinite; }
+    @keyframes playerRapShake {
+      0%, 100% { transform: translate(0, 0); }
+      25% { transform: translate(-1px, 0); }
+      50% { transform: translate(1px, 1px); }
+      75% { transform: translate(0, -1px); }
+    }
+    .player.zhizhi-rap-shake .player-info {
+      animation: playerRapShake 0.38s ease-in-out infinite;
+    }
     .player-name { font-size: 7px; color: var(--gb-text); }
     .player-chips { display: flex; align-items: center; gap: 6px; }
     /* Game Boy 筹码：圆片 + 高对比 */
@@ -745,6 +1177,31 @@
     }
     .btn-add10:hover { background: var(--gb-light); color: var(--gb-darkest); }
 
+    .ai-win-btns {
+      position: absolute;
+      left: 8px;
+      bottom: 42px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      z-index: 10000;
+    }
+    .btn-ai-win {
+      padding: 4px 8px;
+      background: var(--gb-dark);
+      color: var(--gb-lightest);
+      border: 2px solid var(--gb-darkest);
+      border-radius: 0;
+      cursor: pointer;
+      font-size: 7px;
+      font-weight: bold;
+      line-height: 1;
+      font-family: inherit;
+      box-shadow: 2px 2px 0 var(--gb-shadow);
+      -webkit-tap-highlight-color: transparent;
+    }
+    .btn-ai-win:hover { background: var(--gb-light); color: var(--gb-darkest); }
+
     .btn-bgm-switch {
       position: absolute;
       right: 8px;
@@ -764,6 +1221,12 @@
       z-index: 10000;
     }
     .btn-bgm-switch:hover { background: var(--gb-light); color: var(--gb-darkest); }
+    .ai-win-btns,
+    .btn-add10,
+    .btn-bgm-switch {
+      display: none !important;
+      pointer-events: none;
+    }
 
     .confetti-wrap {
       position: fixed;
@@ -1163,6 +1626,50 @@
     .player-bubble.bubble-shake {
       animation: bubbleShake 0.4s ease-in-out 3;
     }
+    .player-bubble.bubble-shake-loop {
+      animation: bubbleShake 0.35s ease-in-out infinite;
+    }
+    .player-bubble .bubble-char-shake {
+      display: inline-block;
+      animation: bubbleCharShake 0.32s ease-in-out infinite;
+    }
+    .player-bubble .bubble-char-shake:nth-child(2n) { animation-delay: -0.08s; }
+    .player-bubble .bubble-char-shake:nth-child(3n) { animation-delay: -0.16s; }
+    @keyframes bubbleCharShake {
+      0%, 100% { transform: translate(0, 0); }
+      25% { transform: translate(1px, -1px); }
+      50% { transform: translate(-1px, 1px); }
+      75% { transform: translate(-1px, -1px); }
+    }
+    @keyframes sweatShake {
+      0%, 100% { transform: translate(0, 0); }
+      10% { transform: translate(-2px, -1px); }
+      20% { transform: translate(2px, 1px); }
+      30% { transform: translate(-1px, 2px); }
+      40% { transform: translate(1px, -2px); }
+      50% { transform: translate(-2px, 1px); }
+      60% { transform: translate(2px, -1px); }
+      70% { transform: translate(-1px, -1px); }
+      80% { transform: translate(1px, 2px); }
+      90% { transform: translate(-1px, 1px); }
+    }
+    .player.player-sweat-shake .player-info {
+      animation: sweatShake 0.08s ease-in-out infinite;
+    }
+    .sweat-drop {
+      position: fixed;
+      width: 3px;
+      height: 3px;
+      background: var(--gb-light);
+      border: 1px solid var(--gb-lightest);
+      pointer-events: none;
+      z-index: 9998;
+      animation: sweatDropFall 0.55s ease-in forwards;
+    }
+    @keyframes sweatDropFall {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(56px); opacity: 0; }
+    }
 
     .game-over-panel {
       margin: 12px;
@@ -1208,6 +1715,11 @@
         <span class="icon-muted">♪</span>
       </button>
     <button class="btn-help" id="btnHelp" type="button" title="玩法说明" aria-label="玩法说明">?</button>
+    <div class="ai-win-btns">
+      <button class="btn-ai-win" id="btnAiWin1" type="button" title="吱吱直接胜利">吱吱赢</button>
+      <button class="btn-ai-win" id="btnAiWin2" type="button" title="杉斯直接胜利">杉斯赢</button>
+      <button class="btn-ai-win" id="btnAiWin3" type="button" title="小白直接胜利">小白赢</button>
+    </div>
     <button class="btn-add10" id="btnAdd10" type="button" title="全体+10分(测试)">+10分</button>
     <button class="btn-bgm-switch" id="btnBgmSwitch" type="button" title="切换BGM">BGM1</button>
     <button class="new-game" id="newGame" title="新一局" aria-label="新一局"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg></button>
@@ -1319,6 +1831,8 @@
     let gameOverWinnerIndex = -1;
     let gameOverBubbleIntervalId = null;
     var gameOverBubbleTimeoutId = null;
+    var gameOverTime = 0;
+    var gameOverAgainScheduled = false;
     let currentBubble = null;
     let justRevealedCard = false;
     let justAddedChip = false;
@@ -1395,6 +1909,89 @@
         gain.gain.exponentialRampToValueAtTime(0.001, now + 0.06);
         osc.start(now);
         osc.stop(now + 0.06);
+      } catch (e) {}
+    }
+
+    function playButtonClickSound() {
+      try {
+        if (!chipSoundCtx) chipSoundCtx = new (window.AudioContext || window.webkitAudioContext)();
+        if (chipSoundCtx.state === 'suspended') chipSoundCtx.resume();
+        var now = chipSoundCtx.currentTime;
+        var osc = chipSoundCtx.createOscillator();
+        var gain = chipSoundCtx.createGain();
+        osc.connect(gain);
+        gain.connect(chipSoundCtx.destination);
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(1200, now);
+        gain.gain.setValueAtTime(0.025, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.03);
+        osc.start(now);
+        osc.stop(now + 0.03);
+      } catch (e) {}
+    }
+    function playDialogueCharSound() {
+      try {
+        if (!chipSoundCtx) chipSoundCtx = new (window.AudioContext || window.webkitAudioContext)();
+        if (chipSoundCtx.state === 'suspended') chipSoundCtx.resume();
+        var now = chipSoundCtx.currentTime;
+        var osc = chipSoundCtx.createOscillator();
+        var gain = chipSoundCtx.createGain();
+        osc.connect(gain);
+        gain.connect(chipSoundCtx.destination);
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(880, now);
+        osc.frequency.exponentialRampToValueAtTime(660, now + 0.04);
+        gain.gain.setValueAtTime(0.4, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
+        osc.start(now);
+        osc.stop(now + 0.05);
+      } catch (e) {}
+    }
+    function playDialogueHeavySound() {
+      try {
+        if (!chipSoundCtx) chipSoundCtx = new (window.AudioContext || window.webkitAudioContext)();
+        if (chipSoundCtx.state === 'suspended') chipSoundCtx.resume();
+        var now = chipSoundCtx.currentTime;
+        var osc = chipSoundCtx.createOscillator();
+        var gain = chipSoundCtx.createGain();
+        osc.connect(gain);
+        gain.connect(chipSoundCtx.destination);
+        osc.type = 'square';
+        osc.frequency.setValueAtTime(180, now);
+        osc.frequency.exponentialRampToValueAtTime(90, now + 0.12);
+        gain.gain.setValueAtTime(0, now);
+        gain.gain.linearRampToValueAtTime(1, now + 0.02);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.12);
+        osc.start(now);
+        osc.stop(now + 0.12);
+      } catch (e) {}
+    }
+
+    function playZhizhiNoteSound(accent) {
+      try {
+        if (!chipSoundCtx) chipSoundCtx = new (window.AudioContext || window.webkitAudioContext)();
+        if (chipSoundCtx.state === 'suspended') chipSoundCtx.resume();
+        var ctx = chipSoundCtx;
+        var now = ctx.currentTime;
+        var dur = 0.14 + Math.random() * 0.05;
+        var osc = ctx.createOscillator();
+        var lowpass = ctx.createBiquadFilter();
+        var gain = ctx.createGain();
+        osc.connect(lowpass);
+        lowpass.connect(gain);
+        gain.connect(ctx.destination);
+        osc.type = 'triangle';
+        lowpass.type = 'lowpass';
+        lowpass.frequency.setValueAtTime(195, now);
+        var baseFreq = 72 + Math.random() * 38;
+        osc.frequency.setValueAtTime(baseFreq, now);
+        osc.frequency.exponentialRampToValueAtTime(baseFreq * 0.82, now + dur * 0.6);
+        osc.frequency.setValueAtTime(baseFreq * 0.82, now + dur * 0.6);
+        gain.gain.setValueAtTime(0, now);
+        gain.gain.linearRampToValueAtTime(accent ? 0.22 : 0.15, now + 0.025);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + dur);
+        osc.start(now);
+        osc.stop(now + dur);
       } catch (e) {}
     }
 
@@ -1751,6 +2348,8 @@
 
     function startGame() {
       startBgmIfNeeded();
+      gameOverTime = 0;
+      gameOverAgainScheduled = false;
       if (gameOverBubbleTimeoutId) { clearTimeout(gameOverBubbleTimeoutId); gameOverBubbleTimeoutId = null; }
       if (gameOverBubbleIntervalId) { clearInterval(gameOverBubbleIntervalId); gameOverBubbleIntervalId = null; }
       deck = makeDeck();
@@ -2333,6 +2932,806 @@
       }
     }
 
+    var xiaobaiVictoryRafId = null;
+    var xiaobaiVictoryBubbleShake = false;
+    var xiaobaiTableBubbleIntervalId = null;
+    var xiaobaiTableBubbleTimeoutId = null;
+    var xiaobaiZhizhiBubbleIntervalId = null;
+    var XIAOBAI_ZHIZHI_LINES = [
+      '不要碰我兄弟！',
+      '动我的人？找死啊！',
+      '那是我小弟！',
+      '敢动我兄弟试试！',
+      '我的人你也敢动？',
+      '老鼠是我罩的！',
+      '放开我兄弟！',
+      '那是我手下！',
+      '动我兄弟就是动我！',
+      '我小弟你也敢抓？',
+      '大哥在此，休想动他！',
+      '那是老子的人！',
+      '碰他一下试试！',
+      '我兄弟你也敢碰？',
+      '小弟别怕，大哥在！',
+      '谁动我的人我跟谁急！',
+      '老鼠是我的人！',
+      '给我放开！'
+    ];
+
+    function stopXiaobaiVictoryAnimation() {
+      if (xiaobaiVictoryRafId != null) {
+        cancelAnimationFrame(xiaobaiVictoryRafId);
+        xiaobaiVictoryRafId = null;
+      }
+      if (xiaobaiTableBubbleIntervalId) { clearInterval(xiaobaiTableBubbleIntervalId); xiaobaiTableBubbleIntervalId = null; }
+      if (xiaobaiTableBubbleTimeoutId) { clearTimeout(xiaobaiTableBubbleTimeoutId); xiaobaiTableBubbleTimeoutId = null; }
+      if (xiaobaiZhizhiBubbleIntervalId) { clearInterval(xiaobaiZhizhiBubbleIntervalId); xiaobaiZhizhiBubbleIntervalId = null; }
+      if (document.getElementById('xiaobaiVictoryWrap')) clearPlayerBubble();
+      var tblBubble = document.getElementById('xiaobaiTableBubble');
+      if (tblBubble && tblBubble.parentNode) tblBubble.parentNode.removeChild(tblBubble);
+      var wrap = document.getElementById('xiaobaiVictoryWrap');
+      if (wrap && wrap.parentNode) wrap.parentNode.removeChild(wrap);
+      var p3 = document.getElementById('player3');
+      if (p3) p3.classList.remove('xiaobai-on-table');
+      document.body.classList.remove('xiaobai-left-seat');
+      xiaobaiVictoryBubbleShake = false;
+    }
+
+    function startXiaobaiVictoryAnimation(onCaught) {
+      var felt = document.querySelector('.felt');
+      if (!felt) return;
+      stopXiaobaiVictoryAnimation();
+      var p3 = document.getElementById('player3');
+      if (p3) p3.classList.remove('winner');
+      var caughtFired = false;
+      var rect = felt.getBoundingClientRect();
+      var pad = 16;
+      var bounds = { left: rect.left + pad, top: rect.top + pad, right: rect.right - pad, bottom: rect.bottom - pad };
+      var wrap = document.createElement('div');
+      wrap.id = 'xiaobaiVictoryWrap';
+      wrap.className = 'xiaobai-victory-wrap';
+      var avatar = document.createElement('div');
+      avatar.className = 'xiaobai-avatar';
+      var img = document.createElement('img');
+      img.src = 'avatars/head_4.png?v=8';
+      img.alt = '';
+      avatar.appendChild(img);
+      var ball = document.createElement('div');
+      ball.className = 'xiaobai-ball caught-avatar';
+      var ballImg = document.createElement('img');
+      ballImg.src = 'avatars/caught_target.png';
+      ballImg.alt = '';
+      ball.appendChild(ballImg);
+      wrap.appendChild(avatar);
+      wrap.appendChild(ball);
+      if (felt.parentNode) {
+        if (felt.nextSibling) felt.parentNode.insertBefore(wrap, felt.nextSibling);
+        else felt.parentNode.appendChild(wrap);
+      } else {
+        document.body.appendChild(wrap);
+      }
+      var tableBubbleEl = null;
+      var chaseBubbleShown = false;
+      var startAx = bounds.right - 30, startAy = bounds.top + (bounds.bottom - bounds.top) / 2;
+      var ax = startAx, ay = startAy;
+      var centerX = bounds.left + (bounds.right - bounds.left) / 2, centerY = bounds.top + (bounds.bottom - bounds.top) / 2;
+      var bx = centerX, by = bounds.top - 20;
+      var ballVy = 0, ballVx = 0;
+      var ballRadius = 12;
+      var avatarHalf = 18;
+      var phase = 'drop';
+      var jumpStart = 0;
+      var jumpDur = 750;
+      var escapeEndTime = 0;
+      var ballLanded = false;
+      var chaseSpeed = 2.2;
+      var ballBounce = 0.85;
+      var chaseStartTime = 0;
+      var touchCount = 0;
+      var touchCooldown = false;
+      var touchDist = 36;
+      var separateDist = 55;
+      var chaseMinDur = 3000;
+      var catchCenterX = centerX;
+      var catchCenterY = centerY + 28;
+      var approachDur = 600;
+      var approachStartTime = 0;
+      var approachStartAx = 0, approachStartAy = 0, approachStartBx = 0, approachStartBy = 0;
+      var walkTargetX = 0, walkTargetY = 0;
+      var nextBubblePopTime = 0;
+      var caughtWalkSpeed = 0.9;
+      var xiaobaiBubbleTexts = ['喵', '喵呜~'];
+      avatar.style.visibility = 'hidden';
+
+      function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
+
+      function tick() {
+        if (!gameOver) { stopXiaobaiVictoryAnimation(); return; }
+        var rectNow = (phase === 'caught') ? { left: 0, top: 0 } : felt.getBoundingClientRect();
+        var now = Date.now();
+        if (phase === 'drop') {
+          ballVy += 0.5;
+          by += ballVy;
+          if (by + ballRadius >= bounds.bottom) {
+            by = bounds.bottom - ballRadius;
+            ballVy = 0;
+            ballLanded = true;
+            phase = 'escape';
+            ballVx = 4;
+            ballVy = -2;
+            escapeEndTime = now + 2000;
+            setPlayerBubble(3, 'pass', '!');
+            render();
+            if (typeof playChipSound === 'function') playChipSound();
+            setTimeout(function() {
+              if (document.getElementById('xiaobaiVictoryWrap') && currentBubble && currentBubble.playerIndex === 3) {
+                clearPlayerBubble();
+                render();
+              }
+            }, 1400);
+          }
+        } else if (phase === 'escape') {
+          ballVx *= 0.999;
+          ballVy *= 0.999;
+          bx += ballVx;
+          by += ballVy;
+          if (bx - ballRadius < bounds.left) { bx = bounds.left + ballRadius; ballVx = -ballVx * ballBounce; }
+          if (bx + ballRadius > bounds.right) { bx = bounds.right - ballRadius; ballVx = -ballVx * ballBounce; }
+          if (by - ballRadius < bounds.top) { by = bounds.top + ballRadius; ballVy = -ballVy * ballBounce; }
+          if (by + ballRadius > bounds.bottom) { by = bounds.bottom - ballRadius; ballVy = -ballVy * ballBounce; }
+          if (now >= escapeEndTime) {
+            var seatEl = p3 ? p3.querySelector('.player-avatar') : null;
+            if (seatEl) {
+              var seatR = seatEl.getBoundingClientRect();
+              startAx = seatR.left + seatR.width / 2;
+              startAy = seatR.top + seatR.height / 2;
+              ax = startAx;
+              ay = startAy;
+            }
+            phase = 'jump';
+            jumpStart = Date.now();
+            if (p3) p3.classList.add('xiaobai-on-table');
+            document.body.classList.add('xiaobai-left-seat');
+            avatar.style.visibility = '';
+          }
+        } else if (phase === 'jump') {
+          var t = Math.min(1, (now - jumpStart) / jumpDur);
+          var ease = t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+          ax = startAx + (centerX - startAx) * ease;
+          ay = startAy + (centerY - startAy) * ease + 50 * Math.sin(Math.PI * t);
+          if (t >= 1) { phase = 'chase'; chaseStartTime = Date.now(); }
+        } else if (phase === 'chase') {
+          if (!chaseBubbleShown) {
+            chaseBubbleShown = true;
+            hurryAvatarIndex = 1;
+            setPlayerBubble(1, 'pass', XIAOBAI_ZHIZHI_LINES[Math.floor(Math.random() * XIAOBAI_ZHIZHI_LINES.length)]);
+            render();
+            setTimeout(function() {
+              if (document.getElementById('xiaobaiVictoryWrap')) { hurryAvatarIndex = -1; render(); }
+            }, 1100);
+            if (xiaobaiZhizhiBubbleIntervalId) clearInterval(xiaobaiZhizhiBubbleIntervalId);
+            xiaobaiZhizhiBubbleIntervalId = setInterval(function() {
+              if (!document.getElementById('xiaobaiVictoryWrap') || !gameOver) return;
+              hurryAvatarIndex = 1;
+              setPlayerBubble(1, 'pass', XIAOBAI_ZHIZHI_LINES[Math.floor(Math.random() * XIAOBAI_ZHIZHI_LINES.length)]);
+              render();
+              setTimeout(function() {
+                if (document.getElementById('xiaobaiVictoryWrap')) { hurryAvatarIndex = -1; render(); }
+              }, 1100);
+            }, 2200 + Math.random() * 1800);
+          }
+          var dx = bx - ax, dy = by - ay;
+          var dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < touchDist && !touchCooldown) {
+            touchCount++;
+            touchCooldown = true;
+          }
+          if (dist > separateDist) touchCooldown = false;
+          var chaseElapsed = Date.now() - chaseStartTime;
+          if (!caughtFired && touchCount >= 3 && chaseElapsed >= chaseMinDur && typeof onCaught === 'function') {
+            caughtFired = true;
+            phase = 'approachCatch';
+            clearPlayerBubble();
+            render();
+            ballVx = 0;
+            ballVy = 0;
+            var vv = window.visualViewport;
+            if (vv) {
+              catchCenterX = vv.offsetLeft + vv.width / 2;
+              catchCenterY = vv.offsetTop + vv.height / 2 + 20;
+            } else {
+              catchCenterX = window.innerWidth / 2;
+              catchCenterY = window.innerHeight / 2 + 20;
+            }
+            approachStartTime = Date.now();
+            approachStartAx = ax;
+            approachStartAy = ay;
+            approachStartBx = bx;
+            approachStartBy = by;
+          }
+          if (phase === 'chase') {
+            if (dist > 0.1) {
+              ax += (dx / dist) * chaseSpeed;
+              ay += (dy / dist) * chaseSpeed;
+            }
+            if (dist < 35) {
+              var nx = dx / (dist || 1), ny = dy / (dist || 1);
+              ballVx += nx * 7.5;
+              ballVy += ny * 7.5;
+            }
+            ballVx *= 0.992;
+            ballVy *= 0.992;
+            bx += ballVx;
+            by += ballVy;
+            if (bx - ballRadius < bounds.left) { bx = bounds.left + ballRadius; ballVx = -ballVx * ballBounce; }
+            if (bx + ballRadius > bounds.right) { bx = bounds.right - ballRadius; ballVx = -ballVx * ballBounce; }
+            if (by - ballRadius < bounds.top) { by = bounds.top + ballRadius; ballVy = -ballVy * ballBounce; }
+            if (by + ballRadius > bounds.bottom) { by = bounds.bottom - ballRadius; ballVy = -ballVy * ballBounce; }
+            ax = clamp(ax, bounds.left + avatarHalf, bounds.right - avatarHalf);
+            ay = clamp(ay, bounds.top + avatarHalf, bounds.bottom - avatarHalf);
+          }
+        } else if (phase === 'approachCatch') {
+          var t = Math.min(1, (now - approachStartTime) / approachDur);
+          var e = 1 - (1 - t) * (1 - t);
+          var overlap = 12;
+          var targetBx = catchCenterX - avatarHalf + 27;
+          var targetBy = catchCenterY + avatarHalf + 12;
+          ax = approachStartAx + (catchCenterX - approachStartAx) * e;
+          ay = approachStartAy + (catchCenterY - approachStartAy) * e;
+          bx = approachStartBx + (targetBx - approachStartBx) * e;
+          by = approachStartBy + (targetBy - approachStartBy) * e;
+          if (t >= 1) {
+            phase = 'caught';
+            wrap.classList.add('xiaobai-caught-overlay');
+            ball.classList.add('caught-shake');
+            ax = catchCenterX;
+            ay = catchCenterY;
+            bx = targetBx;
+            by = targetBy;
+            walkTargetX = catchCenterX;
+            walkTargetY = catchCenterY;
+            nextBubblePopTime = now + 800 + Math.random() * 1000;
+            if (!tableBubbleEl) {
+              tableBubbleEl = document.createElement('div');
+              tableBubbleEl.className = 'table-bubble bubble-shake-loop';
+              tableBubbleEl.textContent = '喵';
+              wrap.appendChild(tableBubbleEl);
+            }
+            setTimeout(function() {
+              if (!gameOver || typeof onCaught !== 'function') return;
+              onCaught(catchCenterX, catchCenterY);
+            }, 450);
+          }
+        } else if (phase === 'caught') {
+          var overlap = 12;
+          var fr = felt.getBoundingClientRect();
+          var pad = 24;
+          var minX = fr.left + pad + avatarHalf;
+          var maxX = fr.right - pad - avatarHalf;
+          var minY = fr.top + pad + avatarHalf;
+          var maxY = fr.bottom - pad - avatarHalf;
+          var toTarget = Math.sqrt((walkTargetX - ax) * (walkTargetX - ax) + (walkTargetY - ay) * (walkTargetY - ay));
+          if (toTarget < 10) {
+            walkTargetX = minX + Math.random() * (maxX - minX);
+            walkTargetY = minY + Math.random() * (maxY - minY);
+          }
+          var dx = walkTargetX - ax, dy = walkTargetY - ay;
+          var dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist > 1) {
+            ax += (dx / dist) * caughtWalkSpeed;
+            ay += (dy / dist) * caughtWalkSpeed;
+          }
+          ax = clamp(ax, minX, maxX);
+          ay = clamp(ay, minY, maxY);
+          var faceRight = walkTargetX > ax;
+          if (faceRight) {
+            bx = ax + avatarHalf + 8;
+          } else {
+            bx = ax - avatarHalf + 27;
+          }
+          by = ay + avatarHalf + 12;
+          if (now >= nextBubblePopTime && tableBubbleEl) {
+            tableBubbleEl.textContent = xiaobaiBubbleTexts[Math.floor(Math.random() * xiaobaiBubbleTexts.length)];
+            tableBubbleEl.classList.remove('bubble-pop');
+            tableBubbleEl.offsetHeight;
+            tableBubbleEl.classList.add('bubble-pop');
+            playXiaobaiMeow();
+            setTimeout(function() {
+              if (tableBubbleEl) tableBubbleEl.classList.remove('bubble-pop');
+            }, 200);
+            nextBubblePopTime = now + 1200 + Math.random() * 1800;
+          }
+        }
+        avatar.style.left = (ax - rectNow.left) + 'px';
+        avatar.style.top = (ay - rectNow.top) + 'px';
+        if (phase === 'jump' || phase === 'chase' || phase === 'approachCatch') {
+          avatar.style.transform = bx > ax ? 'scaleX(-1)' : 'scaleX(1)';
+          avatar.style.transformOrigin = 'center center';
+        } else if (phase === 'caught') {
+          var caughtFaceRight = walkTargetX > ax;
+          avatar.style.transform = caughtFaceRight ? 'scaleX(-1)' : 'scaleX(1)';
+          avatar.style.transformOrigin = 'center center';
+          ball.style.transform = caughtFaceRight ? 'scaleX(-1)' : 'scaleX(1)';
+          ball.style.transformOrigin = 'center center';
+        }
+        ball.style.left = (bx - rectNow.left) + 'px';
+        ball.style.top = (by - rectNow.top) + 'px';
+        if (tableBubbleEl && tableBubbleEl.parentNode) {
+          tableBubbleEl.style.left = (ax - rectNow.left) + 'px';
+          tableBubbleEl.style.top = (ay - 42 - rectNow.top) + 'px';
+        }
+        xiaobaiVictoryRafId = requestAnimationFrame(tick);
+      }
+
+      xiaobaiVictoryRafId = requestAnimationFrame(tick);
+    }
+
+    var zhizhiVictoryRafId = null;
+    var sansVictoryRafId = null;
+    var sansVictorySweatIntervalId = null;
+    var zhizhiRapIntervalId = null;
+    var zhizhiRapOtherNotesTimeoutId = null;
+    var zhizhiRapOtherNotesIntervalId = null;
+    var ZHIZHI_RAP_BEAT = [
+      { t: 0, f: 55 }, { t: 400, f: 55 }, { t: 800, f: 62 }, { t: 1200, f: 55 }, { t: 1600, f: 73 },
+      { t: 2000, f: 55 }, { t: 2400, f: 65 }, { t: 2800, f: 55 }, { t: 3200, f: 58 }, { t: 3600, f: 55 }
+    ];
+    var ZHIZHI_RAP_BAR_MS = 4000;
+    function playXiaobaiMeow() {
+      try {
+        if (!chipSoundCtx) chipSoundCtx = new (window.AudioContext || window.webkitAudioContext)();
+        if (chipSoundCtx.state === 'suspended') chipSoundCtx.resume();
+        var now = chipSoundCtx.currentTime;
+        var osc = chipSoundCtx.createOscillator();
+        var gain = chipSoundCtx.createGain();
+        var filter = chipSoundCtx.createBiquadFilter();
+        osc.connect(filter);
+        filter.connect(gain);
+        gain.connect(chipSoundCtx.destination);
+        osc.type = 'sine';
+        filter.type = 'lowpass';
+        filter.frequency.setValueAtTime(2000, now);
+        osc.frequency.setValueAtTime(720, now);
+        osc.frequency.exponentialRampToValueAtTime(380, now + 0.18);
+        gain.gain.setValueAtTime(0, now);
+        gain.gain.linearRampToValueAtTime(1, now + 0.02);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.18);
+        osc.start(now);
+        osc.stop(now + 0.2);
+      } catch (e) {}
+    }
+    function playZhizhiRapNote(freq) {
+      try {
+        if (!chipSoundCtx) chipSoundCtx = new (window.AudioContext || window.webkitAudioContext)();
+        if (chipSoundCtx.state === 'suspended') chipSoundCtx.resume();
+        var now = chipSoundCtx.currentTime;
+        var osc = chipSoundCtx.createOscillator();
+        var lowpass = chipSoundCtx.createBiquadFilter();
+        var gain = chipSoundCtx.createGain();
+        osc.connect(lowpass);
+        lowpass.connect(gain);
+        gain.connect(chipSoundCtx.destination);
+        osc.type = 'triangle';
+        lowpass.type = 'lowpass';
+        lowpass.frequency.setValueAtTime(220, now);
+        osc.frequency.setValueAtTime(freq, now);
+        osc.frequency.exponentialRampToValueAtTime(freq * 0.85, now + 0.14);
+        gain.gain.setValueAtTime(0, now);
+        gain.gain.linearRampToValueAtTime(3, now + 0.015);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.14);
+        osc.start(now);
+        osc.stop(now + 0.14);
+      } catch (e) {}
+    }
+    function startZhizhiRapBgm() {
+      if (zhizhiRapIntervalId) clearInterval(zhizhiRapIntervalId);
+      if (zhizhiRapOtherNotesTimeoutId) { clearTimeout(zhizhiRapOtherNotesTimeoutId); zhizhiRapOtherNotesTimeoutId = null; }
+      if (zhizhiRapOtherNotesIntervalId) { clearInterval(zhizhiRapOtherNotesIntervalId); zhizhiRapOtherNotesIntervalId = null; }
+      var otherNotesWrap = document.getElementById('zhizhiOtherPlayerNotes');
+      if (otherNotesWrap && otherNotesWrap.parentNode) otherNotesWrap.parentNode.removeChild(otherNotesWrap);
+      var felt = document.querySelector('.felt');
+      if (felt) felt.classList.add('felt-shake-rap');
+      function scheduleBar() {
+        for (var i = 0; i < ZHIZHI_RAP_BEAT.length; i++) {
+          (function(ev) {
+            setTimeout(function() {
+              if (document.getElementById('zhizhiVictoryWrap')) playZhizhiRapNote(ev.f);
+            }, ev.t);
+          })(ZHIZHI_RAP_BEAT[i]);
+        }
+      }
+      scheduleBar();
+      zhizhiRapIntervalId = setInterval(scheduleBar, ZHIZHI_RAP_BAR_MS);
+      var otherPlayerIndices = [0, 2, 3];
+      var noteChars = ['♪', '♫'];
+      zhizhiRapOtherNotesTimeoutId = setTimeout(function() {
+        zhizhiRapOtherNotesTimeoutId = null;
+        if (!document.getElementById('zhizhiVictoryWrap')) return;
+        var stagger = [0, 380, 720];
+        for (var s = 0; s < otherPlayerIndices.length; s++) {
+          (function(idx, delay) {
+            setTimeout(function() {
+              var el = document.getElementById('player' + idx);
+              if (el && document.getElementById('zhizhiVictoryWrap')) el.classList.add('zhizhi-rap-shake');
+            }, delay);
+          })(otherPlayerIndices[s], stagger[s]);
+        }
+        var wrap = document.createElement('div');
+        wrap.id = 'zhizhiOtherPlayerNotes';
+        wrap.style.cssText = 'position:fixed;left:0;top:0;width:100%;height:100%;pointer-events:none;z-index:9998;';
+        document.body.appendChild(wrap);
+        function spawnOtherPlayerNote() {
+          if (!document.getElementById('zhizhiVictoryWrap') || !wrap.parentNode) return;
+          var idx = otherPlayerIndices[Math.floor(Math.random() * otherPlayerIndices.length)];
+          var el = document.getElementById('player' + idx);
+          if (!el) return;
+          var avatarWrap = el.querySelector('.player-info');
+          if (!avatarWrap) return;
+          var r = avatarWrap.getBoundingClientRect();
+          var cx = r.left + r.width / 2;
+          var top = r.top - 6;
+          var noteEl = document.createElement('span');
+          noteEl.className = 'zhizhi-player-note';
+          noteEl.textContent = noteChars[Math.floor(Math.random() * noteChars.length)];
+          noteEl.style.left = (cx + (Math.random() * 16 - 8)) + 'px';
+          noteEl.style.top = (top + (Math.random() * 8 - 4)) + 'px';
+          noteEl.style.setProperty('--note-rotate', (Math.random() * 60 - 30) + 'deg');
+          wrap.appendChild(noteEl);
+          setTimeout(function() {
+            if (noteEl.parentNode) noteEl.parentNode.removeChild(noteEl);
+          }, 1550);
+        }
+        spawnOtherPlayerNote();
+        zhizhiRapOtherNotesIntervalId = setInterval(spawnOtherPlayerNote, 480 + Math.random() * 240);
+      }, 2000);
+    }
+    function stopZhizhiRapBgm() {
+      if (zhizhiRapIntervalId) { clearInterval(zhizhiRapIntervalId); zhizhiRapIntervalId = null; }
+      if (zhizhiRapOtherNotesTimeoutId) { clearTimeout(zhizhiRapOtherNotesTimeoutId); zhizhiRapOtherNotesTimeoutId = null; }
+      if (zhizhiRapOtherNotesIntervalId) { clearInterval(zhizhiRapOtherNotesIntervalId); zhizhiRapOtherNotesIntervalId = null; }
+      var otherNotesWrap = document.getElementById('zhizhiOtherPlayerNotes');
+      if (otherNotesWrap && otherNotesWrap.parentNode) otherNotesWrap.parentNode.removeChild(otherNotesWrap);
+      [0, 2, 3].forEach(function(idx) {
+        var el = document.getElementById('player' + idx);
+        if (el) el.classList.remove('zhizhi-rap-shake');
+      });
+      var felt = document.querySelector('.felt');
+      if (felt) felt.classList.remove('felt-shake-rap');
+    }
+    function stopZhizhiVictoryAnimation() {
+      if (zhizhiVictoryRafId != null) {
+        cancelAnimationFrame(zhizhiVictoryRafId);
+        zhizhiVictoryRafId = null;
+      }
+      stopZhizhiRapBgm();
+      var wrap = document.getElementById('zhizhiVictoryWrap');
+      if (wrap && wrap.parentNode) wrap.parentNode.removeChild(wrap);
+      var p1 = document.getElementById('player1');
+      if (p1) p1.classList.remove('zhizhi-on-table');
+      document.body.classList.remove('zhizhi-on-table');
+    }
+
+    function startZhizhiVictoryAnimation() {
+      var felt = document.querySelector('.felt');
+      if (!felt) return;
+      stopZhizhiVictoryAnimation();
+      var p1 = document.getElementById('player1');
+      if (p1) p1.classList.remove('winner');
+      var rect = felt.getBoundingClientRect();
+      var pad = 16;
+      var bounds = { left: rect.left + pad, top: rect.top + pad, right: rect.right - pad, bottom: rect.bottom - pad };
+      var avatarHalf = 18;
+      var centerX = bounds.left + (bounds.right - bounds.left) / 2;
+      var centerY = bounds.top + (bounds.bottom - bounds.top) / 2;
+      var leftEdge = bounds.left + avatarHalf;
+      var rightEdge = bounds.right - avatarHalf;
+      var enterDur = 800;
+      var patrolDur = 2200;
+      /* 巡逻顺序：进入中心后 → 先移到桌子最右边 → 翻面 → 移到最左边 → 翻面 → 循环 */
+      var wrap = document.createElement('div');
+      wrap.id = 'zhizhiVictoryWrap';
+      wrap.className = 'zhizhi-victory-wrap';
+      wrap.style.left = rect.left + 'px';
+      wrap.style.top = rect.top + 'px';
+      wrap.style.width = rect.width + 'px';
+      wrap.style.height = rect.height + 'px';
+      var avatar = document.createElement('div');
+      avatar.className = 'zhizhi-avatar';
+      var img = document.createElement('img');
+      img.src = 'avatars/head_2.png?v=8';
+      img.alt = '';
+      avatar.appendChild(img);
+      wrap.appendChild(avatar);
+      var notesContainer = document.createElement('div');
+      notesContainer.className = 'zhizhi-notes';
+      notesContainer.style.cssText = 'position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;overflow:visible;';
+      wrap.appendChild(notesContainer);
+      document.body.appendChild(wrap);
+      document.body.classList.add('zhizhi-on-table');
+      if (p1) p1.classList.add('zhizhi-on-table');
+      var seatEl = p1 ? p1.querySelector('.player-avatar') : null;
+      var startX = leftEdge, startY = centerY;
+      if (seatEl) {
+        var seatR = seatEl.getBoundingClientRect();
+        startX = seatR.left + seatR.width / 2;
+        startY = seatR.top + seatR.height / 2;
+      }
+      var phase = 'enter';
+      var enterStartTime = Date.now();
+      var patrolSegment = 'toRight';
+      var patrolStartTime = 0;
+      var patrolStartX = centerX;
+      var x = startX, y = startY;
+      var wobbleAmp = 2;
+      var wobbleSpeed = 0.04;
+      var micAdded = false;
+      var lastNoteTime = 0;
+      var nextNoteIntervalMs = 400;
+      var noteBeatIndex = 0;
+      var noteChars = ['♪', '♫'];
+      function getNextNoteInterval() {
+        noteBeatIndex++;
+        var pattern = [380, 360, 620, 400, 580];
+        return pattern[noteBeatIndex % pattern.length] + (Math.random() * 60 - 30);
+      }
+
+      function addMic() {
+        if (micAdded) return;
+        micAdded = true;
+        var mic = document.createElement('img');
+        mic.className = 'zhizhi-avatar-mic';
+        mic.src = 'avatars/zhizhi_mic.png';
+        mic.alt = '';
+        avatar.appendChild(mic);
+        startZhizhiRapBgm();
+      }
+      function spawnNote() {
+        var noteEl = document.createElement('span');
+        noteEl.className = 'zhizhi-note';
+        noteEl.textContent = noteChars[Math.floor(Math.random() * noteChars.length)];
+        var rot = (Math.random() * 60 - 30);
+        noteEl.style.setProperty('--note-rotate', rot + 'deg');
+        var nx = (x - rect.left) + (Math.random() * 12 - 6);
+        var ny = (y - rect.top) - 8 - Math.random() * 4;
+        noteEl.style.left = nx + 'px';
+        noteEl.style.top = ny + 'px';
+        notesContainer.appendChild(noteEl);
+        setTimeout(function() {
+          if (noteEl.parentNode) noteEl.parentNode.removeChild(noteEl);
+        }, 1550);
+      }
+
+      function tick() {
+        if (!gameOver) { stopZhizhiVictoryAnimation(); return; }
+        var now = Date.now();
+        if (phase === 'enter') {
+          var t = Math.min(1, (now - enterStartTime) / enterDur);
+          var e = t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+          x = startX + (centerX - startX) * e;
+          y = startY + (centerY - startY) * e;
+          if (t >= 1) {
+            phase = 'patrol';
+            patrolSegment = 'toRight';
+            patrolStartTime = Date.now();
+            patrolStartX = centerX;
+            addMic();
+            lastNoteTime = now;
+          }
+        } else if (phase === 'patrol') {
+          if (now - lastNoteTime >= nextNoteIntervalMs) {
+            lastNoteTime = now;
+            nextNoteIntervalMs = getNextNoteInterval();
+            spawnNote();
+          }
+          var t = Math.min(1, (now - patrolStartTime) / patrolDur);
+          var e = 1 - (1 - t) * (1 - t);
+          var wobbleY = wobbleAmp * Math.sin(now * wobbleSpeed);
+          if (patrolSegment === 'toRight') {
+            x = patrolStartX + (rightEdge - patrolStartX) * e;
+            y = centerY + wobbleY;
+            avatar.style.transform = 'translate(-50%, -50%) scaleX(1)';
+            if (t >= 1) {
+              patrolSegment = 'toLeft';
+              patrolStartTime = Date.now();
+              patrolStartX = rightEdge;
+              avatar.style.transform = 'translate(-50%, -50%) scaleX(-1)';
+            }
+          } else {
+            x = patrolStartX + (leftEdge - patrolStartX) * e;
+            y = centerY + wobbleY;
+            avatar.style.transform = 'translate(-50%, -50%) scaleX(-1)';
+            if (t >= 1) {
+              patrolSegment = 'toRight';
+              patrolStartTime = Date.now();
+              patrolStartX = leftEdge;
+              avatar.style.transform = 'translate(-50%, -50%) scaleX(1)';
+            }
+          }
+        }
+        avatar.style.left = (x - rect.left) + 'px';
+        avatar.style.top = (y - rect.top) + 'px';
+        zhizhiVictoryRafId = requestAnimationFrame(tick);
+      }
+      zhizhiVictoryRafId = requestAnimationFrame(tick);
+    }
+
+    function stopSansVictoryAnimation() {
+      if (sansVictoryRafId != null) {
+        cancelAnimationFrame(sansVictoryRafId);
+        sansVictoryRafId = null;
+      }
+      if (sansVictorySweatIntervalId != null) {
+        clearInterval(sansVictorySweatIntervalId);
+        sansVictorySweatIntervalId = null;
+      }
+      [0, 1, 3].forEach(function(idx) {
+        var el = document.getElementById('player' + idx);
+        if (el) el.classList.remove('player-sweat-shake');
+      });
+      var wrap = document.getElementById('sansVictoryWrap');
+      if (wrap && wrap.parentNode) wrap.parentNode.removeChild(wrap);
+      var p2 = document.getElementById('player2');
+      if (p2) p2.classList.remove('sans-on-table');
+      document.body.classList.remove('sans-on-table');
+    }
+
+    function startSansVictoryAnimation() {
+      var felt = document.querySelector('.felt');
+      if (!felt) return;
+      stopSansVictoryAnimation();
+      var p2 = document.getElementById('player2');
+      if (p2) p2.classList.remove('winner');
+      var rect = felt.getBoundingClientRect();
+      var pad = 16;
+      var bounds = { left: rect.left + pad, top: rect.top + pad, right: rect.right - pad, bottom: rect.bottom - pad };
+      var avatarHalf = 18;
+      var centerX = bounds.left + (bounds.right - bounds.left) / 2;
+      var topCenterY = bounds.top + 40;
+      var wrap = document.createElement('div');
+      wrap.id = 'sansVictoryWrap';
+      wrap.className = 'sans-victory-wrap';
+      wrap.style.left = rect.left + 'px';
+      wrap.style.top = rect.top + 'px';
+      wrap.style.width = rect.width + 'px';
+      wrap.style.height = rect.height + 'px';
+      var avatar = document.createElement('div');
+      avatar.className = 'sans-avatar';
+      var img = document.createElement('img');
+      img.src = 'avatars/head_3.png?v=8';
+      img.alt = '';
+      avatar.appendChild(img);
+      wrap.appendChild(avatar);
+      document.body.appendChild(wrap);
+      document.body.classList.add('sans-on-table');
+      if (p2) p2.classList.add('sans-on-table');
+      var seatEl = p2 ? p2.querySelector('.player-avatar') : null;
+      var startX = centerX, startY = bounds.top - 20;
+      if (seatEl) {
+        var seatR = seatEl.getBoundingClientRect();
+        startX = seatR.left + seatR.width / 2;
+        startY = seatR.top + seatR.height / 2;
+      }
+      var phase = 'enter';
+      var enterStartTime = Date.now();
+      var enterDur = 700;
+      var x = startX, y = startY;
+      function tick() {
+        if (!document.getElementById('sansVictoryWrap')) {
+          sansVictoryRafId = null;
+          return;
+        }
+        var t = (Date.now() - enterStartTime) / enterDur;
+        if (phase === 'enter') {
+          if (t >= 1) {
+            phase = 'face';
+            sansVictoryRafId = null;
+            var delay = 1000 + Math.random() * 1000;
+            setTimeout(function() {
+              if (!document.getElementById('sansVictoryWrap')) return;
+              wrap.classList.add('sans-face-overlay');
+              wrap.style.left = '0';
+              wrap.style.top = '0';
+              wrap.style.width = '100%';
+              wrap.style.height = '100%';
+              avatar.style.left = '50%';
+              avatar.style.top = '50%';
+              var bubble = document.createElement('div');
+              bubble.className = 'sans-dialogue-bubble';
+              var dialogueLine = document.createElement('div');
+              dialogueLine.className = 'sans-dialogue-line';
+              bubble.appendChild(dialogueLine);
+              wrap.appendChild(bubble);
+              var dialogueText = '感觉如何？被我完・全・碾・压的滋味';
+              var heavyPart = '完全碾压';
+              var chars = [];
+              for (var i = 0; i < dialogueText.length; i++) {
+                chars.push({ c: dialogueText[i], heavy: heavyPart.indexOf(dialogueText[i]) >= 0 });
+              }
+              var charIndex = 0;
+              var totalDuration = 2400;
+              var numZoomSteps = 5;
+              var stepMs = Math.round(totalDuration / numZoomSteps);
+              var numChars = chars.length;
+              var numHeavy = chars.filter(function(x) { return x.heavy; }).length;
+              var numNormal = numChars - numHeavy;
+              var heavyDelay = 210;
+              var normalDelay = Math.round((totalDuration - numHeavy * heavyDelay) / numNormal);
+              function showNextChar() {
+                if (!document.getElementById('sansVictoryWrap') || charIndex >= chars.length) return;
+                var span = document.createElement('span');
+                span.className = 'sans-char' + (chars[charIndex].heavy ? ' sans-char-heavy' : '');
+                span.textContent = chars[charIndex].c;
+                dialogueLine.appendChild(span);
+                if (chars[charIndex].heavy) playDialogueHeavySound(); else playDialogueCharSound();
+                charIndex++;
+                if (charIndex < chars.length) setTimeout(showNextChar, chars[charIndex].heavy ? heavyDelay : normalDelay);
+              }
+              showNextChar();
+              setTimeout(function() {
+                var otherIndices = [0, 1, 3];
+                function spawnSweatForPlayer(idx) {
+                  var playerEl = document.getElementById('player' + idx);
+                  if (!playerEl || !document.getElementById('sansVictoryWrap')) return;
+                  var avatarEl = playerEl.querySelector('.player-avatar');
+                  if (!avatarEl) return;
+                  var rect = avatarEl.getBoundingClientRect();
+                  var count = 4;
+                  for (var i = 0; i < count; i++) {
+                    (function() {
+                      var drop = document.createElement('div');
+                      drop.className = 'sweat-drop';
+                      drop.style.left = (rect.left + rect.width * 0.2 + Math.random() * rect.width * 0.6) + 'px';
+                      drop.style.top = rect.top + 'px';
+                      drop.addEventListener('animationend', function() {
+                        if (drop.parentNode) drop.parentNode.removeChild(drop);
+                      });
+                      document.body.appendChild(drop);
+                    })();
+                  }
+                }
+                otherIndices.forEach(function(idx) {
+                  var playerEl = document.getElementById('player' + idx);
+                  if (playerEl) playerEl.classList.add('player-sweat-shake');
+                });
+                spawnSweatForPlayer(0);
+                spawnSweatForPlayer(1);
+                spawnSweatForPlayer(3);
+                if (sansVictorySweatIntervalId != null) clearInterval(sansVictorySweatIntervalId);
+                sansVictorySweatIntervalId = setInterval(function() {
+                  if (!document.getElementById('sansVictoryWrap')) return;
+                  otherIndices.forEach(spawnSweatForPlayer);
+                }, 420);
+              }, totalDuration + 500);
+              var step = 0;
+              var scales = [1, 1.3, 1.8, 2.5, 3.4, 4.5];
+              function updateBubblePosition() {
+                if (!bubble.parentNode) return;
+                var rect = avatar.getBoundingClientRect();
+                bubble.style.top = 'auto';
+                bubble.style.bottom = (window.innerHeight - rect.top + 2) + 'px';
+              }
+              function applyStep() {
+                if (!document.getElementById('sansVictoryWrap') || step >= scales.length) return;
+                avatar.style.transform = 'translate(-50%, -50%) scale(' + scales[step] + ')';
+                requestAnimationFrame(function() { requestAnimationFrame(updateBubblePosition); });
+                step++;
+                if (step < scales.length) setTimeout(applyStep, stepMs);
+              }
+              applyStep();
+            }, delay);
+            return;
+          }
+          var e = t < 1 ? (t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2) : 1;
+          x = startX + (centerX - startX) * e;
+          y = startY + (topCenterY - startY) * e;
+          avatar.style.left = (x - rect.left) + 'px';
+          avatar.style.top = (y - rect.top) + 'px';
+        }
+        sansVictoryRafId = requestAnimationFrame(tick);
+      }
+      sansVictoryRafId = requestAnimationFrame(tick);
+    }
+
     function showGameOverCelebration() {
       var winnerIndex = gameOverWinnerIndex;
       if (gameOverIsYou) {
@@ -2342,6 +3741,75 @@
         playFailureBgm();
       }
       if (winnerIndex < 0) return;
+      if (winnerIndex === 1) {
+        setPlayerBubble(winnerIndex, 'pass', getAILine('gameOverFirst', winnerIndex, '在座的各位都是辣鸡~'));
+        render();
+        gameOverBubbleTimeoutId = setTimeout(function() {
+          gameOverBubbleTimeoutId = null;
+          if (gameOver) {
+            clearPlayerBubble();
+            render();
+            startZhizhiVictoryAnimation();
+          }
+        }, 2000);
+        return;
+      }
+      if (winnerIndex === 2) {
+        setPlayerBubble(winnerIndex, 'pass', getAILine('gameOverFirst', winnerIndex, '在座的各位都是辣鸡~'));
+        render();
+        gameOverBubbleTimeoutId = setTimeout(function() {
+          gameOverBubbleTimeoutId = null;
+          if (gameOver) {
+            clearPlayerBubble();
+            render();
+            startSansVictoryAnimation();
+          }
+        }, 2000);
+        return;
+      }
+      if (winnerIndex === 3) {
+        setPlayerBubble(winnerIndex, 'pass', getAILine('gameOverFirst', winnerIndex, '在座的各位都是辣鸡~'));
+        render();
+        gameOverBubbleTimeoutId = setTimeout(function() {
+          gameOverBubbleTimeoutId = null;
+          if (gameOver) {
+            clearPlayerBubble();
+            render();
+            startXiaobaiVictoryAnimation(function(bubbleX, bubbleY) {
+              var winIdx = winnerIndex;
+              if (winIdx !== 3) {
+                var x = typeof bubbleX === 'number' ? bubbleX : (window.innerWidth / 2);
+                var y = typeof bubbleY === 'number' ? bubbleY : (window.innerHeight / 2);
+                var bubbleShowDur = 2500;
+                function showOneBubble() {
+                  if (!gameOver) return;
+                  var old = document.getElementById('xiaobaiTableBubble');
+                  if (old && old.parentNode) old.parentNode.removeChild(old);
+                  var el = document.createElement('div');
+                  el.id = 'xiaobaiTableBubble';
+                  el.className = 'table-bubble-fixed bubble-animate-in';
+                  el.textContent = getAILine('gameOverLoop', winIdx, 'HAHAHAHAHA');
+                  el.style.left = x + 'px';
+                  el.style.top = (y - 42) + 'px';
+                  document.body.appendChild(el);
+                  if (xiaobaiTableBubbleTimeoutId) clearTimeout(xiaobaiTableBubbleTimeoutId);
+                  xiaobaiTableBubbleTimeoutId = setTimeout(function() {
+                    xiaobaiTableBubbleTimeoutId = null;
+                    if (!gameOver) return;
+                    var o = document.getElementById('xiaobaiTableBubble');
+                    if (o && o.parentNode) o.parentNode.removeChild(o);
+                    if (xiaobaiTableBubbleTimeoutId) clearTimeout(xiaobaiTableBubbleTimeoutId);
+                    xiaobaiTableBubbleTimeoutId = setTimeout(showOneBubble, 1000 + Math.random() * 1000);
+                  }, bubbleShowDur);
+                }
+                showOneBubble();
+              }
+              /* 小白(3)只用 wrap 内的 tableBubbleEl 一个气泡，不重复创建固定气泡，避免重叠 */
+            });
+          }
+        }, 2000);
+        return;
+      }
       setPlayerBubble(winnerIndex, 'pass', getAILine('gameOverFirst', winnerIndex, '在座的各位都是辣鸡~'));
       render();
       gameOverBubbleTimeoutId = setTimeout(function() {
@@ -2382,6 +3850,9 @@
       document.getElementById('gameOverOverlay').classList.remove('show');
       var cw = document.getElementById('confettiWrap');
       if (cw) { cw.classList.add('hidden'); cw.innerHTML = ''; }
+      stopXiaobaiVictoryAnimation();
+      stopZhizhiVictoryAnimation();
+      stopSansVictoryAnimation();
     }
 
     function setMessage(msg, isAi = false) {
@@ -2465,6 +3936,34 @@
               feltEl.classList.remove('felt-shake', 'felt-shake-heavy', 'felt-shake-light');
               feltEl.offsetHeight;
               feltEl.classList.add(isLarge ? 'felt-shake-heavy' : 'felt-shake-light');
+              if (isLarge) {
+                var flyLayer = document.getElementById('chipFlyLayer');
+                if (tableChipsEl && flyLayer) {
+                  var rect = tableChipsEl.getBoundingClientRect();
+                  var pcx = 50, pcy = 50;
+                  if (currentLeader === 0) { pcx = 50; pcy = 83; }
+                  else if (currentLeader === 1) { pcx = 15; pcy = 50; }
+                  else if (currentLeader === 2) { pcx = 50; pcy = 17; }
+                  else if (currentLeader === 3) { pcx = 85; pcy = 50; }
+                  var cx = rect.left + rect.width * pcx / 100;
+                  var cy = rect.top + rect.height * pcy / 100;
+                  for (var i = 0; i < 18; i++) {
+                    var angle = (Math.PI * 2 * i) / 18 + Math.random() * 0.4;
+                    var dist = 18 + Math.random() * 72;
+                    var tx = Math.cos(angle) * dist + 'px';
+                    var ty = Math.sin(angle) * dist + 'px';
+                    var p = document.createElement('div');
+                    p.className = 'chip-burst-particle';
+                    p.style.left = cx + 'px';
+                    p.style.top = cy + 'px';
+                    p.style.setProperty('--tx', tx);
+                    p.style.setProperty('--ty', ty);
+                    p.style.opacity = (0.75 + Math.random() * 0.25).toFixed(2);
+                    flyLayer.appendChild(p);
+                    setTimeout(function(el) { if (el.parentNode) el.parentNode.removeChild(el); }, 450, p);
+                  }
+                }
+              }
               setTimeout(function() {
                 feltEl.classList.remove('felt-shake', 'felt-shake-heavy', 'felt-shake-light');
               }, isLarge ? 560 : 240);
@@ -2492,9 +3991,19 @@
       document.getElementById('bidPoolNum').textContent = currentBid ? '×' + currentBid : '0';
       players.forEach((p, i) => {
         const div = document.getElementById('player' + i);
-        div.className = 'player player-' + ['bottom','left','top','right'][i] + (i === HUMAN_INDEX ? ' you' : '');
+        var baseClass = 'player player-' + ['bottom','left','top','right'][i] + (i === HUMAN_INDEX ? ' you' : '');
+        if (i === 3 && document.body.classList.contains('xiaobai-left-seat')) baseClass += ' xiaobai-on-table';
+        if (i === 1 && document.getElementById('zhizhiVictoryWrap')) baseClass += ' zhizhi-on-table';
+        if (i === 2 && document.getElementById('sansVictoryWrap')) baseClass += ' sans-on-table';
+        div.className = baseClass;
         if (p.score >= TARGET_SCORE) div.classList.add('winner'); else div.classList.remove('winner');
-        const bubble = currentBubble && currentBubble.playerIndex === i;
+        if (i === 3 && document.getElementById('xiaobaiVictoryWrap')) div.classList.remove('winner');
+        if (i === 1 && document.getElementById('zhizhiVictoryWrap')) div.classList.remove('winner');
+        if (i === 2 && document.getElementById('sansVictoryWrap')) div.classList.remove('winner');
+        const xiaobaiOnTable = i === 3 && div.classList.contains('xiaobai-on-table');
+        const zhizhiOnTable = i === 1 && div.classList.contains('zhizhi-on-table');
+        const sansOnTable = i === 2 && div.classList.contains('sans-on-table');
+        const bubble = !xiaobaiOnTable && !zhizhiOnTable && !sansOnTable && currentBubble && currentBubble.playerIndex === i;
         let bubbleContent = '';
         var bubbleAnimateIn = false;
         if (bubble) {
@@ -2515,7 +4024,12 @@
           } else {
             bubbleAnimateIn = bubbleKey !== lastBubbleAnimatedKey;
             if (bubbleAnimateIn) lastBubbleAnimatedKey = bubbleKey;
-            bubbleContent = '<span>' + (currentBubble.value || '不要') + '</span>';
+            var passText = currentBubble.value || '不要';
+            if (currentBubble.playerIndex === 1 && document.getElementById('xiaobaiVictoryWrap')) {
+              bubbleContent = passText.split('').map(function(c) { return '<span class="bubble-char-shake">' + c + '</span>'; }).join('');
+            } else {
+              bubbleContent = '<span>' + passText + '</span>';
+            }
           }
         } else if (!currentBubble) {
           lastBubbleAnimatedKey = '';
@@ -2561,7 +4075,22 @@
       const isHumanTurn = !gameOver && currentCard != null && players[(firstBidder + bidIndex) % 4].isHuman;
       var btnAgainInGame = document.getElementById('btnAgainInGame');
       if (btnAgainInGame) {
-        if (gameOver) { btnAgainInGame.classList.add('show'); } else { btnAgainInGame.classList.remove('show'); }
+        if (gameOver) {
+          if (gameOverTime === 0) {
+            gameOverTime = Date.now();
+            if (!gameOverAgainScheduled) {
+              gameOverAgainScheduled = true;
+              setTimeout(function() { if (gameOver) render(); }, 7000);
+            }
+          }
+          if (Date.now() - gameOverTime >= 7000) {
+            btnAgainInGame.classList.add('show');
+          } else {
+            btnAgainInGame.classList.remove('show');
+          }
+        } else {
+          btnAgainInGame.classList.remove('show');
+        }
       }
       if (!isHumanTurn) {
         document.getElementById('btnPass').style.display = 'none';
@@ -2581,6 +4110,7 @@
     document.getElementById('btnAgain').onclick = () => { hideGameOverOverlay(); startGame(); };
     document.getElementById('btnAgainInGame').onclick = startGame;
     var rulesOverlayAsHelp = false;
+    var startBtnClicked = false;
     document.getElementById('btnStartGame').onclick = function() {
       if (rulesOverlayAsHelp) {
         document.getElementById('rulesOverlay').classList.add('hidden');
@@ -2588,9 +4118,12 @@
         this.textContent = '开始游戏';
         return;
       }
+      if (startBtnClicked) return;
+      startBtnClicked = true;
       var chip = document.querySelector('.rules-panel-chips .chip');
       var btn = this;
       if (!chip || !btn) {
+        startBtnClicked = false;
         document.getElementById('rulesOverlay').classList.add('hidden');
         startGame();
         return;
@@ -2635,11 +4168,23 @@
           startBtn.classList.remove('btn-start-hit');
           setTimeout(function() {
             document.getElementById('rulesOverlay').classList.add('hidden');
+            startBtnClicked = false;
             startGame();
           }, 380);
         }, 520);
       });
     };
+    (function() {
+      var ro = document.getElementById('rulesOverlay');
+      if (!ro) return;
+      function startBgmOnRulesInteraction() {
+        startBgmIfNeeded();
+        ro.removeEventListener('click', startBgmOnRulesInteraction);
+        ro.removeEventListener('touchstart', startBgmOnRulesInteraction);
+      }
+      ro.addEventListener('click', startBgmOnRulesInteraction, true);
+      ro.addEventListener('touchstart', startBgmOnRulesInteraction, true);
+    })();
     document.getElementById('btnHelp').onclick = function() {
       rulesOverlayAsHelp = true;
       document.getElementById('rulesOverlay').classList.remove('hidden');
@@ -2663,6 +4208,23 @@
         setTimeout(function() { showGameOverCelebration(); }, 1200);
       }
     };
+    function setAiWinner(aiIndex) {
+      if (gameOver || !players.length || aiIndex < 1 || aiIndex > 3) return;
+      var p = players[aiIndex];
+      if (!p || p.isHuman) return;
+      p.score = 30;
+      gameOver = true;
+      gameOverByDeck = false;
+      gameOverWinnerName = p.name;
+      gameOverWinnerScore = p.score;
+      gameOverIsYou = false;
+      gameOverWinnerIndex = aiIndex;
+      render();
+      setTimeout(function() { showGameOverCelebration(); }, 1200);
+    }
+    document.getElementById('btnAiWin1').onclick = function() { setAiWinner(1); };
+    document.getElementById('btnAiWin2').onclick = function() { setAiWinner(2); };
+    document.getElementById('btnAiWin3').onclick = function() { setAiWinner(3); };
     document.getElementById('btnBgmSwitch').onclick = function() {
       stopNormalBgm();
       currentBgmIndex = (currentBgmIndex + 1) % 3;
@@ -2678,6 +4240,11 @@
       }
     };
     document.getElementById('btnMusic').onclick = toggleMusic;
+    document.addEventListener('click', function(e) {
+      if (e.target && (e.target.tagName === 'BUTTON' || e.target.closest('button'))) {
+        playButtonClickSound();
+      }
+    });
     fillRulesBgCards();
   </script>
 </body>
