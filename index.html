@@ -1815,6 +1815,15 @@
     }
 
     const START_CHIPS = 10;
+    (function() {
+      if (window.location.protocol === 'file:') {
+        window.ASSET_BASE = '';
+        return;
+      }
+      var p = window.location.pathname || '';
+      window.ASSET_BASE = (p.endsWith('/') || p === '') ? p : p.replace(/\/[^/]*$/, '/');
+    })();
+
     const CHIPS_PER_ROUND = 1;
     const TARGET_SCORE = 30;
     const HUMAN_INDEX = 0;
@@ -3003,8 +3012,9 @@
       var ball = document.createElement('div');
       ball.className = 'xiaobai-ball caught-avatar';
       var ballImg = document.createElement('img');
-      ballImg.src = 'avatars/caught_target.png';
+      ballImg.src = (window.ASSET_BASE || '') + 'avatars/caught_target.png';
       ballImg.alt = '';
+      ballImg.onerror = function() { this.style.display = 'none'; };
       ball.appendChild(ballImg);
       wrap.appendChild(avatar);
       wrap.appendChild(ball);
@@ -3484,8 +3494,9 @@
         micAdded = true;
         var mic = document.createElement('img');
         mic.className = 'zhizhi-avatar-mic';
-        mic.src = 'avatars/zhizhi_mic.png';
+        mic.src = (window.ASSET_BASE || '') + 'avatars/zhizhi_mic.png';
         mic.alt = '';
+        mic.onerror = function() { this.style.display = 'none'; };
         avatar.appendChild(mic);
         startZhizhiRapBgm();
       }
