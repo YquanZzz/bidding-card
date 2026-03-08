@@ -3351,10 +3351,13 @@
       if (otherNotesWrap && otherNotesWrap.parentNode) otherNotesWrap.parentNode.removeChild(otherNotesWrap);
       var felt = document.querySelector('.felt');
       if (felt) felt.classList.add('felt-shake-rap');
-      [0, 2, 3].forEach(function(idx) {
-        var el = document.getElementById('player' + idx);
-        if (el) el.classList.add('zhizhi-rap-shake');
-      });
+      setTimeout(function() {
+        if (!document.getElementById('zhizhiVictoryWrap')) return;
+        [0, 2, 3].forEach(function(idx) {
+          var el = document.getElementById('player' + idx);
+          if (el) el.classList.add('zhizhi-rap-shake');
+        });
+      }, 2000);
       function scheduleBar() {
         for (var i = 0; i < ZHIZHI_RAP_BEAT.length; i++) {
           (function(ev) {
