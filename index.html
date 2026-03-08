@@ -1221,12 +1221,15 @@
       z-index: 10000;
     }
     .btn-bgm-switch:hover { background: var(--gb-light); color: var(--gb-darkest); }
-    .ai-win-btns,
-    .btn-add10,
-    .btn-bgm-switch {
+    body:not(.cheat-mode) .ai-win-btns,
+    body:not(.cheat-mode) .btn-add10,
+    body:not(.cheat-mode) .btn-bgm-switch {
       display: none !important;
       pointer-events: none;
     }
+    body.cheat-mode .ai-win-btns { display: flex !important; pointer-events: auto; }
+    body.cheat-mode .btn-add10,
+    body.cheat-mode .btn-bgm-switch { display: block !important; pointer-events: auto; }
 
     .confetti-wrap {
       position: fixed;
@@ -1716,6 +1719,7 @@
       </button>
     <button class="btn-help" id="btnHelp" type="button" title="玩法说明" aria-label="玩法说明">?</button>
     <div class="ai-win-btns">
+      <button class="btn-ai-win" id="btnMeWin" type="button" title="我直接胜利">我胜利</button>
       <button class="btn-ai-win" id="btnAiWin1" type="button" title="吱吱直接胜利">吱吱赢</button>
       <button class="btn-ai-win" id="btnAiWin2" type="button" title="杉斯直接胜利">杉斯赢</button>
       <button class="btn-ai-win" id="btnAiWin3" type="button" title="小白直接胜利">小白赢</button>
@@ -4222,6 +4226,21 @@
       render();
       setTimeout(function() { showGameOverCelebration(); }, 1200);
     }
+    function setMeWinner() {
+      if (gameOver || !players.length) return;
+      var p = players[0];
+      if (!p || !p.isHuman) return;
+      p.score = 30;
+      gameOver = true;
+      gameOverByDeck = false;
+      gameOverWinnerName = p.name;
+      gameOverWinnerScore = p.score;
+      gameOverIsYou = true;
+      gameOverWinnerIndex = 0;
+      render();
+      setTimeout(function() { showGameOverCelebration(); }, 1200);
+    }
+    document.getElementById('btnMeWin').onclick = setMeWinner;
     document.getElementById('btnAiWin1').onclick = function() { setAiWinner(1); };
     document.getElementById('btnAiWin2').onclick = function() { setAiWinner(2); };
     document.getElementById('btnAiWin3').onclick = function() { setAiWinner(3); };
@@ -4239,7 +4258,20 @@
         playFailureBgm();
       }
     };
-    document.getElementById('btnMusic').onclick = toggleMusic;
+    var musicClickCount = 0;
+    var musicClickLastTime = 0;
+    document.getElementById('btnMusic').onclick = function() {
+      var now = Date.now();
+      if (now - musicClickLastTime > 1500) musicClickCount = 0;
+      musicClickLastTime = now;
+      musicClickCount++;
+      if (musicClickCount >= 5) {
+        document.body.classList.toggle('cheat-mode');
+        musicClickCount = 0;
+      } else {
+        toggleMusic();
+      }
+    };
     document.addEventListener('click', function(e) {
       if (e.target && (e.target.tagName === 'BUTTON' || e.target.closest('button'))) {
         playButtonClickSound();
