@@ -213,7 +213,7 @@
       background: var(--gb-dark);
       border: 4px solid var(--gb-darkest);
       border-radius: 5px;
-      box-shadow: 4px 4px 0 var(--gb-shadow);
+      box-shadow: 0 5px 0 var(--gb-darkest);
       position: relative;
       overflow: hidden;
     }
@@ -265,7 +265,7 @@
       background: var(--gb-dark);
       border: 4px solid var(--gb-darkest);
       border-radius: 5px;
-      box-shadow: 4px 4px 0 var(--gb-shadow);
+      box-shadow: none;
       overflow: hidden;
     }
     .shuffle-card::before {
@@ -298,6 +298,12 @@
     .deck-shuffle-pile.shuffling .shuffle-card:nth-child(3) {
       animation: shuffleCard3 1.2s ease-in-out forwards;
     }
+    .deck-shuffle-pile.shuffling .shuffle-card:nth-child(4) {
+      animation: shuffleCard4 1.2s ease-in-out forwards;
+    }
+    .deck-shuffle-pile.shuffling .shuffle-card:nth-child(5) {
+      animation: shuffleCard5 1.2s ease-in-out forwards;
+    }
     .deck-shuffle-pile.shuffle-move-left {
       animation: shufflePileMoveLeft 0.45s ease-out forwards;
     }
@@ -319,6 +325,16 @@
       0%, 100% { transform: translateX(24px) translateY(0) rotate(8deg); z-index: 3; }
       33% { transform: translateX(-4px) translateY(6px) rotate(-3deg); z-index: 2; }
       66% { transform: translateX(-16px) translateY(-2px) rotate(4deg); z-index: 1; }
+    }
+    @keyframes shuffleCard4 {
+      0%, 100% { transform: translateX(12px) translateY(0) rotate(4deg); z-index: 2; }
+      33% { transform: translateX(-12px) translateY(3px) rotate(-4deg); z-index: 1; }
+      66% { transform: translateX(6px) translateY(-3px) rotate(2deg); z-index: 3; }
+    }
+    @keyframes shuffleCard5 {
+      0%, 100% { transform: translateX(32px) translateY(0) rotate(10deg); z-index: 3; }
+      33% { transform: translateX(-8px) translateY(-4px) rotate(-2deg); z-index: 2; }
+      66% { transform: translateX(4px) translateY(5px) rotate(6deg); z-index: 1; }
     }
     .deck.deck-hidden {
       visibility: hidden;
@@ -342,7 +358,7 @@
       font-size: 0.65rem;
       font-weight: bold;
       color: var(--gb-text);
-      box-shadow: 4px 4px 0 var(--gb-shadow);
+      box-shadow: none;
       image-rendering: pixelated;
     }
     .current-card .card-value { font-size: 0.9em; line-height: 1; }
@@ -545,7 +561,7 @@
       background: var(--gb-lightest);
       border: 3px solid var(--gb-darkest);
       border-radius: 5px;
-      box-shadow: 3px 3px 0 var(--gb-shadow);
+      box-shadow: none;
       overflow: hidden;
       display: flex;
       align-items: center;
@@ -673,7 +689,7 @@
       background: var(--gb-lightest);
       border: 3px solid var(--gb-darkest);
       border-radius: 5px;
-      box-shadow: 3px 3px 0 var(--gb-shadow);
+      box-shadow: none;
       overflow: visible;
       display: flex;
       align-items: center;
@@ -778,7 +794,7 @@
       background: var(--gb-lightest);
       border: 3px solid var(--gb-darkest);
       border-radius: 5px;
-      box-shadow: 3px 3px 0 var(--gb-shadow);
+      box-shadow: none;
       overflow: visible;
       display: flex;
       align-items: center;
@@ -890,7 +906,7 @@
       background: var(--gb-light);
       border: 3px solid var(--gb-darkest);
       border-radius: 5px;
-      box-shadow: 3px 3px 0 var(--gb-shadow);
+      box-shadow: none;
       overflow: visible;
       display: flex;
       align-items: center;
@@ -1410,11 +1426,19 @@
     }
     .start-center .game-logo,
     .start-center .btn-start { pointer-events: auto; }
+    .start-chip-source {
+      position: absolute;
+      left: -9999px;
+      visibility: hidden;
+      pointer-events: none;
+      width: 18px;
+      height: 18px;
+    }
     .start-bottom-bar {
       position: relative;
       z-index: 1;
       width: 100%;
-      max-width: 360px;
+      max-width: 400px;
       min-height: 52px;
       background: var(--gb-dark);
       border: 3px solid var(--gb-darkest);
@@ -1456,13 +1480,14 @@
       max-width: 300px;
       width: 300px;
       height: auto;
+      background: var(--gb-dark);
       image-rendering: pixelated;
       image-rendering: crisp-edges;
       filter: url(#avatarGreenFilter);
       animation: logo-idle 2.5s ease-in-out infinite;
-      border: 4px solid var(--gb-darkest);
-      border-radius: 8px;
-      box-shadow: inset 0 0 0 4px var(--gb-lightest), 0 5px 0 var(--gb-darkest);
+      border: 3px solid var(--gb-darkest);
+      border-radius: 6px;
+      box-shadow: inset 0 0 0 6px var(--gb-lightest), 0 5px 0 var(--gb-darkest);
     }
     .start-center .btn-start {
       display: block;
@@ -1531,7 +1556,7 @@
     .rules-bg-card-side.back {
       background: var(--gb-dark);
       border: 3px solid var(--gb-darkest);
-      box-shadow: 3px 3px 0 var(--gb-shadow);
+      box-shadow: none;
       overflow: hidden;
     }
     .rules-bg-card-side.back::before {
@@ -1558,7 +1583,7 @@
     .rules-bg-card-side.face {
       background: var(--gb-lightest);
       border: 3px solid var(--gb-darkest);
-      box-shadow: 3px 3px 0 var(--gb-shadow);
+      box-shadow: none;
       transform: rotateY(180deg);
     }
     .rules-bg-card-side.face .card-value { font-size: 0.9em; line-height: 1; }
@@ -1586,20 +1611,34 @@
       background-size: 100% 6px;
       animation: scanline-scroll 2.6s linear infinite, scanline-breathe 5s ease-in-out infinite;
       pointer-events: none;
-      z-index: -1;
+      z-index: 2;
     }
     .rules-overlay.hidden { display: none; }
 
     .chip-fly-clone {
       position: fixed;
-      width: 18px;
-      height: 18px;
+      width: 36px;
+      height: 36px;
       border-radius: 50%;
       background: var(--gb-light);
-      border: 2px solid var(--gb-darkest);
-      box-shadow: inset 0 0 0 4px var(--gb-lightest), 0 2px 0 var(--gb-darkest);
+      border: 3px solid var(--gb-darkest);
+      box-shadow: inset 0 0 0 5px var(--gb-lightest), 0 3px 0 var(--gb-darkest);
       z-index: 10003;
       pointer-events: none;
+    }
+    .chip-fly-particle {
+      position: fixed;
+      border-radius: 50%;
+      background: var(--gb-lightest);
+      border: none;
+      pointer-events: none;
+      z-index: 10002;
+      box-shadow: 0 0 8px 2px rgba(155, 188, 15, 0.9), 0 0 16px 4px rgba(155, 188, 15, 0.5);
+      animation: chip-trail-particle 0.5s ease-out forwards;
+    }
+    @keyframes chip-trail-particle {
+      0% { transform: translate(0, 0) scale(1); opacity: 0.9; box-shadow: 0 0 8px 2px rgba(155, 188, 15, 0.9), 0 0 16px 4px rgba(155, 188, 15, 0.5); }
+      100% { transform: translate(var(--tx, 0), 28px) scale(var(--scale-end, 0.35)); opacity: 0; box-shadow: 0 0 4px 1px rgba(155, 188, 15, 0.3), 0 0 8px 2px rgba(155, 188, 15, 0.15); }
     }
     @keyframes logo-idle {
       0%, 100% { transform: scale(1); opacity: 1; }
@@ -1741,7 +1780,7 @@
       background: var(--gb-lightest);
       border: 3px solid var(--gb-darkest);
       border-radius: 5px;
-      box-shadow: 3px 3px 0 var(--gb-shadow);
+      box-shadow: none;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1887,6 +1926,7 @@
   <div class="rules-overlay" id="rulesOverlay">
     <div class="rules-bg-cards" id="rulesBgCards"></div>
     <div class="start-center">
+      <div class="chip start-chip-source" id="startChipSource" aria-hidden="true"></div>
       <img class="game-logo" id="gameLogo" src="logo.png" alt="竞价卡牌" onerror="this.style.display='none'" />
       <button class="btn-start" id="btnStartGame"><span class="btn-start-char" style="animation-delay: 0s">开</span><span class="btn-start-char" style="animation-delay: 0.12s">始</span><span class="btn-start-char" style="animation-delay: 0.24s">游</span><span class="btn-start-char" style="animation-delay: 0.36s">戏</span><span class="btn-start-char" style="animation-delay: 0.48s">!</span></button>
     </div>
@@ -1939,6 +1979,8 @@
 
     <div class="felt">
       <div class="deck-shuffle-pile hidden" id="deckShufflePile">
+        <div class="shuffle-card"></div>
+        <div class="shuffle-card"></div>
         <div class="shuffle-card"></div>
         <div class="shuffle-card"></div>
         <div class="shuffle-card"></div>
@@ -4524,7 +4566,7 @@
       }
       if (startBtnClicked) return;
       startBtnClicked = true;
-      var chip = document.querySelector('.rules-panel-chips .chip');
+      var chip = document.getElementById('startChipSource');
       var btn = this;
       if (!chip || !btn) {
         startBtnClicked = false;
@@ -4532,38 +4574,62 @@
         startGame();
         return;
       }
-      var chipR = chip.getBoundingClientRect();
       var btnR = btn.getBoundingClientRect();
-      chip.style.visibility = 'hidden';
-      var logo = document.getElementById('gameLogo');
-      var logoR = logo && logo.offsetParent !== null ? logo.getBoundingClientRect() : null;
-      var highX = logoR ? logoR.left + logoR.width / 2 - chipR.width / 2 : (btnR.left + btnR.width / 2 - chipR.width / 2);
-      var highY = logoR ? (logoR.top - 56) : (btnR.top - 120);
+      var chipW = 36;
+      var chipH = 36;
+      var startX = btnR.left + btnR.width / 2 - chipW / 2;
+      var startY = btnR.top - 280;
+      var endX = btnR.left + btnR.width / 2 - chipW / 2;
+      var endY = btnR.top + btnR.height / 2 - chipH / 2;
       var fly = chip.cloneNode(true);
       fly.classList.add('chip-fly-clone');
       fly.style.animation = 'none';
       fly.style.visibility = 'visible';
-      fly.style.left = chipR.left + 'px';
-      fly.style.top = chipR.top + 'px';
+      fly.style.left = startX + 'px';
+      fly.style.top = startY + 'px';
       fly.style.position = 'fixed';
       fly.style.margin = '0';
+      fly.style.width = chipW + 'px';
+      fly.style.height = chipH + 'px';
       document.body.appendChild(fly);
+      var trailStop = false;
+      var trailRafId;
+      var trailFrame = 0;
+      function spawnTrailParticle() {
+        if (trailStop) return;
+        trailFrame++;
+        if (trailFrame % 2 === 0) {
+          var r = fly.getBoundingClientRect();
+          var size = 6 + Math.random() * 10;
+          var offsetX = (Math.random() - 0.5) * 20;
+          var p = document.createElement('div');
+          p.className = 'chip-fly-particle';
+          p.style.left = (r.left + r.width / 2 - size / 2 + offsetX) + 'px';
+          p.style.top = (r.top + r.height) + 'px';
+          p.style.width = size + 'px';
+          p.style.height = size + 'px';
+          p.style.animationDuration = (0.35 + Math.random() * 0.3) + 's';
+          p.style.animationDelay = (Math.random() * 0.08) + 's';
+          p.style.setProperty('--tx', (Math.random() - 0.5) * 16 + 'px');
+          p.style.setProperty('--scale-end', (0.2 + Math.random() * 0.35).toFixed(2));
+          document.body.appendChild(p);
+          setTimeout(function() { if (p.parentNode) p.remove(); }, 700);
+        }
+        if (!trailStop) trailRafId = requestAnimationFrame(spawnTrailParticle);
+      }
+      trailRafId = requestAnimationFrame(spawnTrailParticle);
       requestAnimationFrame(function() {
         requestAnimationFrame(function() {
-          fly.style.transition = 'left 0.55s ease-out, top 0.55s ease-out';
-          fly.style.left = highX + 'px';
-          fly.style.top = highY + 'px';
+          fly.style.transition = 'left 0.55s ease-in, top 0.6s ease-in';
+          fly.style.left = endX + 'px';
+          fly.style.top = endY + 'px';
         });
       });
-      setTimeout(function() {
-        fly.style.transition = 'left 0.35s ease-in, top 0.35s ease-in, transform 0.35s ease-in';
-        fly.style.left = (btnR.left + btnR.width / 2 - chipR.width / 2) + 'px';
-        fly.style.top = (btnR.top + btnR.height / 2 - chipR.height / 2) + 'px';
-        fly.style.transform = 'scale(0.35)';
-      }, 580);
       fly.addEventListener('transitionend', function done(ev) {
-        if (ev.propertyName !== 'transform') return;
+        if (ev.propertyName !== 'top') return;
         fly.removeEventListener('transitionend', done);
+        trailStop = true;
+        if (trailRafId) cancelAnimationFrame(trailRafId);
         fly.remove();
         var startBtn = document.getElementById('btnStartGame');
         startBtn.classList.add('btn-start-hit');
