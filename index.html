@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
-  <svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0">
+  <svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0" aria-hidden="true">
     <defs>
       <filter id="avatarGreenFilter" color-interpolation-filters="sRGB">
         <feColorMatrix type="matrix" in="SourceGraphic" values="
@@ -21,6 +21,12 @@
     </defs>
   </svg>
   <style>
+    /* 本地游戏字体：请将字体文件放在 fonts/game-font.ttf */
+    @font-face {
+      font-family: "GameFont";
+      src: url("fonts/game-font.ttf") format("truetype");
+      font-display: swap;
+    }
     /* GB 初代宝可梦截图配色：四阶绿 */
     :root {
       --gb-darkest: #0f380f;
@@ -31,6 +37,8 @@
       --gb-bg: #5a7c4a;
       --gb-bg-alt: #4a6b3d;
       --gb-text: #0f380f;
+      /* 开始页 logo 块与底部的距离：数值越大 logo 越靠上，越小越靠下 */
+      --start-logo-from-bottom: 140px;
     }
     * { box-sizing: border-box; }
     html { -webkit-text-size-adjust: 100%; image-rendering: pixelated; image-rendering: crisp-edges; }
@@ -40,7 +48,7 @@
       min-width: 100vw;
       background: var(--gb-bg);
       color: var(--gb-text);
-      font-family: "Press Start 2P", monospace;
+      font-family: "GameFont", "Press Start 2P", monospace;
       font-size: 11px;
       display: flex;
       flex-direction: column;
@@ -70,8 +78,8 @@
         0deg,
         transparent 0px,
         transparent 5px,
-        rgba(15,56,15,0.07) 5px,
-        rgba(15,56,15,0.07) 6px
+        rgba(15,56,15,0.1) 5px,
+        rgba(15,56,15,0.1) 6px
       );
       background-size: 100% 6px;
       animation: scanline-scroll 2.6s linear infinite, scanline-breathe 5s ease-in-out infinite;
@@ -91,7 +99,7 @@
       100% { background-position: 0 6px; }
     }
     @keyframes scanline-breathe {
-      0%, 100% { opacity: 0.9; }
+      0%, 100% { opacity: 0.95; }
       50% { opacity: 1; }
     }
     /* 统一竖屏布局：设最小宽高避免缩小后四角玩家与桌子重叠，视口更小时可滚动 */
@@ -124,7 +132,7 @@
       background-size: 14px 14px;
       border: 4px solid var(--gb-darkest);
       border-radius: 0;
-      box-shadow: inset 0 0 0 4px var(--gb-light), 6px 6px 0 var(--gb-shadow);
+      box-shadow: inset 0 0 0 4px var(--gb-light), 0 6px 0 var(--gb-darkest);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -204,7 +212,7 @@
     .deck {
       background: var(--gb-dark);
       border: 4px solid var(--gb-darkest);
-      border-radius: 0;
+      border-radius: 5px;
       box-shadow: 4px 4px 0 var(--gb-shadow);
       position: relative;
       overflow: hidden;
@@ -256,7 +264,7 @@
       margin-top: -30px;
       background: var(--gb-dark);
       border: 4px solid var(--gb-darkest);
-      border-radius: 0;
+      border-radius: 5px;
       box-shadow: 4px 4px 0 var(--gb-shadow);
       overflow: hidden;
     }
@@ -325,7 +333,7 @@
     .current-card {
       background: var(--gb-lightest);
       border: 4px solid var(--gb-darkest);
-      border-radius: 0;
+      border-radius: 5px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -382,10 +390,8 @@
       height: 18px;
       border-radius: 50%;
       background: var(--gb-light);
-      border: 2px solid var(--gb-lightest);
-      box-shadow:
-        inset 0 0 0 2px var(--gb-dark),
-        2px 2px 0 var(--gb-shadow);
+      border: 2px solid var(--gb-darkest);
+      box-shadow: inset 0 0 0 4px var(--gb-lightest), 0 2px 0 var(--gb-darkest);
     }
     .chip-burst-particle {
       position: fixed;
@@ -422,8 +428,8 @@
       transform: translate(-50%, -50%);
       border-radius: 50%;
       background: var(--gb-light);
-      border: 2px solid var(--gb-lightest);
-      box-shadow: inset 0 0 0 2px var(--gb-dark), 2px 2px 0 var(--gb-shadow);
+      border: 2px solid var(--gb-darkest);
+      box-shadow: inset 0 0 0 4px var(--gb-lightest), 0 2px 0 var(--gb-darkest);
       transition: left 0.35s ease-out, top 0.35s ease-out;
     }
     .xiaobai-victory-wrap {
@@ -461,6 +467,7 @@
       padding: 8px 12px;
       background: var(--gb-lightest);
       border: 3px solid var(--gb-darkest);
+      border-radius: 6px;
       box-shadow: 3px 3px 0 var(--gb-shadow);
       font-size: 9px;
       font-weight: bold;
@@ -497,6 +504,7 @@
       padding: 8px 12px;
       background: var(--gb-lightest);
       border: 3px solid var(--gb-darkest);
+      border-radius: 6px;
       box-shadow: 3px 3px 0 var(--gb-shadow);
       font-size: 9px;
       font-weight: bold;
@@ -536,7 +544,7 @@
       transform: translate(-50%, -50%);
       background: var(--gb-lightest);
       border: 3px solid var(--gb-darkest);
-      border-radius: 0;
+      border-radius: 5px;
       box-shadow: 3px 3px 0 var(--gb-shadow);
       overflow: hidden;
       display: flex;
@@ -648,6 +656,13 @@
       z-index: 25;
       overflow: visible;
     }
+    @keyframes zhizhiJumpArc {
+      0%, 100% { transform: translate(-50%, -50%) translateY(0); }
+      50% { transform: translate(-50%, -50%) translateY(-35px); }
+    }
+    .zhizhi-victory-wrap .zhizhi-avatar.zhizhi-jump-arc {
+      animation: zhizhiJumpArc 0.52s ease-out forwards;
+    }
     .zhizhi-victory-wrap .zhizhi-avatar {
       position: absolute;
       width: 36px;
@@ -657,12 +672,26 @@
       transform: translate(-50%, -50%);
       background: var(--gb-lightest);
       border: 3px solid var(--gb-darkest);
-      border-radius: 0;
+      border-radius: 5px;
       box-shadow: 3px 3px 0 var(--gb-shadow);
       overflow: visible;
       display: flex;
       align-items: center;
       justify-content: center;
+    }
+    @keyframes zhizhiAvatarPop {
+      0%, 100% { transform: translate(-50%, -50%) scaleX(1) scale(1); }
+      50% { transform: translate(-50%, -50%) scaleX(1) scale(1.12); }
+    }
+    .zhizhi-victory-wrap .zhizhi-avatar.zhizhi-avatar-pop {
+      animation: zhizhiAvatarPop 0.28s ease-out both;
+    }
+    @keyframes zhizhiAvatarTurn {
+      0%, 100% { transform: translate(-50%, -50%) scaleX(var(--zhizhi-turn-sx, 1)) scale(1); }
+      50% { transform: translate(-50%, -50%) scaleX(var(--zhizhi-turn-sx, 1)) scale(0.72); }
+    }
+    .zhizhi-victory-wrap .zhizhi-avatar.zhizhi-avatar-turn {
+      animation: zhizhiAvatarTurn 0.1s ease-out both;
     }
     .zhizhi-victory-wrap .zhizhi-avatar img {
       width: 100%;
@@ -672,8 +701,15 @@
       filter: url(#avatarGreenFilter);
     }
     @keyframes zhizhiMicWobble {
-      0%, 100% { transform: translateY(0) rotate(-4deg); }
-      50% { transform: translateY(-1px) rotate(4deg); }
+      0%, 100% { transform: translate(-2px, 1px) rotate(calc(-14deg + var(--mic-tilt, 0deg))); }
+      25% { transform: translate(2px, -2px) rotate(calc(6deg + var(--mic-tilt, 0deg))); }
+      50% { transform: translate(2px, 1px) rotate(calc(14deg + var(--mic-tilt, 0deg))); }
+      75% { transform: translate(-2px, -1px) rotate(calc(-6deg + var(--mic-tilt, 0deg))); }
+    }
+    @keyframes zhizhiMicAppear {
+      0% { transform: translate(-2px, 1px) rotate(calc(-14deg + var(--mic-tilt, 0deg))) scale(0); opacity: 0; }
+      40% { transform: translate(-2px, 1px) rotate(calc(-14deg + var(--mic-tilt, 0deg))) scale(1.35); opacity: 1; }
+      100% { transform: translate(-2px, 1px) rotate(calc(-14deg + var(--mic-tilt, 0deg))) scale(1); opacity: 1; }
     }
     .zhizhi-victory-wrap .zhizhi-avatar-mic {
       position: absolute;
@@ -686,6 +722,16 @@
       z-index: 2;
       pointer-events: none;
       animation: zhizhiMicWobble 0.5s ease-in-out infinite;
+    }
+    .zhizhi-victory-wrap .zhizhi-avatar-mic.zhizhi-mic-appear {
+      animation: zhizhiMicAppear 0.32s ease-out forwards, zhizhiMicWobble 0.5s ease-in-out 0.32s infinite;
+    }
+    @keyframes zhizhiMicFlip {
+      0%, 100% { transform: translate(-2px, 1px) rotate(calc(-14deg + var(--mic-tilt, 0deg))); }
+      50% { transform: translate(1px, -2px) rotate(calc(2deg + var(--mic-tilt, 0deg))); }
+    }
+    .zhizhi-victory-wrap .zhizhi-avatar-mic.zhizhi-mic-flip {
+      animation: zhizhiMicFlip 0.18s ease-in-out both;
     }
     .zhizhi-victory-wrap .zhizhi-note {
       position: absolute;
@@ -731,7 +777,7 @@
       transform: translate(-50%, -50%);
       background: var(--gb-lightest);
       border: 3px solid var(--gb-darkest);
-      border-radius: 0;
+      border-radius: 5px;
       box-shadow: 3px 3px 0 var(--gb-shadow);
       overflow: visible;
       display: flex;
@@ -770,10 +816,18 @@
       padding: 6px 10px 10px;
       background: var(--gb-lightest);
       border: 3px solid var(--gb-darkest);
+      border-radius: 6px;
       box-shadow: 3px 3px 0 var(--gb-shadow);
       color: var(--gb-text);
       pointer-events: none;
       z-index: 20;
+    }
+    @keyframes sansBubbleAppear {
+      from { opacity: 0; transform: translateX(-50%) translateY(-10px); }
+      to { opacity: 1; transform: translateX(-50%) translateY(0); }
+    }
+    .sans-victory-wrap .sans-dialogue-bubble.sans-bubble-appear {
+      animation: sansBubbleAppear 0.22s ease-out forwards;
     }
     .sans-victory-wrap .sans-dialogue-bubble::after {
       content: '';
@@ -787,7 +841,7 @@
     .sans-victory-wrap .sans-dialogue-line {
       text-align: center;
       font-size: 10px;
-      font-family: "Press Start 2P", monospace;
+      font-family: "GameFont", "Press Start 2P", monospace;
       line-height: 1.7;
       padding: 0;
     }
@@ -816,6 +870,69 @@
       to { opacity: 1; transform: scale(1); }
     }
     .player.sans-on-table .player-avatar { visibility: hidden; }
+    .human-victory-wrap {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 25;
+      overflow: visible;
+    }
+    .human-victory-wrap .human-avatar {
+      position: absolute;
+      width: 36px;
+      height: 36px;
+      left: 0;
+      top: 0;
+      transform: translate(-50%, -50%);
+      background: var(--gb-light);
+      border: 3px solid var(--gb-darkest);
+      border-radius: 5px;
+      box-shadow: 3px 3px 0 var(--gb-shadow);
+      overflow: visible;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .human-victory-wrap .human-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      image-rendering: pixelated;
+    }
+    @keyframes humanAvatarPop {
+      0%, 100% { transform: translate(-50%, -50%) scale(1); }
+      50% { transform: translate(-50%, -50%) scale(1.15); }
+    }
+    .human-victory-wrap .human-avatar.human-avatar-pop {
+      animation: humanAvatarPop 0.3s ease-out both;
+    }
+    .human-victory-wrap .human-bubble {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 58%;
+      margin-bottom: 4px;
+      padding: 6px 10px;
+      background: var(--gb-lightest);
+      border: 3px solid var(--gb-darkest);
+      border-radius: 6px;
+      box-shadow: 3px 3px 0 var(--gb-shadow);
+      color: var(--gb-text);
+      font-size: 10px;
+      font-family: "GameFont", "Press Start 2P", monospace;
+      white-space: nowrap;
+      pointer-events: none;
+      z-index: 20;
+      animation: humanBubbleIn 0.25s ease-out forwards;
+    }
+    @keyframes humanBubbleIn {
+      from { opacity: 0; transform: translateX(-50%) translateY(4px); }
+      to { opacity: 1; transform: translateX(-50%) translateY(0); }
+    }
+    .player.human-on-table .player-avatar { visibility: hidden; }
     .table-pass-indicators {
       position: absolute;
       left: 0;
@@ -842,7 +959,7 @@
       content: '×';
       font-size: 20px;
       font-weight: bold;
-      font-family: inherit;
+      font-family: sans-serif;
       color: var(--gb-text);
       line-height: 1;
     }
@@ -897,21 +1014,22 @@
       display: none;
       padding: 10px 20px;
       font-size: 8px;
-      background: var(--gb-light);
+      background: var(--gb-dark);
       border: 3px solid var(--gb-darkest);
-      color: var(--gb-darkest);
+      color: var(--gb-lightest);
       cursor: pointer;
       font-family: inherit;
-      box-shadow: 3px 3px 0 var(--gb-shadow);
+      border-radius: 6px;
+      box-shadow: inset 0 0 0 4px var(--gb-lightest), 0 5px 0 var(--gb-darkest);
       -webkit-tap-highlight-color: transparent;
     }
-    .btn-again-in-game:hover { background: var(--gb-lightest); }
+    .btn-again-in-game:hover { background: var(--gb-light); color: var(--gb-darkest); box-shadow: inset 0 0 0 4px var(--gb-light), 0 5px 0 var(--gb-darkest); }
     .btn-again-in-game.show { display: flex; align-items: center; justify-content: center; }
     .btn-pass {
       width: 36px;
       min-width: 36px;
       height: 36px;
-      border-radius: 0;
+      border-radius: 5px;
       background: var(--gb-dark);
       border: 3px solid var(--gb-darkest);
       color: var(--gb-lightest);
@@ -922,10 +1040,11 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 3px 3px 0 var(--gb-shadow);
+      box-shadow: inset 0 0 0 4px var(--gb-lightest), 0 5px 0 var(--gb-darkest);
       font-family: inherit;
     }
-    .btn-pass:hover:not(:disabled) { background: var(--gb-light); color: var(--gb-darkest); }
+    .btn-pass:hover:not(:disabled) { background: var(--gb-light); color: var(--gb-darkest); box-shadow: inset 0 0 0 4px var(--gb-light), 0 5px 0 var(--gb-darkest); }
+    .btn-pass .btn-pass-icon { font-family: sans-serif; }
     .btn-pass:disabled { opacity: 0.5; cursor: not-allowed; }
     .btn-pass, .btn-bid, .btn-arrow, .btn-confirm-bid, .new-game, .game-over-panel .btn-again {
       -webkit-tap-highlight-color: transparent;
@@ -942,17 +1061,17 @@
       min-width: 44px;
       height: 36px;
       padding: 0 8px;
-      border-radius: 0;
-      background: var(--gb-lightest);
+      border-radius: 5px;
+      background: var(--gb-dark);
       border: 3px solid var(--gb-darkest);
-      color: var(--gb-darkest);
+      color: var(--gb-lightest);
       font-weight: bold;
       cursor: pointer;
       font-size: 7px;
-      box-shadow: 3px 3px 0 var(--gb-shadow);
+      box-shadow: inset 0 0 0 4px var(--gb-lightest), 0 5px 0 var(--gb-darkest);
       font-family: inherit;
     }
-    .btn-bid:hover:not(:disabled) { background: var(--gb-light); }
+    .btn-bid:hover:not(:disabled) { background: var(--gb-light); color: var(--gb-darkest); box-shadow: inset 0 0 0 4px var(--gb-light), 0 5px 0 var(--gb-darkest); }
     /* 四角玩家；人类玩家信息在上，操作区在下 */
     .player-bottom { position: absolute; left: 50%; bottom: 20%; transform: translateX(-50%); }
     .player-left   { position: absolute; left: 1%;  top: 50%;  transform: translateY(-50%); }
@@ -1004,11 +1123,13 @@
     }
     @keyframes chipGlow {
       0%, 100% { filter: brightness(1); transform: scale(1); }
-      50% { filter: brightness(1.5); transform: scale(1.08); }
+      50% { filter: brightness(1.55); transform: scale(1.06); }
     }
     .player-chips.chip-fly-in .chip { animation: chipFlyIn 0.4s ease-out; }
     .player-chips.glow { animation: chipGlow 0.5s ease-out; }
-    .player-chips.glow .chip { box-shadow: 0 0 0 2px var(--gb-lightest); }
+    .player-chips.glow .chip {
+      box-shadow: inset 0 0 0 4px var(--gb-lightest), 0 2px 0 var(--gb-darkest), 0 0 0 2px var(--gb-lightest), 0 0 6px 1px rgba(155, 188, 15, 0.5);
+    }
     @keyframes chipReturnPop {
       0%, 100% { transform: scale(1); }
       40% { transform: scale(1.35); }
@@ -1032,17 +1153,15 @@
     }
     .player-name { font-size: 7px; color: var(--gb-text); }
     .player-chips { display: flex; align-items: center; gap: 6px; }
-    /* Game Boy 筹码：圆片 + 高对比 */
+    /* Game Boy 筹码：圆片 + 与按钮一致的描边与投影（投影略小） */
     .chip {
       width: 18px;
       height: 18px;
       flex-shrink: 0;
       border-radius: 50%;
       background: var(--gb-light);
-      border: 2px solid var(--gb-lightest);
-      box-shadow:
-        inset 0 0 0 2px var(--gb-dark),
-        2px 2px 0 var(--gb-shadow);
+      border: 2px solid var(--gb-darkest);
+      box-shadow: inset 0 0 0 4px var(--gb-lightest), 0 2px 0 var(--gb-darkest);
     }
     .chip-num {
       font-size: 7px;
@@ -1056,7 +1175,7 @@
       box-sizing: border-box;
       background: var(--gb-dark);
       border: 3px solid var(--gb-darkest);
-      border-radius: 0;
+      border-radius: 5px;
       padding: 5px 9px;
       font-size: 7px;
       font-weight: bold;
@@ -1072,6 +1191,7 @@
       top: 0;
       bottom: 0;
       background: var(--gb-light);
+      border-radius: 3px;
       transition: width 0.8s ease-out;
       z-index: 0;
       max-width: 100%;
@@ -1096,16 +1216,16 @@
       background: var(--gb-dark);
       color: var(--gb-lightest);
       border: 3px solid var(--gb-darkest);
-      border-radius: 0;
+      border-radius: 5px;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 3px 3px 0 var(--gb-shadow);
+      box-shadow: inset 0 0 0 4px var(--gb-lightest), 0 5px 0 var(--gb-darkest);
       -webkit-tap-highlight-color: transparent;
     }
     .new-game svg { width: 22px; height: 22px; display: block; }
-    .new-game:hover { background: var(--gb-light); color: var(--gb-darkest); }
+    .new-game:hover { background: var(--gb-light); color: var(--gb-darkest); box-shadow: inset 0 0 0 4px var(--gb-light), 0 5px 0 var(--gb-darkest); }
 
     .btn-music {
       position: absolute;
@@ -1117,19 +1237,19 @@
       background: var(--gb-dark);
       color: var(--gb-lightest);
       border: 3px solid var(--gb-darkest);
-      border-radius: 0;
+      border-radius: 5px;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 3px 3px 0 var(--gb-shadow);
+      box-shadow: inset 0 0 0 4px var(--gb-lightest), 0 5px 0 var(--gb-darkest);
       -webkit-tap-highlight-color: transparent;
     }
     .btn-music .icon-on, .btn-music .icon-muted { font-size: 18px; line-height: 1; display: flex; align-items: center; justify-content: center; }
     .btn-music .icon-muted { display: none; }
     .btn-music.muted .icon-on { display: none; }
     .btn-music.muted .icon-muted { display: flex; align-items: center; justify-content: center; }
-    .btn-music:hover { background: var(--gb-light); color: var(--gb-darkest); }
+    .btn-music:hover { background: var(--gb-light); color: var(--gb-darkest); box-shadow: inset 0 0 0 4px var(--gb-light), 0 5px 0 var(--gb-darkest); }
     .btn-music.muted { opacity: 0.7; }
 
     .btn-help {
@@ -1142,7 +1262,7 @@
       background: var(--gb-dark);
       color: var(--gb-lightest);
       border: 3px solid var(--gb-darkest);
-      border-radius: 0;
+      border-radius: 5px;
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -1151,11 +1271,11 @@
       font-weight: bold;
       line-height: 1;
       font-family: inherit;
-      box-shadow: 3px 3px 0 var(--gb-shadow);
+      box-shadow: inset 0 0 0 4px var(--gb-lightest), 0 5px 0 var(--gb-darkest);
       -webkit-tap-highlight-color: transparent;
       z-index: 10000;
     }
-    .btn-help:hover { background: var(--gb-light); color: var(--gb-darkest); }
+    .btn-help:hover { background: var(--gb-light); color: var(--gb-darkest); box-shadow: inset 0 0 0 4px var(--gb-light), 0 5px 0 var(--gb-darkest); }
 
     .btn-add10 {
       position: absolute;
@@ -1165,17 +1285,17 @@
       background: var(--gb-dark);
       color: var(--gb-lightest);
       border: 3px solid var(--gb-darkest);
-      border-radius: 0;
+      border-radius: 5px;
       cursor: pointer;
       font-size: 8px;
       font-weight: bold;
       line-height: 1;
       font-family: inherit;
-      box-shadow: 3px 3px 0 var(--gb-shadow);
+      box-shadow: inset 0 0 0 4px var(--gb-lightest), 0 5px 0 var(--gb-darkest);
       -webkit-tap-highlight-color: transparent;
       z-index: 10000;
     }
-    .btn-add10:hover { background: var(--gb-light); color: var(--gb-darkest); }
+    .btn-add10:hover { background: var(--gb-light); color: var(--gb-darkest); box-shadow: inset 0 0 0 4px var(--gb-light), 0 5px 0 var(--gb-darkest); }
 
     .ai-win-btns {
       position: absolute;
@@ -1190,17 +1310,17 @@
       padding: 4px 8px;
       background: var(--gb-dark);
       color: var(--gb-lightest);
-      border: 2px solid var(--gb-darkest);
-      border-radius: 0;
+      border: 3px solid var(--gb-darkest);
+      border-radius: 5px;
       cursor: pointer;
       font-size: 7px;
       font-weight: bold;
       line-height: 1;
       font-family: inherit;
-      box-shadow: 2px 2px 0 var(--gb-shadow);
+      box-shadow: inset 0 0 0 4px var(--gb-lightest), 0 4px 0 var(--gb-darkest);
       -webkit-tap-highlight-color: transparent;
     }
-    .btn-ai-win:hover { background: var(--gb-light); color: var(--gb-darkest); }
+    .btn-ai-win:hover { background: var(--gb-light); color: var(--gb-darkest); box-shadow: inset 0 0 0 4px var(--gb-light), 0 4px 0 var(--gb-darkest); }
 
     .btn-bgm-switch {
       position: absolute;
@@ -1210,17 +1330,17 @@
       background: var(--gb-dark);
       color: var(--gb-lightest);
       border: 3px solid var(--gb-darkest);
-      border-radius: 0;
+      border-radius: 5px;
       cursor: pointer;
       font-size: 8px;
       font-weight: bold;
       line-height: 1;
       font-family: inherit;
-      box-shadow: 3px 3px 0 var(--gb-shadow);
+      box-shadow: inset 0 0 0 4px var(--gb-lightest), 0 5px 0 var(--gb-darkest);
       -webkit-tap-highlight-color: transparent;
       z-index: 10000;
     }
-    .btn-bgm-switch:hover { background: var(--gb-light); color: var(--gb-darkest); }
+    .btn-bgm-switch:hover { background: var(--gb-light); color: var(--gb-darkest); box-shadow: inset 0 0 0 4px var(--gb-light), 0 5px 0 var(--gb-darkest); }
     body:not(.cheat-mode) .ai-win-btns,
     body:not(.cheat-mode) .btn-add10,
     body:not(.cheat-mode) .btn-bgm-switch {
@@ -1271,9 +1391,100 @@
       inset: 0;
       z-index: 10001;
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: center;
-      padding: 20px;
+      justify-content: space-between;
+      padding: 20px 20px 16px;
+    }
+    .start-center {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      flex: 1;
+      gap: 0;
+      padding-bottom: var(--start-logo-from-bottom);
+      position: relative;
+      z-index: 1;
+      pointer-events: none;
+    }
+    .start-center .game-logo,
+    .start-center .btn-start { pointer-events: auto; }
+    .start-bottom-bar {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 360px;
+      min-height: 52px;
+      background: var(--gb-dark);
+      border: 3px solid var(--gb-darkest);
+      border-radius: 6px;
+      box-shadow: inset 0 0 0 3px var(--gb-lightest), 0 5px 0 var(--gb-darkest);
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      pointer-events: none;
+    }
+    .start-bottom-bar .btn-start-menu {
+      pointer-events: auto;
+      flex: 0 0 auto;
+      width: 76px;
+      min-width: 76px;
+      height: 36px;
+      padding: 0 8px;
+      border-radius: 5px;
+      background: var(--gb-lightest);
+      border: 3px solid var(--gb-darkest);
+      color: var(--gb-dark);
+      font-family: inherit;
+      font-size: 10px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: inset 0 0 0 4px var(--gb-dark), 0 2px 0 var(--gb-darkest);
+      -webkit-tap-highlight-color: transparent;
+    }
+    .start-bottom-bar .btn-start-menu:hover {
+      background: var(--gb-light);
+      color: var(--gb-darkest);
+      box-shadow: inset 0 0 0 4px var(--gb-dark), 0 2px 0 var(--gb-darkest);
+    }
+    .start-center .game-logo {
+      display: block;
+      margin: 0 0 auto 0;
+      max-width: 300px;
+      width: 300px;
+      height: auto;
+      image-rendering: pixelated;
+      image-rendering: crisp-edges;
+      filter: url(#avatarGreenFilter);
+      animation: logo-idle 2.5s ease-in-out infinite;
+      border: 4px solid var(--gb-darkest);
+      border-radius: 8px;
+      box-shadow: inset 0 0 0 4px var(--gb-lightest), 0 5px 0 var(--gb-darkest);
+    }
+    .start-center .btn-start {
+      display: block;
+      margin-top: 32px;
+      font-family: inherit;
+      padding: 12px 24px;
+      font-size: 24px;
+      font-weight: bold;
+      background: var(--gb-dark);
+      border: 3px solid var(--gb-darkest);
+      color: var(--gb-lightest);
+      cursor: pointer;
+      border-radius: 6px;
+      box-shadow: inset 0 0 0 6px var(--gb-lightest), 0 5px 0 var(--gb-darkest);
+    }
+    .start-center .btn-start:hover { background: var(--gb-dark); box-shadow: inset 0 0 0 6px var(--gb-light), 0 5px 0 var(--gb-darkest); }
+    .start-center .btn-start .btn-start-char {
+      display: inline-block;
+      animation: btn-char-wave 0.95s ease-in-out infinite;
+    }
+    .start-center .btn-start.btn-start-hit {
+      animation: btn-start-hit 0.5s ease-out forwards;
     }
     .rules-bg-cards {
       position: absolute;
@@ -1286,7 +1497,7 @@
       position: absolute;
       width: 44px;
       height: 60px;
-      border-radius: 0;
+      border-radius: 5px;
       image-rendering: pixelated;
       image-rendering: crisp-edges;
       pointer-events: auto;
@@ -1307,7 +1518,7 @@
       position: absolute;
       inset: 0;
       backface-visibility: hidden;
-      border-radius: 0;
+      border-radius: 5px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -1369,8 +1580,8 @@
         0deg,
         transparent 0px,
         transparent 5px,
-        rgba(15,56,15,0.07) 5px,
-        rgba(15,56,15,0.07) 6px
+        rgba(15,56,15,0.1) 5px,
+        rgba(15,56,15,0.1) 6px
       );
       background-size: 100% 6px;
       animation: scanline-scroll 2.6s linear infinite, scanline-breathe 5s ease-in-out infinite;
@@ -1379,101 +1590,29 @@
     }
     .rules-overlay.hidden { display: none; }
 
-    .rules-panel {
-      position: relative;
-      z-index: 1;
-      background: var(--gb-lightest);
-      border: 4px solid var(--gb-darkest);
-      box-shadow: 4px 4px 0 var(--gb-shadow);
-      padding: 20px 24px 44px;
-      max-width: 360px;
-      width: 100%;
-    }
-    .rules-panel-chips {
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      height: 24px;
-      overflow: hidden;
-    }
-    .rules-panel-chips .chip {
-      position: absolute;
-      bottom: 0;
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      background: var(--gb-light);
-      border: 2px solid var(--gb-lightest);
-      box-shadow: inset 0 0 0 2px var(--gb-dark), 2px 2px 0 var(--gb-shadow), 0 0 0 2px var(--gb-darkest);
-      animation: rulesChipScroll 5s ease-in-out infinite;
-    }
-    @keyframes rulesChipScroll {
-      0%, 100% { left: 5%; }
-      50% { left: 81%; }
-    }
     .chip-fly-clone {
       position: fixed;
       width: 18px;
       height: 18px;
       border-radius: 50%;
       background: var(--gb-light);
-      border: 2px solid var(--gb-lightest);
-      box-shadow: inset 0 0 0 2px var(--gb-dark), 2px 2px 0 var(--gb-shadow), 0 0 0 2px var(--gb-darkest);
+      border: 2px solid var(--gb-darkest);
+      box-shadow: inset 0 0 0 4px var(--gb-lightest), 0 2px 0 var(--gb-darkest);
       z-index: 10003;
       pointer-events: none;
     }
     @keyframes logo-idle {
       0%, 100% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.04); opacity: 0.92; }
+      50% { transform: scale(1.04); opacity: 1; }
     }
-    .rules-panel .game-logo {
-      display: block;
-      margin: 0 auto 14px;
-      max-width: 100%;
-      height: auto;
-      image-rendering: pixelated;
-      image-rendering: -moz-crisp-edges;
-      image-rendering: crisp-edges;
-      filter: url(#avatarGreenFilter);
-      animation: logo-idle 2.5s ease-in-out infinite;
+    @keyframes btn-char-wave {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
     }
-    .rules-panel h2 {
-      font-size: 13px;
-      font-weight: bold;
-      margin: 0 0 14px 0;
-      color: var(--gb-text);
-      text-align: center;
-      line-height: 1.5;
-    }
-    .rules-panel p {
-      font-size: 10px;
-      font-weight: 600;
-      color: var(--gb-text);
-      line-height: 1.9;
-      margin: 0 0 12px 0;
-    }
-    .rules-panel .btn-start {
-      display: block;
-      margin: 18px auto 0;
-      font-family: inherit;
-      padding: 12px 24px;
-      font-size: 9px;
-      background: var(--gb-light);
-      border: 3px solid var(--gb-darkest);
-      color: var(--gb-text);
-      cursor: pointer;
-      box-shadow: 3px 3px 0 var(--gb-shadow);
-    }
-    .rules-panel .btn-start:hover { background: var(--gb-lightest); }
     @keyframes btn-start-hit {
-      0%, 100% { filter: brightness(1); transform: scale(1); box-shadow: 3px 3px 0 var(--gb-shadow); }
-      50% { filter: brightness(1.5); transform: scale(1.08); box-shadow: 0 0 0 2px var(--gb-lightest), 3px 3px 0 var(--gb-shadow); }
+      0%, 100% { filter: brightness(1); transform: scale(1); box-shadow: inset 0 0 0 6px var(--gb-lightest), 0 5px 0 var(--gb-darkest); }
+      50% { filter: brightness(1.3); transform: scale(1.08); box-shadow: inset 0 0 0 6px var(--gb-lightest), 0 0 0 2px var(--gb-light), 0 5px 0 var(--gb-darkest); }
     }
-    .rules-panel .btn-start.btn-start-hit {
-      animation: btn-start-hit 0.5s ease-out forwards;
-    }
-
     .game-over-panel {
       background: var(--gb-lightest);
       border: 4px solid var(--gb-darkest);
@@ -1494,13 +1633,69 @@
       font-family: inherit;
       padding: 12px 20px;
       font-size: 9px;
-      background: var(--gb-light);
+      background: var(--gb-dark);
       border: 3px solid var(--gb-darkest);
-      color: var(--gb-darkest);
+      color: var(--gb-lightest);
       cursor: pointer;
-      box-shadow: 3px 3px 0 var(--gb-shadow);
+      border-radius: 6px;
+      box-shadow: inset 0 0 0 4px var(--gb-lightest), 0 5px 0 var(--gb-darkest);
     }
-    .game-over-panel .btn-again:hover { background: var(--gb-lightest); }
+    .game-over-panel .btn-again:hover { background: var(--gb-light); color: var(--gb-darkest); box-shadow: inset 0 0 0 4px var(--gb-light), 0 5px 0 var(--gb-darkest); }
+
+    .tutorial-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 10002;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(15, 56, 15, 0.5);
+    }
+    .tutorial-overlay.hidden { display: none; }
+    .tutorial-panel {
+      background: var(--gb-lightest);
+      border: 4px solid var(--gb-darkest);
+      box-shadow: 4px 4px 0 var(--gb-shadow);
+      padding: 20px 24px 24px;
+      max-width: 320px;
+      width: 100%;
+      border-radius: 6px;
+    }
+    .tutorial-panel .tutorial-title {
+      font-size: 13px;
+      font-weight: bold;
+      margin: 0 0 14px 0;
+      color: var(--gb-text);
+      text-align: center;
+      line-height: 1.5;
+    }
+    .tutorial-panel p {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--gb-text);
+      line-height: 1.9;
+      margin: 0 0 12px 0;
+    }
+    .tutorial-panel .btn-tutorial-close {
+      display: block;
+      margin: 16px auto 0;
+      font-family: inherit;
+      padding: 10px 20px;
+      font-size: 10px;
+      background: var(--gb-dark);
+      border: 3px solid var(--gb-darkest);
+      color: var(--gb-lightest);
+      cursor: pointer;
+      border-radius: 5px;
+      box-shadow: inset 0 0 0 4px var(--gb-lightest), 0 5px 0 var(--gb-darkest);
+      -webkit-tap-highlight-color: transparent;
+    }
+    .tutorial-panel .btn-tutorial-close:hover {
+      background: var(--gb-light);
+      color: var(--gb-darkest);
+      box-shadow: inset 0 0 0 4px var(--gb-light), 0 5px 0 var(--gb-darkest);
+    }
 
     .bid-picker { display: flex; align-items: center; gap: 8px; }
     .bid-picker-value { min-width: 40px; font-size: 11px; text-align: center; color: var(--gb-text); }
@@ -1508,7 +1703,7 @@
       width: 36px;
       height: 36px;
       padding: 0;
-      border-radius: 0;
+      border-radius: 5px;
       background: var(--gb-dark);
       border: 3px solid var(--gb-darkest);
       color: var(--gb-lightest);
@@ -1517,26 +1712,27 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 2px 2px 0 var(--gb-shadow);
+      box-shadow: inset 0 0 0 4px var(--gb-lightest), 0 5px 0 var(--gb-darkest);
       font-family: inherit;
     }
-    .btn-arrow:hover:not(:disabled) { background: var(--gb-light); color: var(--gb-darkest); }
+    .btn-arrow:hover:not(:disabled) { background: var(--gb-light); color: var(--gb-darkest); box-shadow: inset 0 0 0 4px var(--gb-light), 0 5px 0 var(--gb-darkest); }
     .btn-arrow:disabled { opacity: 0.4; cursor: not-allowed; }
     .btn-confirm-bid {
       font-family: inherit;
       padding: 0 8px;
       height: 36px;
-      font-size: 7px;
+      font-size: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: var(--gb-lightest);
+      background: var(--gb-dark);
       border: 3px solid var(--gb-darkest);
-      color: var(--gb-darkest);
+      color: var(--gb-lightest);
       cursor: pointer;
-      box-shadow: 2px 2px 0 var(--gb-shadow);
+      border-radius: 5px;
+      box-shadow: inset 0 0 0 4px var(--gb-lightest), 0 5px 0 var(--gb-darkest);
     }
-    .btn-confirm-bid:hover { background: var(--gb-light); }
+    .btn-confirm-bid:hover { background: var(--gb-light); color: var(--gb-darkest); box-shadow: inset 0 0 0 4px var(--gb-light), 0 5px 0 var(--gb-darkest); }
 
     .player-avatar {
       width: 32px;
@@ -1544,7 +1740,7 @@
       flex-shrink: 0;
       background: var(--gb-lightest);
       border: 3px solid var(--gb-darkest);
-      border-radius: 0;
+      border-radius: 5px;
       box-shadow: 3px 3px 0 var(--gb-shadow);
       display: flex;
       align-items: center;
@@ -1578,6 +1774,7 @@
       padding: 6px 10px;
       background: var(--gb-lightest);
       border: 3px solid var(--gb-darkest);
+      border-radius: 6px;
       box-shadow: 3px 3px 0 var(--gb-shadow);
       font-size: 7px;
       color: var(--gb-text);
@@ -1608,7 +1805,8 @@
     .player-bubble .chip-in-bubble {
       width: 12px;
       height: 12px;
-      border-width: 2px;
+      border: 2px solid var(--gb-darkest);
+      box-shadow: inset 0 0 0 2px var(--gb-lightest), 0 1px 0 var(--gb-darkest);
     }
     @keyframes avatarJumpTwice {
       0%, 100% { transform: translateY(0); }
@@ -1685,18 +1883,29 @@
   </style>
 </head>
 <body>
-  <!-- 开始前：玩法说明，点击确认再开始 -->
+  <!-- 开始界面：无教程窗口，底部长条 + 设置/制作组/退出 -->
   <div class="rules-overlay" id="rulesOverlay">
     <div class="rules-bg-cards" id="rulesBgCards"></div>
-    <div class="rules-panel">
+    <div class="start-center">
       <img class="game-logo" id="gameLogo" src="logo.png" alt="竞价卡牌" onerror="this.style.display='none'" />
+      <button class="btn-start" id="btnStartGame"><span class="btn-start-char" style="animation-delay: 0s">开</span><span class="btn-start-char" style="animation-delay: 0.12s">始</span><span class="btn-start-char" style="animation-delay: 0.24s">游</span><span class="btn-start-char" style="animation-delay: 0.36s">戏</span><span class="btn-start-char" style="animation-delay: 0.48s">!</span></button>
+    </div>
+    <div class="start-bottom-bar">
+      <button type="button" class="btn-start-menu" id="btnSettings">设置</button>
+      <button type="button" class="btn-start-menu" id="btnTutorial">教程</button>
+      <button type="button" class="btn-start-menu" id="btnCredits">制作组</button>
+      <button type="button" class="btn-start-menu" id="btnExit">退出</button>
+    </div>
+  </div>
+
+  <!-- 教程说明弹窗 -->
+  <div class="tutorial-overlay hidden" id="tutorialOverlay">
+    <div class="tutorial-panel">
+      <h2 class="tutorial-title">玩法说明</h2>
       <p>· 每轮翻一张牌（5～13点），大家用筹码出价，价高者赢得该牌，牌面点数加入总分。</p>
       <p>· 可以出价比上家高，或选择「不要」跳过。每轮每人补1个筹码。</p>
       <p>· 先达到30分者获胜！</p>
-      <button class="btn-start" id="btnStartGame">开始游戏</button>
-      <div class="rules-panel-chips">
-        <div class="chip"></div>
-      </div>
+      <button type="button" class="btn-tutorial-close" id="btnTutorialClose">关闭</button>
     </div>
   </div>
 
@@ -1751,7 +1960,7 @@
     <div class="actions-wrap" id="actionsWrap">
       <div id="bids" class="actions-row-number"></div>
       <div class="actions-row-buttons">
-        <button class="btn-pass" id="btnPass" title="跳过" style="display:none">×</button>
+        <button class="btn-pass" id="btnPass" title="跳过" style="display:none"><span class="btn-pass-icon">×</span></button>
         <div id="bidConfirmPlace"></div>
       </div>
       <button class="btn-again-in-game" id="btnAgainInGame" type="button">再来一把</button>
@@ -1977,6 +2186,24 @@
         gain.gain.exponentialRampToValueAtTime(0.001, now + 0.12);
         osc.start(now);
         osc.stop(now + 0.12);
+      } catch (e) {}
+    }
+    function playSansZoomStepSound() {
+      try {
+        if (!chipSoundCtx) chipSoundCtx = new (window.AudioContext || window.webkitAudioContext)();
+        if (chipSoundCtx.state === 'suspended') chipSoundCtx.resume();
+        var now = chipSoundCtx.currentTime;
+        var osc = chipSoundCtx.createOscillator();
+        var gain = chipSoundCtx.createGain();
+        osc.connect(gain);
+        gain.connect(chipSoundCtx.destination);
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(120, now);
+        osc.frequency.exponentialRampToValueAtTime(65, now + 0.06);
+        gain.gain.setValueAtTime(0.12, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.06);
+        osc.start(now);
+        osc.stop(now + 0.06);
       } catch (e) {}
     }
 
@@ -3289,6 +3516,7 @@
     var zhizhiVictoryRafId = null;
     var sansVictoryRafId = null;
     var sansVictorySweatIntervalId = null;
+    var humanVictoryRafId = null;
     var zhizhiRapIntervalId = null;
     var zhizhiRapOtherNotesTimeoutId = null;
     var zhizhiRapOtherNotesIntervalId = null;
@@ -3346,7 +3574,7 @@
     function startZhizhiRapBgm() {
       if (zhizhiRapIntervalId) clearInterval(zhizhiRapIntervalId);
       if (zhizhiRapOtherNotesTimeoutId) { clearTimeout(zhizhiRapOtherNotesTimeoutId); zhizhiRapOtherNotesTimeoutId = null; }
-      if (zhizhiRapOtherNotesIntervalId) { clearInterval(zhizhiRapOtherNotesIntervalId); zhizhiRapOtherNotesIntervalId = null; }
+      if (zhizhiRapOtherNotesIntervalId) { clearTimeout(zhizhiRapOtherNotesIntervalId); zhizhiRapOtherNotesIntervalId = null; }
       var otherNotesWrap = document.getElementById('zhizhiOtherPlayerNotes');
       if (otherNotesWrap && otherNotesWrap.parentNode) otherNotesWrap.parentNode.removeChild(otherNotesWrap);
       var felt = document.querySelector('.felt');
@@ -3371,6 +3599,7 @@
       zhizhiRapIntervalId = setInterval(scheduleBar, ZHIZHI_RAP_BAR_MS);
       var otherPlayerIndices = [0, 2, 3];
       var noteChars = ['♪', '♫'];
+      var otherNoteBaseMs = [400, 520, 480];
       zhizhiRapOtherNotesTimeoutId = setTimeout(function() {
         zhizhiRapOtherNotesTimeoutId = null;
         if (!document.getElementById('zhizhiVictoryWrap')) return;
@@ -3380,7 +3609,8 @@
         document.body.appendChild(wrap);
         function spawnOtherPlayerNote() {
           if (!document.getElementById('zhizhiVictoryWrap') || !wrap.parentNode) return;
-          var idx = otherPlayerIndices[Math.floor(Math.random() * otherPlayerIndices.length)];
+          var pick = Math.floor(Math.random() * otherPlayerIndices.length);
+          var idx = otherPlayerIndices[pick];
           var el = document.getElementById('player' + idx);
           if (!el) return;
           var avatarWrap = el.querySelector('.player-info');
@@ -3398,15 +3628,16 @@
           setTimeout(function() {
             if (noteEl.parentNode) noteEl.parentNode.removeChild(noteEl);
           }, 1550);
+          var nextDelay = otherNoteBaseMs[pick] + Math.random() * 180;
+          zhizhiRapOtherNotesIntervalId = setTimeout(spawnOtherPlayerNote, nextDelay);
         }
         spawnOtherPlayerNote();
-        zhizhiRapOtherNotesIntervalId = setInterval(spawnOtherPlayerNote, 480 + Math.random() * 240);
       }, 2000);
     }
     function stopZhizhiRapBgm() {
       if (zhizhiRapIntervalId) { clearInterval(zhizhiRapIntervalId); zhizhiRapIntervalId = null; }
       if (zhizhiRapOtherNotesTimeoutId) { clearTimeout(zhizhiRapOtherNotesTimeoutId); zhizhiRapOtherNotesTimeoutId = null; }
-      if (zhizhiRapOtherNotesIntervalId) { clearInterval(zhizhiRapOtherNotesIntervalId); zhizhiRapOtherNotesIntervalId = null; }
+      if (zhizhiRapOtherNotesIntervalId) { clearTimeout(zhizhiRapOtherNotesIntervalId); zhizhiRapOtherNotesIntervalId = null; }
       var otherNotesWrap = document.getElementById('zhizhiOtherPlayerNotes');
       if (otherNotesWrap && otherNotesWrap.parentNode) otherNotesWrap.parentNode.removeChild(otherNotesWrap);
     }
@@ -3438,8 +3669,10 @@
       var leftEdge = bounds.left + avatarHalf;
       var rightEdge = bounds.right - avatarHalf;
       var enterDur = 800;
+      var poseDur = 1000;
       var patrolDur = 2200;
-      /* 巡逻顺序：进入中心后 → 先移到桌子最右边 → 翻面 → 移到最左边 → 翻面 → 循环 */
+      var patrolLegIndex = 0;
+      /* 巡逻顺序：进入中心后 → 先移到桌子最右边 → 翻面 → 移到最左边 → 翻面 → 循环；每段时长跟 BGM 小节(4s) 错落 */
       var wrap = document.createElement('div');
       wrap.id = 'zhizhiVictoryWrap';
       wrap.className = 'zhizhi-victory-wrap';
@@ -3470,9 +3703,11 @@
       }
       var phase = 'enter';
       var enterStartTime = Date.now();
+      var poseEndTime = 0;
       var patrolSegment = 'toRight';
       var patrolStartTime = 0;
       var patrolStartX = centerX;
+      var turning = false;
       var x = startX, y = startY;
       var wobbleAmp = 2;
       var wobbleSpeed = 0.04;
@@ -3491,7 +3726,7 @@
         if (micAdded) return;
         micAdded = true;
         var mic = document.createElement('img');
-        mic.className = 'zhizhi-avatar-mic';
+        mic.className = 'zhizhi-avatar-mic zhizhi-mic-appear';
         mic.src = (window.ASSET_BASE || '') + 'avatars/zhizhi_mic.png';
         mic.alt = '';
         mic.onerror = function() { this.style.display = 'none'; };
@@ -3512,6 +3747,7 @@
         setTimeout(function() {
           if (noteEl.parentNode) noteEl.parentNode.removeChild(noteEl);
         }, 1550);
+        if (Math.random() < 0.15) setTimeout(spawnNote, 80);
       }
 
       function tick() {
@@ -3523,6 +3759,18 @@
           x = startX + (centerX - startX) * e;
           y = startY + (centerY - startY) * e;
           if (t >= 1) {
+            phase = 'pose';
+            poseEndTime = now;
+            avatar.classList.add('zhizhi-avatar-pop');
+            setTimeout(function() {
+              if (avatar.parentNode) avatar.classList.remove('zhizhi-avatar-pop');
+            }, 280);
+          }
+        } else if (phase === 'pose') {
+          x = centerX;
+          y = centerY;
+          avatar.style.transform = 'translate(-50%, -50%) scaleX(1)';
+          if (now - poseEndTime >= poseDur) {
             phase = 'patrol';
             patrolSegment = 'toRight';
             patrolStartTime = Date.now();
@@ -3531,33 +3779,64 @@
             lastNoteTime = now;
           }
         } else if (phase === 'patrol') {
-          if (now - lastNoteTime >= nextNoteIntervalMs) {
-            lastNoteTime = now;
-            nextNoteIntervalMs = getNextNoteInterval();
-            spawnNote();
-          }
-          var t = Math.min(1, (now - patrolStartTime) / patrolDur);
-          var e = 1 - (1 - t) * (1 - t);
-          var wobbleY = wobbleAmp * Math.sin(now * wobbleSpeed);
-          if (patrolSegment === 'toRight') {
-            x = patrolStartX + (rightEdge - patrolStartX) * e;
+          avatar.style.setProperty('--mic-tilt', patrolSegment === 'toRight' ? '5deg' : '-5deg');
+          if (turning) {
+            var wobbleY = wobbleAmp * Math.sin(now * wobbleSpeed);
+            x = patrolSegment === 'toRight' ? rightEdge : leftEdge;
             y = centerY + wobbleY;
-            avatar.style.transform = 'translate(-50%, -50%) scaleX(1)';
-            if (t >= 1) {
-              patrolSegment = 'toLeft';
-              patrolStartTime = Date.now();
-              patrolStartX = rightEdge;
-              avatar.style.transform = 'translate(-50%, -50%) scaleX(-1)';
-            }
           } else {
-            x = patrolStartX + (leftEdge - patrolStartX) * e;
-            y = centerY + wobbleY;
-            avatar.style.transform = 'translate(-50%, -50%) scaleX(-1)';
-            if (t >= 1) {
-              patrolSegment = 'toRight';
-              patrolStartTime = Date.now();
-              patrolStartX = leftEdge;
+            if (now - lastNoteTime >= nextNoteIntervalMs) {
+              lastNoteTime = now;
+              nextNoteIntervalMs = getNextNoteInterval();
+              spawnNote();
+            }
+            var t = Math.min(1, (now - patrolStartTime) / patrolDur);
+            var e = 1 - (1 - t) * (1 - t);
+            var wobbleY = wobbleAmp * Math.sin(now * wobbleSpeed);
+            if (patrolSegment === 'toRight') {
+              x = patrolStartX + (rightEdge - patrolStartX) * e;
+              y = centerY + wobbleY;
               avatar.style.transform = 'translate(-50%, -50%) scaleX(1)';
+              if (t >= 1) {
+                turning = true;
+                avatar.style.setProperty('--zhizhi-turn-sx', '1');
+                avatar.classList.add('zhizhi-avatar-turn');
+                var micEl = avatar.querySelector('.zhizhi-avatar-mic');
+                if (micEl) { micEl.classList.add('zhizhi-mic-flip'); setTimeout(function() { micEl.classList.remove('zhizhi-mic-flip'); }, 150); }
+                setTimeout(function() {
+                  if (!avatar.parentNode) return;
+                  avatar.classList.remove('zhizhi-avatar-turn');
+                  patrolSegment = 'toLeft';
+                  patrolStartTime = Date.now();
+                  patrolStartX = rightEdge;
+                  patrolLegIndex++;
+                  patrolDur = 2000 + [0, 200, 400, 200][patrolLegIndex % 4];
+                  avatar.style.transform = 'translate(-50%, -50%) scaleX(-1)';
+                  turning = false;
+                }, 100);
+              }
+            } else {
+              x = patrolStartX + (leftEdge - patrolStartX) * e;
+              y = centerY + wobbleY;
+              avatar.style.transform = 'translate(-50%, -50%) scaleX(-1)';
+              if (t >= 1) {
+                turning = true;
+                avatar.style.setProperty('--zhizhi-turn-sx', '-1');
+                avatar.classList.add('zhizhi-avatar-turn');
+                var micEl = avatar.querySelector('.zhizhi-avatar-mic');
+                if (micEl) { micEl.classList.add('zhizhi-mic-flip'); setTimeout(function() { micEl.classList.remove('zhizhi-mic-flip'); }, 150); }
+                setTimeout(function() {
+                  if (!avatar.parentNode) return;
+                  avatar.classList.remove('zhizhi-avatar-turn');
+                  patrolSegment = 'toRight';
+                  patrolStartTime = Date.now();
+                  patrolStartX = leftEdge;
+                  patrolLegIndex++;
+                  patrolDur = 2000 + [0, 200, 400, 200][patrolLegIndex % 4];
+                  avatar.style.transform = 'translate(-50%, -50%) scaleX(1)';
+                  turning = false;
+                }, 100);
+              }
             }
           }
         }
@@ -3586,6 +3865,86 @@
       var p2 = document.getElementById('player2');
       if (p2) p2.classList.remove('sans-on-table');
       document.body.classList.remove('sans-on-table');
+    }
+
+    function stopHumanVictoryAnimation() {
+      if (humanVictoryRafId != null) {
+        cancelAnimationFrame(humanVictoryRafId);
+        humanVictoryRafId = null;
+      }
+      var wrap = document.getElementById('humanVictoryWrap');
+      if (wrap && wrap.parentNode) wrap.parentNode.removeChild(wrap);
+      var p0 = document.getElementById('player0');
+      if (p0) p0.classList.remove('human-on-table');
+      document.body.classList.remove('human-on-table');
+    }
+
+    function startHumanVictoryAnimation() {
+      var felt = document.querySelector('.felt');
+      if (!felt) return;
+      stopHumanVictoryAnimation();
+      var p0 = document.getElementById('player0');
+      if (p0) p0.classList.remove('winner');
+      var rect = felt.getBoundingClientRect();
+      var pad = 16;
+      var bounds = { left: rect.left + pad, top: rect.top + pad, right: rect.right - pad, bottom: rect.bottom - pad };
+      var centerX = bounds.left + (bounds.right - bounds.left) / 2;
+      var centerY = bounds.top + (bounds.bottom - bounds.top) / 2;
+      var topCenterY = bounds.top + 40;
+      var wrap = document.createElement('div');
+      wrap.id = 'humanVictoryWrap';
+      wrap.className = 'human-victory-wrap';
+      wrap.style.left = rect.left + 'px';
+      wrap.style.top = rect.top + 'px';
+      wrap.style.width = rect.width + 'px';
+      wrap.style.height = rect.height + 'px';
+      var avatar = document.createElement('div');
+      avatar.className = 'human-avatar';
+      var img = document.createElement('img');
+      img.src = 'avatars/head_1.png?v=8';
+      img.alt = '';
+      avatar.appendChild(img);
+      wrap.appendChild(avatar);
+      document.body.appendChild(wrap);
+      document.body.classList.add('human-on-table');
+      if (p0) p0.classList.add('human-on-table');
+      var seatEl = p0 ? p0.querySelector('.player-avatar') : null;
+      var startX = centerX, startY = bounds.bottom + 20;
+      if (seatEl) {
+        var seatR = seatEl.getBoundingClientRect();
+        startX = seatR.left + seatR.width / 2;
+        startY = seatR.top + seatR.height / 2;
+      }
+      var enterDur = 750;
+      var enterStartTime = Date.now();
+      var x = startX, y = startY;
+      function tick() {
+        if (!gameOver) { stopHumanVictoryAnimation(); return; }
+        var now = Date.now();
+        var t = Math.min(1, (now - enterStartTime) / enterDur);
+        var e = t < 0.5 ? 2 * t * t : 1 - 2 * (1 - t) * (1 - t);
+        x = startX + (centerX - startX) * e;
+        y = startY + (topCenterY - startY) * e;
+        avatar.style.left = (x - rect.left) + 'px';
+        avatar.style.top = (y - rect.top) + 'px';
+        if (t >= 1) {
+          humanVictoryRafId = null;
+          avatar.classList.add('human-avatar-pop');
+          setTimeout(function() {
+            if (avatar.parentNode) avatar.classList.remove('human-avatar-pop');
+          }, 300);
+          var bubble = document.createElement('div');
+          bubble.className = 'human-bubble';
+          bubble.textContent = '赢了！';
+          wrap.appendChild(bubble);
+          setTimeout(function() {
+            if (bubble.parentNode) bubble.parentNode.removeChild(bubble);
+          }, 2200);
+          return;
+        }
+        humanVictoryRafId = requestAnimationFrame(tick);
+      }
+      humanVictoryRafId = requestAnimationFrame(tick);
     }
 
     function startSansVictoryAnimation() {
@@ -3626,34 +3985,37 @@
       }
       var phase = 'enter';
       var enterStartTime = Date.now();
-      var enterDur = 700;
+      var enterDur = 880;
+      var holdStartTime = 0;
+      var holdDur = 0;
       var x = startX, y = startY;
       function tick() {
         if (!document.getElementById('sansVictoryWrap')) {
           sansVictoryRafId = null;
           return;
         }
-        var t = (Date.now() - enterStartTime) / enterDur;
-        if (phase === 'enter') {
-          if (t >= 1) {
+        var now = Date.now();
+        var t = (now - enterStartTime) / enterDur;
+        if (phase === 'hold') {
+          if (now - holdStartTime >= holdDur) {
             phase = 'face';
             sansVictoryRafId = null;
-            var delay = 1000 + Math.random() * 1000;
-            setTimeout(function() {
-              if (!document.getElementById('sansVictoryWrap')) return;
-              wrap.classList.add('sans-face-overlay');
+            if (!document.getElementById('sansVictoryWrap')) return;
+            wrap.classList.add('sans-face-overlay');
               wrap.style.left = '0';
               wrap.style.top = '0';
               wrap.style.width = '100%';
               wrap.style.height = '100%';
               avatar.style.left = '50%';
               avatar.style.top = '50%';
+              avatar.style.transition = 'transform 0.28s cubic-bezier(0.34, 1.15, 0.64, 1)';
               var bubble = document.createElement('div');
-              bubble.className = 'sans-dialogue-bubble';
+              bubble.className = 'sans-dialogue-bubble sans-bubble-appear';
               var dialogueLine = document.createElement('div');
               dialogueLine.className = 'sans-dialogue-line';
               bubble.appendChild(dialogueLine);
               wrap.appendChild(bubble);
+              setTimeout(function() { if (bubble.parentNode) bubble.classList.remove('sans-bubble-appear'); }, 250);
               var dialogueText = '感觉如何？被我完・全・碾・压的滋味';
               var heavyPart = '完全碾压';
               var chars = [];
@@ -3662,8 +4024,7 @@
               }
               var charIndex = 0;
               var totalDuration = 2400;
-              var numZoomSteps = 5;
-              var stepMs = Math.round(totalDuration / numZoomSteps);
+              var stepTimes = [0, 380, 640, 1100, 1680, 2400];
               var numChars = chars.length;
               var numHeavy = chars.filter(function(x) { return x.heavy; }).length;
               var numNormal = numChars - numHeavy;
@@ -3707,15 +4068,14 @@
                   if (playerEl) playerEl.classList.add('player-sweat-shake');
                 });
                 spawnSweatForPlayer(0);
-                spawnSweatForPlayer(1);
-                spawnSweatForPlayer(3);
+                setTimeout(function() { spawnSweatForPlayer(1); }, 70);
+                setTimeout(function() { spawnSweatForPlayer(3); }, 140);
                 if (sansVictorySweatIntervalId != null) clearInterval(sansVictorySweatIntervalId);
                 sansVictorySweatIntervalId = setInterval(function() {
                   if (!document.getElementById('sansVictoryWrap')) return;
                   otherIndices.forEach(spawnSweatForPlayer);
                 }, 420);
               }, totalDuration + 500);
-              var step = 0;
               var scales = [1, 1.3, 1.8, 2.5, 3.4, 4.5];
               function updateBubblePosition() {
                 if (!bubble.parentNode) return;
@@ -3723,22 +4083,36 @@
                 bubble.style.top = 'auto';
                 bubble.style.bottom = (window.innerHeight - rect.top + 2) + 'px';
               }
-              function applyStep() {
+              function applyStep(step) {
                 if (!document.getElementById('sansVictoryWrap') || step >= scales.length) return;
-                avatar.style.transform = 'translate(-50%, -50%) scale(' + scales[step] + ')';
+                if (step > 0) playSansZoomStepSound();
+                var s = scales[step];
+                avatar.style.transform = 'translate(-50%, -50%) scale(' + s + ')';
                 requestAnimationFrame(function() { requestAnimationFrame(updateBubblePosition); });
-                step++;
-                if (step < scales.length) setTimeout(applyStep, stepMs);
               }
-              applyStep();
-            }, delay);
+              stepTimes.forEach(function(ms, step) {
+                setTimeout(function() { applyStep(step); }, ms);
+              });
             return;
           }
-          var e = t < 1 ? (t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2) : 1;
-          x = startX + (centerX - startX) * e;
-          y = startY + (topCenterY - startY) * e;
+          x = centerX;
+          y = topCenterY;
+          var breath = 1 + 0.04 * Math.sin((now - holdStartTime) / 1500 * 2 * Math.PI);
+          avatar.style.transform = 'translate(-50%, -50%) scale(' + breath + ')';
           avatar.style.left = (x - rect.left) + 'px';
           avatar.style.top = (y - rect.top) + 'px';
+        } else if (phase === 'enter') {
+          if (t >= 1) {
+            phase = 'hold';
+            holdStartTime = now;
+            holdDur = 1000 + Math.random() * 1000;
+          } else {
+            var e = t < 0.5 ? 2 * t * t : 1 - 2 * (1 - t) * (1 - t);
+            x = startX + (centerX - startX) * e;
+            y = startY + (topCenterY - startY) * e;
+            avatar.style.left = (x - rect.left) + 'px';
+            avatar.style.top = (y - rect.top) + 'px';
+          }
         }
         sansVictoryRafId = requestAnimationFrame(tick);
       }
@@ -3754,6 +4128,19 @@
         playFailureBgm();
       }
       if (winnerIndex < 0) return;
+      if (winnerIndex === 0) {
+        setPlayerBubble(0, 'pass', '嘿嘿，我赢了~');
+        render();
+        gameOverBubbleTimeoutId = setTimeout(function() {
+          gameOverBubbleTimeoutId = null;
+          if (gameOver) {
+            clearPlayerBubble();
+            render();
+            startHumanVictoryAnimation();
+          }
+        }, 2000);
+        return;
+      }
       if (winnerIndex === 1) {
         setPlayerBubble(winnerIndex, 'pass', getAILine('gameOverFirst', winnerIndex, '在座的各位都是辣鸡~'));
         render();
@@ -3866,6 +4253,7 @@
       stopXiaobaiVictoryAnimation();
       stopZhizhiVictoryAnimation();
       stopSansVictoryAnimation();
+      stopHumanVictoryAnimation();
     }
 
     function setMessage(msg, isAi = false) {
@@ -4008,12 +4396,14 @@
         if (i === 3 && document.body.classList.contains('xiaobai-left-seat')) baseClass += ' xiaobai-on-table';
         if (i === 1 && document.getElementById('zhizhiVictoryWrap')) baseClass += ' zhizhi-on-table';
         if (i === 2 && document.getElementById('sansVictoryWrap')) baseClass += ' sans-on-table';
+        if (i === 0 && document.getElementById('humanVictoryWrap')) baseClass += ' human-on-table';
         if ([0, 2, 3].indexOf(i) >= 0 && gameOver && gameOverWinnerIndex === 1) baseClass += ' zhizhi-rap-shake';
         div.className = baseClass;
         if (p.score >= TARGET_SCORE) div.classList.add('winner'); else div.classList.remove('winner');
         if (i === 3 && document.getElementById('xiaobaiVictoryWrap')) div.classList.remove('winner');
         if (i === 1 && document.getElementById('zhizhiVictoryWrap')) div.classList.remove('winner');
         if (i === 2 && document.getElementById('sansVictoryWrap')) div.classList.remove('winner');
+        if (i === 0 && document.getElementById('humanVictoryWrap')) div.classList.remove('winner');
         const xiaobaiOnTable = i === 3 && div.classList.contains('xiaobai-on-table');
         const zhizhiOnTable = i === 1 && div.classList.contains('zhizhi-on-table');
         const sansOnTable = i === 2 && div.classList.contains('sans-on-table');
@@ -4129,7 +4519,7 @@
       if (rulesOverlayAsHelp) {
         document.getElementById('rulesOverlay').classList.add('hidden');
         rulesOverlayAsHelp = false;
-        this.textContent = '开始游戏';
+        this.innerHTML = '<span class="btn-start-char" style="animation-delay: 0s">开</span><span class="btn-start-char" style="animation-delay: 0.12s">始</span><span class="btn-start-char" style="animation-delay: 0.24s">游</span><span class="btn-start-char" style="animation-delay: 0.36s">戏</span><span class="btn-start-char" style="animation-delay: 0.48s">!</span>';
         return;
       }
       if (startBtnClicked) return;
@@ -4200,12 +4590,16 @@
       ro.addEventListener('touchstart', startBgmOnRulesInteraction, true);
     })();
     document.getElementById('btnHelp').onclick = function() {
-      rulesOverlayAsHelp = true;
-      document.getElementById('rulesOverlay').classList.remove('hidden');
-      document.getElementById('btnStartGame').textContent = '关闭';
-      var sc = document.querySelector('.rules-panel-chips .chip');
-      if (sc) sc.style.visibility = '';
-      fillRulesBgCards();
+      document.getElementById('tutorialOverlay').classList.remove('hidden');
+    };
+    document.getElementById('btnSettings').onclick = function() { /* 设置：暂无功能 */ };
+    document.getElementById('btnTutorial').onclick = function() {
+      document.getElementById('tutorialOverlay').classList.remove('hidden');
+    };
+    document.getElementById('btnCredits').onclick = function() { /* 制作组：暂无功能 */ };
+    document.getElementById('btnExit').onclick = function() { /* 退出：暂无功能 */ };
+    document.getElementById('btnTutorialClose').onclick = function() {
+      document.getElementById('tutorialOverlay').classList.add('hidden');
     };
     document.getElementById('btnAdd10').onclick = function() {
       if (gameOver || !players.length) return;
