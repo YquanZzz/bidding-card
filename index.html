@@ -38,7 +38,7 @@
       --gb-bg-alt: #4a6b3d;
       --gb-text: #0f380f;
       /* 开始页 logo 块与底部的距离：数值越大 logo 越靠上，越小越靠下 */
-      --start-logo-from-bottom: 140px;
+      --start-logo-from-bottom: 70px;
     }
     * { box-sizing: border-box; }
     html { -webkit-text-size-adjust: 100%; image-rendering: pixelated; image-rendering: crisp-edges; }
@@ -185,6 +185,24 @@
     }
     .felt.felt-shake-rap {
       animation: feltShakeRap 0.4s ease-in-out infinite;
+    }
+    @keyframes feltShakeZhizhiLand {
+      0%, 100% { transform: translate(-50%, -50%) scale(1); }
+      6% { transform: translate(-50%, -50%) translate(-8px, -4px) scale(0.98); }
+      12% { transform: translate(-50%, -50%) translate(7px, 4px) scale(1.02); }
+      18% { transform: translate(-50%, -50%) translate(-6px, 5px) scale(0.98); }
+      24% { transform: translate(-50%, -50%) translate(6px, -4px) scale(1.02); }
+      30% { transform: translate(-50%, -50%) translate(-7px, 0) scale(0.99); }
+      36% { transform: translate(-50%, -50%) translate(6px, 3px) scale(1.01); }
+      44% { transform: translate(-50%, -50%) translate(-5px, -3px); }
+      52% { transform: translate(-50%, -50%) translate(5px, 2px); }
+      60% { transform: translate(-50%, -50%) translate(-4px, 2px); }
+      70% { transform: translate(-50%, -50%) translate(4px, -2px); }
+      80% { transform: translate(-50%, -50%) translate(-3px, 0); }
+      90% { transform: translate(-50%, -50%) translate(2px, 1px); }
+    }
+    .felt.felt-shake-zhizhi-land {
+      animation: feltShakeZhizhiLand 0.7s ease-out;
     }
     .deck-and-card {
       position: absolute;
@@ -447,6 +465,29 @@
       border: 2px solid var(--gb-darkest);
       box-shadow: inset 0 0 0 4px var(--gb-lightest), 0 2px 0 var(--gb-darkest);
       transition: left 0.35s ease-out, top 0.35s ease-out;
+    }
+    .chip-steal-fly {
+      position: fixed;
+      width: 18px;
+      height: 18px;
+      left: 0;
+      top: 0;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background: var(--gb-light);
+      border: 2px solid var(--gb-darkest);
+      box-shadow: inset 0 0 0 4px var(--gb-lightest), 0 2px 0 var(--gb-darkest);
+      z-index: 10002;
+      pointer-events: none;
+    }
+    .chip-steal-fly.chip-steal-absorb {
+      transition: transform 0.25s ease-in, opacity 0.2s ease-in;
+      animation: chipStealAbsorb 0.28s ease-in forwards;
+    }
+    @keyframes chipStealAbsorb {
+      0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+      50% { transform: translate(-50%, -50%) scale(1.3); opacity: 1; }
+      100% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
     }
     .xiaobai-victory-wrap {
       position: absolute;
@@ -822,6 +863,20 @@
       top: 50%;
       transform: translate(-50%, -50%) scale(1);
     }
+    @keyframes sansAvatarIdle {
+      0%, 100% { transform: translate(-50%, -50%) scale(4.5); }
+      50% { transform: translate(-50%, -50%) scale(4.72); }
+    }
+    .sans-victory-wrap.sans-face-overlay .sans-avatar.sans-avatar-idle {
+      animation: sansAvatarIdle 2.6s ease-in-out infinite;
+    }
+    @keyframes sansBubbleFloat {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(-10px); }
+    }
+    .sans-victory-wrap .sans-dialogue-bubble.sans-bubble-idle {
+      animation: sansBubbleFloat 2.6s ease-in-out infinite;
+    }
     .sans-victory-wrap .sans-dialogue-bubble {
       position: absolute;
       left: 50%;
@@ -917,6 +972,8 @@
       height: 100%;
       object-fit: contain;
       image-rendering: pixelated;
+      image-rendering: crisp-edges;
+      filter: url(#avatarGreenFilter);
     }
     @keyframes humanAvatarPop {
       0%, 100% { transform: translate(-50%, -50%) scale(1); }
@@ -924,6 +981,38 @@
     }
     .human-victory-wrap .human-avatar.human-avatar-pop {
       animation: humanAvatarPop 0.3s ease-out both;
+    }
+    .human-code-rain-wrap {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 5;
+    }
+    .human-code-rain-column {
+      position: absolute;
+      top: 22px;
+      width: 1em;
+      margin-left: -0.5em;
+      font-size: 11px;
+      font-family: "GameFont", "Press Start 2P", monospace;
+      color: var(--gb-light);
+      opacity: 0.9;
+      line-height: 1.15;
+      white-space: pre;
+      text-align: center;
+    }
+    .human-code-rain-char {
+      display: block;
+      animation: humanCodeRainFall linear infinite;
+      animation-timing-function: cubic-bezier(0.32, 0, 0.6, 1);
+    }
+    @keyframes humanCodeRainFall {
+      0% { transform: translateY(-20px); opacity: 0.9; }
+      100% { transform: translateY(100vh); opacity: 0.25; }
     }
     .human-victory-wrap .human-bubble {
       position: absolute;
@@ -947,6 +1036,89 @@
     @keyframes humanBubbleIn {
       from { opacity: 0; transform: translateX(-50%) translateY(4px); }
       to { opacity: 1; transform: translateX(-50%) translateY(0); }
+    }
+    .human-keyboard {
+      position: absolute;
+      left: 50%;
+      z-index: 10;
+      pointer-events: none;
+    }
+    .human-keyboard img {
+      display: block;
+      width: auto;
+      height: 52px;
+      max-width: 180px;
+      object-fit: contain;
+      image-rendering: pixelated;
+      image-rendering: crisp-edges;
+      filter: url(#avatarGreenFilter);
+    }
+    .human-keyboard.human-keyboard-pull-out {
+      animation: humanKeyboardPullOut 0.32s cubic-bezier(0.34, 1.4, 0.64, 1) forwards;
+      transform: translateX(-50%) scale(0.2);
+      opacity: 0;
+    }
+    @keyframes humanKeyboardPullOut {
+      0% { transform: translateX(-50%) scale(0.2); opacity: 0; }
+      55% { transform: translateX(-50%) scale(1.08); opacity: 1; }
+      75% { transform: translateX(-50%) scale(0.96); opacity: 1; }
+      100% { transform: translateX(-50%) scale(1); opacity: 1; }
+    }
+    .human-keyboard-inner {
+      display: inline-block;
+    }
+    .human-keyboard-inner.human-keyboard-inner-typing {
+      animation: humanKeyboardTypingShake 0.08s ease-in-out infinite;
+    }
+    @keyframes humanKeyboardTypingShake {
+      0%, 100% { transform: translateX(0); }
+      33% { transform: translateX(-2px); }
+      66% { transform: translateX(2px); }
+    }
+    .human-keyboard.human-keyboard-rotate {
+      animation: humanKeyboardRotate 2.2s ease-in-out infinite;
+    }
+    @keyframes humanKeyboardRotate {
+      0%, 100% { transform: translateX(-50%) rotate(-4deg); }
+      50% { transform: translateX(-50%) rotate(4deg); }
+    }
+    .human-keyboard.human-keyboard-swing {
+      animation: humanKeyboardSwing 0.5s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+    }
+    @keyframes humanKeyboardSwing {
+      0% { transform: translateX(-50%) rotate(0deg); }
+      22% { transform: translateX(-50%) rotate(-42deg); }
+      48% { transform: translateX(-50%) rotate(28deg); }
+      72% { transform: translateX(-50%) rotate(-10deg); }
+      100% { transform: translateX(-50%) rotate(0deg); }
+    }
+    .player-avatar {
+      position: relative;
+    }
+    .player-avatar.avatar-bounce-once {
+      animation: avatarBounceOnce 0.35s ease-out forwards;
+    }
+    @keyframes avatarBounceOnce {
+      0%, 100% { transform: scale(1); }
+      40% { transform: scale(1.25); }
+      70% { transform: scale(0.95); }
+    }
+    .player-avatar.avatar-forbidden {
+      background-image: url(avatars/forbidden.png);
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      filter: url(#avatarGreenFilter);
+    }
+    .player-avatar.avatar-forbidden img {
+      opacity: 0;
+    }
+    .human-victory-wrap .human-avatar.human-avatar-typing {
+      animation: humanAvatarTypingShake 0.07s ease-in-out infinite;
+    }
+    @keyframes humanAvatarTypingShake {
+      0%, 100% { transform: translate(-50%, -50%) translateY(0); }
+      50% { transform: translate(-50%, -50%) translateY(-1.2px); }
     }
     .player.human-on-table .player-avatar { visibility: hidden; }
     .table-pass-indicators {
@@ -1477,17 +1649,14 @@
     .start-center .game-logo {
       display: block;
       margin: 0 0 auto 0;
-      max-width: 300px;
-      width: 300px;
+      max-width: 420px;
+      width: 420px;
       height: auto;
-      background: var(--gb-dark);
+      background: transparent;
       image-rendering: pixelated;
       image-rendering: crisp-edges;
-      filter: url(#avatarGreenFilter);
+      filter: url(#avatarGreenFilter) drop-shadow(0 10px 0 var(--gb-darkest));
       animation: logo-idle 2.5s ease-in-out infinite;
-      border: 3px solid var(--gb-darkest);
-      border-radius: 6px;
-      box-shadow: inset 0 0 0 6px var(--gb-lightest), 0 5px 0 var(--gb-darkest);
     }
     .start-center .btn-start {
       display: block;
@@ -1968,7 +2137,7 @@
       </button>
     <button class="btn-help" id="btnHelp" type="button" title="玩法说明" aria-label="玩法说明">?</button>
     <div class="ai-win-btns">
-      <button class="btn-ai-win" id="btnMeWin" type="button" title="我直接胜利">我胜利</button>
+      <button class="btn-ai-win" id="btnMeWin" type="button" title="D直接胜利">D胜利</button>
       <button class="btn-ai-win" id="btnAiWin1" type="button" title="吱吱直接胜利">吱吱赢</button>
       <button class="btn-ai-win" id="btnAiWin2" type="button" title="杉斯直接胜利">杉斯赢</button>
       <button class="btn-ai-win" id="btnAiWin3" type="button" title="小白直接胜利">小白赢</button>
@@ -2107,7 +2276,7 @@
 
     var chipSoundCtx = null;
     var TYPE_TO_KEY = { '跳过':'pass', '中标':'win', '催促':'hurry', '思考前缀':'thinkPrefix', '出价前':'beforeBid', '结束第一句':'gameOverFirst', '结束循环句':'gameOverLoop' };
-    var WHO_TO_INDEX = { '吱吱':1, '杉斯':2, '小白':3, '我':0 };
+    var WHO_TO_INDEX = { '吱吱':1, '杉斯':2, '小白':3, 'D':0 };
 
     function parseCSVRow(row) {
       var parts = [];
@@ -2191,6 +2360,24 @@
         gain.gain.exponentialRampToValueAtTime(0.001, now + 0.03);
         osc.start(now);
         osc.stop(now + 0.03);
+      } catch (e) {}
+    }
+    function playForbiddenSound() {
+      try {
+        if (!chipSoundCtx) chipSoundCtx = new (window.AudioContext || window.webkitAudioContext)();
+        if (chipSoundCtx.state === 'suspended') chipSoundCtx.resume();
+        var now = chipSoundCtx.currentTime;
+        var osc = chipSoundCtx.createOscillator();
+        var gain = chipSoundCtx.createGain();
+        osc.connect(gain);
+        gain.connect(chipSoundCtx.destination);
+        osc.type = 'square';
+        osc.frequency.setValueAtTime(220, now);
+        osc.frequency.exponentialRampToValueAtTime(140, now + 0.08);
+        gain.gain.setValueAtTime(0.12, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.1);
+        osc.start(now);
+        osc.stop(now + 0.1);
       } catch (e) {}
     }
     function playDialogueCharSound() {
@@ -2343,6 +2530,66 @@
         gain.gain.exponentialRampToValueAtTime(0.001, now + 0.2);
         osc.start(now);
         osc.stop(now + 0.2);
+      } catch (e) {}
+    }
+
+    function playKeyboardTapSound() {
+      try {
+        if (!chipSoundCtx) chipSoundCtx = new (window.AudioContext || window.webkitAudioContext)();
+        if (chipSoundCtx.state === 'suspended') chipSoundCtx.resume();
+        var now = chipSoundCtx.currentTime;
+        var osc = chipSoundCtx.createOscillator();
+        var gain = chipSoundCtx.createGain();
+        osc.connect(gain);
+        gain.connect(chipSoundCtx.destination);
+        osc.type = 'sine';
+        var freq = 720 + Math.random() * 160;
+        osc.frequency.setValueAtTime(freq, now);
+        gain.gain.setValueAtTime(0.06, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.028);
+        osc.start(now);
+        osc.stop(now + 0.028);
+      } catch (e) {}
+    }
+
+    function playMouseLandSound() {
+      try {
+        if (!chipSoundCtx) chipSoundCtx = new (window.AudioContext || window.webkitAudioContext)();
+        if (chipSoundCtx.state === 'suspended') chipSoundCtx.resume();
+        var now = chipSoundCtx.currentTime;
+        var osc = chipSoundCtx.createOscillator();
+        var gain = chipSoundCtx.createGain();
+        osc.connect(gain);
+        gain.connect(chipSoundCtx.destination);
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(1400, now);
+        osc.frequency.exponentialRampToValueAtTime(2200, now + 0.18);
+        gain.gain.setValueAtTime(0.2, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.22);
+        osc.start(now);
+        osc.stop(now + 0.22);
+      } catch (e) {}
+    }
+
+    function playMouseCaughtSound() {
+      try {
+        if (!chipSoundCtx) chipSoundCtx = new (window.AudioContext || window.webkitAudioContext)();
+        if (chipSoundCtx.state === 'suspended') chipSoundCtx.resume();
+        var now = chipSoundCtx.currentTime;
+        for (var i = 0; i < 2; i++) {
+          (function(t0) {
+            var osc = chipSoundCtx.createOscillator();
+            var gain = chipSoundCtx.createGain();
+            osc.connect(gain);
+            gain.connect(chipSoundCtx.destination);
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(1800 + Math.random() * 200, t0);
+            gain.gain.setValueAtTime(0.22, t0);
+            gain.gain.exponentialRampToValueAtTime(0.001, t0 + 0.06);
+            osc.start(t0);
+            osc.stop(t0 + 0.06);
+          })(now + i * 0.12);
+        }
       } catch (e) {}
     }
 
@@ -2615,7 +2862,7 @@
 
     function initPlayers() {
       return [
-        { name: '我', chips: START_CHIPS, score: 0, cards: [], isHuman: true, avatar: 'cat' },
+        { name: 'D', chips: START_CHIPS, score: 0, cards: [], isHuman: true, avatar: 'cat' },
         { name: '吱吱', chips: START_CHIPS, score: 0, cards: [], isHuman: false, avatar: 'frog' },
         { name: '杉斯', chips: START_CHIPS, score: 0, cards: [], isHuman: false, avatar: 'dog' },
         { name: '小白', chips: START_CHIPS, score: 0, cards: [], isHuman: false, avatar: 'hamster' },
@@ -3286,8 +3533,11 @@
       avatar.appendChild(img);
       var ball = document.createElement('div');
       ball.className = 'xiaobai-ball caught-avatar';
+      var bellyImgUrl = (window.ASSET_BASE || '') + 'avatars/caught_target.png';
+      var backImgUrl = (window.ASSET_BASE || '') + 'avatars/caught_target_back.png';
       var ballImg = document.createElement('img');
-      ballImg.src = (window.ASSET_BASE || '') + 'avatars/caught_target.png';
+      ballImg.src = backImgUrl;
+      ballImg.setAttribute('data-src', 'back');
       ballImg.alt = '';
       ballImg.onerror = function() { this.style.display = 'none'; };
       ball.appendChild(ballImg);
@@ -3351,6 +3601,7 @@
             escapeEndTime = now + 2000;
             setPlayerBubble(3, 'pass', '!');
             render();
+            if (typeof playMouseLandSound === 'function') playMouseLandSound();
             if (typeof playChipSound === 'function') playChipSound();
             setTimeout(function() {
               if (document.getElementById('xiaobaiVictoryWrap') && currentBubble && currentBubble.playerIndex === 3) {
@@ -3471,6 +3722,7 @@
           by = approachStartBy + (targetBy - approachStartBy) * e;
           if (t >= 1) {
             phase = 'caught';
+            if (typeof playMouseCaughtSound === 'function') playMouseCaughtSound();
             wrap.classList.add('xiaobai-caught-overlay');
             ball.classList.add('caught-shake');
             ax = catchCenterX;
@@ -3533,6 +3785,14 @@
         }
         avatar.style.left = (ax - rectNow.left) + 'px';
         avatar.style.top = (ay - rectNow.top) + 'px';
+        var needBackImg = (phase === 'drop' || phase === 'escape' || phase === 'jump' || phase === 'chase' || phase === 'approachCatch');
+        if (needBackImg && ballImg.getAttribute('data-src') !== 'back') {
+          ballImg.src = backImgUrl;
+          ballImg.setAttribute('data-src', 'back');
+        } else if (!needBackImg && ballImg.getAttribute('data-src') !== 'belly') {
+          ballImg.src = bellyImgUrl;
+          ballImg.setAttribute('data-src', 'belly');
+        }
         if (phase === 'jump' || phase === 'chase' || phase === 'approachCatch') {
           avatar.style.transform = bx > ax ? 'scaleX(-1)' : 'scaleX(1)';
           avatar.style.transformOrigin = 'center center';
@@ -3540,7 +3800,22 @@
           var caughtFaceRight = walkTargetX > ax;
           avatar.style.transform = caughtFaceRight ? 'scaleX(-1)' : 'scaleX(1)';
           avatar.style.transformOrigin = 'center center';
-          ball.style.transform = caughtFaceRight ? 'scaleX(-1)' : 'scaleX(1)';
+        }
+        if (phase === 'caught') {
+          var caughtFaceRight = walkTargetX > ax;
+          ball.style.transform = 'translate(-50%, -50%) ' + (caughtFaceRight ? 'scaleX(-1)' : 'scaleX(1)');
+          ball.style.transformOrigin = 'center center';
+        } else if (needBackImg) {
+          var vx = ballVx, vy = ballVy;
+          if (phase === 'approachCatch') {
+            var targetBx = catchCenterX - avatarHalf + 27, targetBy = catchCenterY + avatarHalf + 12;
+            vx = targetBx - approachStartBx;
+            vy = targetBy - approachStartBy;
+          }
+          var speed = Math.sqrt(vx * vx + vy * vy);
+          if (speed < 0.01) speed = 0.01;
+          var angleDeg = Math.atan2(vx, -vy) * 180 / Math.PI;
+          ball.style.transform = 'translate(-50%, -50%) rotate(' + angleDeg + 'deg)';
           ball.style.transformOrigin = 'center center';
         }
         ball.style.left = (bx - rectNow.left) + 'px';
@@ -3559,9 +3834,13 @@
     var sansVictoryRafId = null;
     var sansVictorySweatIntervalId = null;
     var humanVictoryRafId = null;
+    var humanVictoryTypingIntervalId = null;
+    var humanPunishBubbleIntervalId = null;
+    var humanPunishForbiddenPlayers = [false, false, false];
     var zhizhiRapIntervalId = null;
     var zhizhiRapOtherNotesTimeoutId = null;
     var zhizhiRapOtherNotesIntervalId = null;
+    var zhizhiRapShakeActive = false;
     var ZHIZHI_RAP_BEAT = [
       { t: 0, f: 55 }, { t: 400, f: 55 }, { t: 800, f: 62 }, { t: 1200, f: 55 }, { t: 1600, f: 73 },
       { t: 2000, f: 55 }, { t: 2400, f: 65 }, { t: 2800, f: 55 }, { t: 3200, f: 58 }, { t: 3600, f: 55 }
@@ -3623,11 +3902,12 @@
       if (felt) felt.classList.add('felt-shake-rap');
       setTimeout(function() {
         if (!document.getElementById('zhizhiVictoryWrap')) return;
+        zhizhiRapShakeActive = true;
         [0, 2, 3].forEach(function(idx) {
           var el = document.getElementById('player' + idx);
           if (el) el.classList.add('zhizhi-rap-shake');
         });
-      }, 2000);
+      }, 450);
       function scheduleBar() {
         for (var i = 0; i < ZHIZHI_RAP_BEAT.length; i++) {
           (function(ev) {
@@ -3677,6 +3957,7 @@
       }, 2000);
     }
     function stopZhizhiRapBgm() {
+      zhizhiRapShakeActive = false;
       if (zhizhiRapIntervalId) { clearInterval(zhizhiRapIntervalId); zhizhiRapIntervalId = null; }
       if (zhizhiRapOtherNotesTimeoutId) { clearTimeout(zhizhiRapOtherNotesTimeoutId); zhizhiRapOtherNotesTimeoutId = null; }
       if (zhizhiRapOtherNotesIntervalId) { clearTimeout(zhizhiRapOtherNotesIntervalId); zhizhiRapOtherNotesIntervalId = null; }
@@ -3689,6 +3970,12 @@
         zhizhiVictoryRafId = null;
       }
       stopZhizhiRapBgm();
+      var felt = document.querySelector('.felt');
+      if (felt) felt.classList.remove('felt-shake-zhizhi-land');
+      [0, 2, 3].forEach(function(idx) {
+        var el = document.getElementById('player' + idx);
+        if (el) el.classList.remove('zhizhi-rap-shake');
+      });
       var wrap = document.getElementById('zhizhiVictoryWrap');
       if (wrap && wrap.parentNode) wrap.parentNode.removeChild(wrap);
       var p1 = document.getElementById('player1');
@@ -3745,6 +4032,9 @@
       }
       var phase = 'enter';
       var enterStartTime = Date.now();
+      var slamStartTime = 0;
+      var slamDur = 280;
+      var slamUpPx = 28;
       var poseEndTime = 0;
       var patrolSegment = 'toRight';
       var patrolStartTime = 0;
@@ -3801,12 +4091,38 @@
           x = startX + (centerX - startX) * e;
           y = startY + (centerY - startY) * e;
           if (t >= 1) {
+            phase = 'slam';
+            slamStartTime = now;
+          }
+        } else if (phase === 'slam') {
+          var st = (now - slamStartTime) / slamDur;
+          if (st >= 1) {
             phase = 'pose';
             poseEndTime = now;
             avatar.classList.add('zhizhi-avatar-pop');
             setTimeout(function() {
               if (avatar.parentNode) avatar.classList.remove('zhizhi-avatar-pop');
             }, 280);
+            var felt = document.querySelector('.felt');
+            if (felt) {
+              felt.classList.remove('felt-shake-zhizhi-land');
+              felt.offsetHeight;
+              felt.classList.add('felt-shake-zhizhi-land');
+              setTimeout(function() {
+                if (felt) felt.classList.remove('felt-shake-zhizhi-land');
+              }, 700);
+            }
+          } else {
+            var upRatio = 0.28;
+            if (st < upRatio) {
+              var u = st / upRatio;
+              y = centerY - slamUpPx * u;
+            } else {
+              var d = (st - upRatio) / (1 - upRatio);
+              var e = d * d;
+              y = centerY - slamUpPx * (1 - e);
+            }
+            x = centerX;
           }
         } else if (phase === 'pose') {
           x = centerX;
@@ -3914,11 +4230,25 @@
         cancelAnimationFrame(humanVictoryRafId);
         humanVictoryRafId = null;
       }
+      if (humanVictoryTypingIntervalId) { clearInterval(humanVictoryTypingIntervalId); humanVictoryTypingIntervalId = null; }
       var wrap = document.getElementById('humanVictoryWrap');
       if (wrap && wrap.parentNode) wrap.parentNode.removeChild(wrap);
       var p0 = document.getElementById('player0');
       if (p0) p0.classList.remove('human-on-table');
       document.body.classList.remove('human-on-table');
+      if (humanPunishBubbleIntervalId) {
+        clearInterval(humanPunishBubbleIntervalId);
+        humanPunishBubbleIntervalId = null;
+      }
+      humanPunishForbiddenPlayers[0] = false;
+      humanPunishForbiddenPlayers[1] = false;
+      humanPunishForbiddenPlayers[2] = false;
+      [1, 2, 3].forEach(function(i) {
+        var el = document.getElementById('player' + i);
+        if (!el) return;
+        var av = el.querySelector('.player-avatar');
+        if (av) { av.classList.remove('avatar-forbidden', 'avatar-bounce-once'); }
+      });
     }
 
     function startHumanVictoryAnimation() {
@@ -3932,7 +4262,7 @@
       var bounds = { left: rect.left + pad, top: rect.top + pad, right: rect.right - pad, bottom: rect.bottom - pad };
       var centerX = bounds.left + (bounds.right - bounds.left) / 2;
       var centerY = bounds.top + (bounds.bottom - bounds.top) / 2;
-      var topCenterY = bounds.top + 40;
+      var targetY = centerY + (bounds.bottom - bounds.top) * 0.22;
       var wrap = document.createElement('div');
       wrap.id = 'humanVictoryWrap';
       wrap.className = 'human-victory-wrap';
@@ -3966,7 +4296,7 @@
         var t = Math.min(1, (now - enterStartTime) / enterDur);
         var e = t < 0.5 ? 2 * t * t : 1 - 2 * (1 - t) * (1 - t);
         x = startX + (centerX - startX) * e;
-        y = startY + (topCenterY - startY) * e;
+        y = startY + (targetY - startY) * e;
         avatar.style.left = (x - rect.left) + 'px';
         avatar.style.top = (y - rect.top) + 'px';
         if (t >= 1) {
@@ -3975,18 +4305,204 @@
           setTimeout(function() {
             if (avatar.parentNode) avatar.classList.remove('human-avatar-pop');
           }, 300);
-          var bubble = document.createElement('div');
-          bubble.className = 'human-bubble';
-          bubble.textContent = '赢了！';
-          wrap.appendChild(bubble);
+          var targetYInWrap = targetY - rect.top;
           setTimeout(function() {
-            if (bubble.parentNode) bubble.parentNode.removeChild(bubble);
-          }, 2200);
+            if (!wrap.parentNode || !gameOver) return;
+            var keyb = document.createElement('div');
+            keyb.className = 'human-keyboard human-keyboard-pull-out';
+            keyb.style.top = (targetYInWrap - 4) + 'px';
+            var inner = document.createElement('div');
+            inner.className = 'human-keyboard-inner';
+            var keybImg = document.createElement('img');
+            keybImg.src = 'avatars/keyboard.png?v=1';
+            keybImg.alt = '';
+            inner.appendChild(keybImg);
+            keyb.appendChild(inner);
+            wrap.appendChild(keyb);
+            setTimeout(function() {
+            if (!wrap.parentNode || !gameOver) return;
+            var keybEl = wrap.querySelector('.human-keyboard');
+            if (keybEl) {
+              keybEl.classList.remove('human-keyboard-pull-out');
+              keybEl.classList.add('human-keyboard-rotate');
+              var innerEl = keybEl.querySelector('.human-keyboard-inner');
+              if (innerEl) innerEl.classList.add('human-keyboard-inner-typing');
+            }
+            var av = wrap.querySelector('.human-avatar');
+            if (av) av.classList.add('human-avatar-typing');
+            startHumanCodeRain(wrap, rect.width, rect.height);
+            if (humanVictoryTypingIntervalId) clearInterval(humanVictoryTypingIntervalId);
+            humanVictoryTypingIntervalId = setInterval(function() {
+              if (!wrap.parentNode || !gameOver) return;
+              playKeyboardTapSound();
+            }, 85 + Math.floor(Math.random() * 35));
+            setTimeout(function() {
+              if (!wrap.parentNode || !gameOver) return;
+              startHumanPunishRounds(wrap);
+            }, 2000);
+          }, 320 + 1000);
+          }, 700);
           return;
         }
         humanVictoryRafId = requestAnimationFrame(tick);
       }
       humanVictoryRafId = requestAnimationFrame(tick);
+    }
+
+    var humanCodeRainChars = '01{}();=[]<>/|&*#@%+';
+    function startHumanCodeRain(wrap, width, height) {
+      if (!wrap || !wrap.parentNode) return;
+      var rainWrap = document.createElement('div');
+      rainWrap.className = 'human-code-rain-wrap';
+      rainWrap.id = 'humanCodeRainWrap';
+      var centerX = width / 2;
+      var colCount = 10;
+      var bandWidth = Math.min(width * 0.5, width - 32);
+      var colStep = bandWidth / colCount;
+      for (var c = 0; c < colCount; c++) {
+        var col = document.createElement('div');
+        col.className = 'human-code-rain-column';
+        col.style.left = (centerX - bandWidth / 2 + (c + 0.5) * colStep) + 'px';
+        var duration = 6 + Math.random() * 4;
+        var baseDelay = -Math.random() * duration;
+        var chars = [];
+        for (var i = 0; i < 22; i++) {
+          chars.push(humanCodeRainChars[Math.floor(Math.random() * humanCodeRainChars.length)]);
+        }
+        col.innerHTML = chars.map(function(ch, i) {
+          var d = duration + Math.random() * 2;
+          var del = baseDelay - i * 0.11;
+          return '<span class="human-code-rain-char" style="animation-duration:' + d + 's;animation-delay:' + del + 's">' + ch + '</span>';
+        }).join('');
+        rainWrap.appendChild(col);
+      }
+      wrap.insertBefore(rainWrap, wrap.firstChild);
+    }
+
+    function startChipStealFly(fromIdx, wrap) {
+      if (!wrap || !wrap.parentNode || fromIdx < 1 || fromIdx > 3) return;
+      var total = Math.max(0, players[fromIdx].chips);
+      if (total === 0) return;
+      var flyCount = Math.min(total, 15);
+      var wrapRect = wrap.getBoundingClientRect();
+      var targetX = wrapRect.left + wrapRect.width / 2;
+      var targetY = wrapRect.top + wrapRect.height * 0.55;
+      var flyLayer = document.getElementById('chipFlyLayer');
+      if (!flyLayer) return;
+      function flyOne(i, leftToFly) {
+        if (leftToFly <= 0) return;
+        var chipsArea = document.querySelector('#player' + fromIdx + ' .player-chips');
+        if (!chipsArea) return;
+        chipsArea.classList.remove('chip-return');
+        chipsArea.offsetHeight;
+        chipsArea.classList.add('chip-return');
+        setTimeout(function() {
+          if (chipsArea.parentNode) chipsArea.classList.remove('chip-return');
+        }, 460);
+        var chipIcon = chipsArea.querySelector('.chip');
+        var sr = (chipIcon || chipsArea).getBoundingClientRect();
+        var startX = sr.left + sr.width / 2;
+        var startY = sr.top + sr.height / 2;
+        var ctrlX = (startX + targetX) * 0.5;
+        var ctrlY = Math.min(startY, targetY) - 35;
+        var chip = document.createElement('div');
+        chip.className = 'chip-steal-fly';
+        chip.style.left = startX + 'px';
+        chip.style.top = startY + 'px';
+        flyLayer.appendChild(chip);
+        var duration = Math.max(65, 130 - i * 4);
+        var startTime = null;
+        function tick(now) {
+          if (!startTime) startTime = now;
+          var elapsed = now - startTime;
+          var t = Math.min(1, elapsed / duration);
+          var te = t * (2 - t);
+          var x = (1 - te) * (1 - te) * startX + 2 * (1 - te) * te * ctrlX + te * te * targetX;
+          var y = (1 - te) * (1 - te) * startY + 2 * (1 - te) * te * ctrlY + te * te * targetY;
+          chip.style.left = x + 'px';
+          chip.style.top = y + 'px';
+          if (t >= 1) {
+            onArrive();
+            return;
+          }
+          requestAnimationFrame(tick);
+        }
+        var arrived = false;
+        function onArrive() {
+          if (arrived) return;
+          arrived = true;
+          playChipSound();
+          chip.classList.add('chip-steal-absorb');
+          chip.addEventListener('animationend', function done() {
+            chip.removeEventListener('animationend', done);
+            if (chip.parentNode) chip.parentNode.removeChild(chip);
+            players[fromIdx].chips = Math.max(0, players[fromIdx].chips - 1);
+            players[0].chips = (players[0].chips || 0) + 1;
+            render();
+            if (i + 1 < flyCount) setTimeout(function() { flyOne(i + 1, leftToFly - 1); }, Math.max(16, 32 - i * 1.5));
+            else if (players[fromIdx].chips > 0) {
+              players[0].chips += players[fromIdx].chips;
+              players[fromIdx].chips = 0;
+              render();
+            }
+          });
+        }
+        requestAnimationFrame(tick);
+      }
+      setTimeout(function() { flyOne(0, flyCount); }, 20);
+    }
+
+    function startHumanPunishRounds(wrap) {
+      if (!wrap || !wrap.parentNode) return;
+      function doRound(idx, next) {
+        if (humanPunishBubbleIntervalId) {
+          clearInterval(humanPunishBubbleIntervalId);
+          humanPunishBubbleIntervalId = null;
+        }
+        if (idx > 3) {
+          clearPlayerBubble();
+          render();
+          if (next) next();
+          return;
+        }
+        var keyb = wrap.querySelector('.human-keyboard');
+        if (!keyb) { if (next) next(); return; }
+        keyb.classList.remove('human-keyboard-swing');
+        keyb.offsetHeight;
+        keyb.classList.remove('human-keyboard-rotate');
+        keyb.classList.add('human-keyboard-swing');
+        var playerEl = document.getElementById('player' + idx);
+        var avatarEl = playerEl ? playerEl.querySelector('.player-avatar') : null;
+        setTimeout(function() {
+          if (avatarEl) avatarEl.classList.add('avatar-bounce-once');
+        }, 200);
+        setTimeout(function() {
+          if (avatarEl) {
+            avatarEl.classList.remove('avatar-bounce-once');
+            avatarEl.classList.add('avatar-forbidden');
+            humanPunishForbiddenPlayers[idx - 1] = true;
+            playForbiddenSound();
+            startChipStealFly(idx, wrap);
+          }
+        }, 380);
+        setTimeout(function() {
+          setPlayerBubble(idx, 'pass', '?');
+          render();
+          humanPunishBubbleIntervalId = setInterval(function() {
+            if (!wrap.parentNode || !gameOver) return;
+            setPlayerBubble(idx, 'pass', '?');
+            render();
+          }, 600);
+        }, 880);
+        setTimeout(function() {
+          if (keyb.parentNode) {
+            keyb.classList.remove('human-keyboard-swing');
+            keyb.classList.add('human-keyboard-rotate');
+          }
+          doRound(idx + 1, next);
+        }, 1700);
+      }
+      doRound(1, null);
     }
 
     function startSansVictoryAnimation() {
@@ -4051,6 +4567,7 @@
               avatar.style.left = '50%';
               avatar.style.top = '50%';
               avatar.style.transition = 'transform 0.28s cubic-bezier(0.34, 1.15, 0.64, 1)';
+              avatar.style.transform = 'translate(-50%, -50%) scale(1)';
               var bubble = document.createElement('div');
               bubble.className = 'sans-dialogue-bubble sans-bubble-appear';
               var dialogueLine = document.createElement('div');
@@ -4065,20 +4582,47 @@
                 chars.push({ c: dialogueText[i], heavy: heavyPart.indexOf(dialogueText[i]) >= 0 });
               }
               var charIndex = 0;
+              var heavyCharCount = 0;
               var totalDuration = 2400;
-              var stepTimes = [0, 380, 640, 1100, 1680, 2400];
               var numChars = chars.length;
               var numHeavy = chars.filter(function(x) { return x.heavy; }).length;
               var numNormal = numChars - numHeavy;
               var heavyDelay = 210;
               var normalDelay = Math.round((totalDuration - numHeavy * heavyDelay) / numNormal);
+              var scales = [1, 1.5, 2.2, 3.2, 4.5];
+              function updateBubblePosition() {
+                if (!bubble.parentNode) return;
+                var rect = avatar.getBoundingClientRect();
+                bubble.style.top = 'auto';
+                bubble.style.bottom = (window.innerHeight - rect.top + 2) + 'px';
+              }
+              function applyScaleForHeavy(step) {
+                if (!document.getElementById('sansVictoryWrap') || step >= scales.length) return;
+                if (step > 0) playSansZoomStepSound();
+                var s = scales[step];
+                avatar.style.transform = 'translate(-50%, -50%) scale(' + s + ')';
+                requestAnimationFrame(function() { requestAnimationFrame(updateBubblePosition); });
+                if (step === scales.length - 1) {
+                  setTimeout(function() {
+                    if (!document.getElementById('sansVictoryWrap')) return;
+                    avatar.style.transition = 'none';
+                    avatar.classList.add('sans-avatar-idle');
+                    bubble.classList.add('sans-bubble-idle');
+                  }, 320);
+                }
+              }
               function showNextChar() {
                 if (!document.getElementById('sansVictoryWrap') || charIndex >= chars.length) return;
+                var isHeavy = chars[charIndex].heavy;
+                if (isHeavy) {
+                  applyScaleForHeavy(heavyCharCount + 1);
+                  heavyCharCount++;
+                }
                 var span = document.createElement('span');
-                span.className = 'sans-char' + (chars[charIndex].heavy ? ' sans-char-heavy' : '');
+                span.className = 'sans-char' + (isHeavy ? ' sans-char-heavy' : '');
                 span.textContent = chars[charIndex].c;
                 dialogueLine.appendChild(span);
-                if (chars[charIndex].heavy) playDialogueHeavySound(); else playDialogueCharSound();
+                if (isHeavy) playDialogueHeavySound(); else playDialogueCharSound();
                 charIndex++;
                 if (charIndex < chars.length) setTimeout(showNextChar, chars[charIndex].heavy ? heavyDelay : normalDelay);
               }
@@ -4118,23 +4662,6 @@
                   otherIndices.forEach(spawnSweatForPlayer);
                 }, 420);
               }, totalDuration + 500);
-              var scales = [1, 1.3, 1.8, 2.5, 3.4, 4.5];
-              function updateBubblePosition() {
-                if (!bubble.parentNode) return;
-                var rect = avatar.getBoundingClientRect();
-                bubble.style.top = 'auto';
-                bubble.style.bottom = (window.innerHeight - rect.top + 2) + 'px';
-              }
-              function applyStep(step) {
-                if (!document.getElementById('sansVictoryWrap') || step >= scales.length) return;
-                if (step > 0) playSansZoomStepSound();
-                var s = scales[step];
-                avatar.style.transform = 'translate(-50%, -50%) scale(' + s + ')';
-                requestAnimationFrame(function() { requestAnimationFrame(updateBubblePosition); });
-              }
-              stepTimes.forEach(function(ms, step) {
-                setTimeout(function() { applyStep(step); }, ms);
-              });
             return;
           }
           x = centerX;
@@ -4165,13 +4692,13 @@
       var winnerIndex = gameOverWinnerIndex;
       if (gameOverIsYou) {
         playVictoryBgm();
-        startConfetti();
+        // startConfetti(); // 彩带已隐藏，需要时去掉注释即可
       } else {
         playFailureBgm();
       }
       if (winnerIndex < 0) return;
       if (winnerIndex === 0) {
-        setPlayerBubble(0, 'pass', '嘿嘿，我赢了~');
+        setPlayerBubble(0, 'pass', getAILine('gameOverFirst', 0, '在座的各位都是辣鸡~'));
         render();
         gameOverBubbleTimeoutId = setTimeout(function() {
           gameOverBubbleTimeoutId = null;
@@ -4439,13 +4966,13 @@
         if (i === 1 && document.getElementById('zhizhiVictoryWrap')) baseClass += ' zhizhi-on-table';
         if (i === 2 && document.getElementById('sansVictoryWrap')) baseClass += ' sans-on-table';
         if (i === 0 && document.getElementById('humanVictoryWrap')) baseClass += ' human-on-table';
-        if ([0, 2, 3].indexOf(i) >= 0 && gameOver && gameOverWinnerIndex === 1) baseClass += ' zhizhi-rap-shake';
         div.className = baseClass;
         if (p.score >= TARGET_SCORE) div.classList.add('winner'); else div.classList.remove('winner');
         if (i === 3 && document.getElementById('xiaobaiVictoryWrap')) div.classList.remove('winner');
         if (i === 1 && document.getElementById('zhizhiVictoryWrap')) div.classList.remove('winner');
         if (i === 2 && document.getElementById('sansVictoryWrap')) div.classList.remove('winner');
         if (i === 0 && document.getElementById('humanVictoryWrap')) div.classList.remove('winner');
+        if (zhizhiRapShakeActive && [0, 2, 3].indexOf(i) !== -1) div.classList.add('zhizhi-rap-shake');
         const xiaobaiOnTable = i === 3 && div.classList.contains('xiaobai-on-table');
         const zhizhiOnTable = i === 1 && div.classList.contains('zhizhi-on-table');
         const sansOnTable = i === 2 && div.classList.contains('sans-on-table');
@@ -4483,7 +5010,7 @@
         const bubbleHtml = bubble
           ? '<div class="player-bubble show ' + (currentBubble.type === 'bid' ? 'bubble-bid ' : '') + (currentBubble.type === 'hurry' ? 'bubble-shake ' : '') + (bubbleAnimateIn ? 'bubble-animate-in' : '') + '">' + bubbleContent + '</div>'
           : '<div class="player-bubble"></div>';
-        const avatarHtml = '<div class="player-avatar' + (i === hurryAvatarIndex ? ' avatar-hurry' : '') + '"><img src="avatars/head_' + (i + 1) + '.png?v=8" alt=""></div>';
+        const avatarHtml = '<div class="player-avatar' + (i === hurryAvatarIndex ? ' avatar-hurry' : '') + (i >= 1 && i <= 3 && humanPunishForbiddenPlayers[i - 1] ? ' avatar-forbidden' : '') + '"><img src="avatars/head_' + (i + 1) + '.png?v=8" alt=""></div>';
         div.innerHTML = `
           <div class="player-main">
             <div class="player-info">
