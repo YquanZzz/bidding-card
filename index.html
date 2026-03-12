@@ -177,6 +177,22 @@
     .felt.felt-shake-light {
       animation: feltShakeLight 0.22s ease-out;
     }
+    @keyframes feltShakeBidL1 { 0%, 100% { transform: translate(-50%, -50%); } 25% { transform: translate(-50%, -50%) translate(-1px, 0); } 50% { transform: translate(-50%, -50%) translate(1px, 0); } 75% { transform: translate(-50%, -50%) translate(0, -1px); } }
+    @keyframes feltShakeBidL2 { 0%, 100% { transform: translate(-50%, -50%); } 12% { transform: translate(-50%, -50%) translate(-2px, -1px); } 37% { transform: translate(-50%, -50%) translate(2px, 1px); } 62% { transform: translate(-50%, -50%) translate(-1px, 2px); } 87% { transform: translate(-50%, -50%) translate(1px, -1px); } }
+    @keyframes feltShakeBidL3 { 0%, 100% { transform: translate(-50%, -50%); } 10% { transform: translate(-50%, -50%) translate(-2px, -2px); } 30% { transform: translate(-50%, -50%) translate(2px, 2px); } 50% { transform: translate(-50%, -50%) translate(-2px, 1px); } 70% { transform: translate(-50%, -50%) translate(2px, -1px); } 90% { transform: translate(-50%, -50%) translate(-1px, 1px); } }
+    @keyframes feltShakeBidL4 { 0%, 100% { transform: translate(-50%, -50%); } 8% { transform: translate(-50%, -50%) translate(-3px, -2px); } 24% { transform: translate(-50%, -50%) translate(3px, 2px); } 40% { transform: translate(-50%, -50%) translate(-2px, 3px); } 56% { transform: translate(-50%, -50%) translate(2px, -2px); } 72% { transform: translate(-50%, -50%) translate(-3px, 0); } 88% { transform: translate(-50%, -50%) translate(2px, 1px); } }
+    @keyframes feltShakeBidH1 { 0%, 100% { transform: translate(-50%, -50%) scale(1); } 8% { transform: translate(-50%, -50%) translate(-5px, -3px) scale(0.98); } 24% { transform: translate(-50%, -50%) translate(5px, 3px) scale(1.02); } 40% { transform: translate(-50%, -50%) translate(-4px, 4px) scale(0.99); } 56% { transform: translate(-50%, -50%) translate(4px, -3px) scale(1.01); } 72% { transform: translate(-50%, -50%) translate(-4px, -2px); } 88% { transform: translate(-50%, -50%) translate(4px, 2px); } }
+    @keyframes feltShakeBidH2 { 0%, 100% { transform: translate(-50%, -50%) scale(1); } 8% { transform: translate(-50%, -50%) translate(-6px, -4px) scale(0.98); } 24% { transform: translate(-50%, -50%) translate(6px, 4px) scale(1.02); } 40% { transform: translate(-50%, -50%) translate(-5px, 5px) scale(0.98); } 56% { transform: translate(-50%, -50%) translate(5px, -4px) scale(1.02); } 72% { transform: translate(-50%, -50%) translate(-5px, -3px); } 88% { transform: translate(-50%, -50%) translate(5px, 3px); } }
+    @keyframes feltShakeBidH3 { 0%, 100% { transform: translate(-50%, -50%) scale(1); } 6% { transform: translate(-50%, -50%) translate(-7px, -4px) scale(0.98); } 20% { transform: translate(-50%, -50%) translate(7px, 5px) scale(1.03); } 34% { transform: translate(-50%, -50%) translate(-6px, 6px) scale(0.98); } 50% { transform: translate(-50%, -50%) translate(6px, -5px) scale(1.02); } 66% { transform: translate(-50%, -50%) translate(-6px, -4px); } 82% { transform: translate(-50%, -50%) translate(6px, 4px); } }
+    @keyframes feltShakeBidH4 { 0%, 100% { transform: translate(-50%, -50%) scale(1); } 6% { transform: translate(-50%, -50%) translate(-8px, -5px) scale(0.97); } 20% { transform: translate(-50%, -50%) translate(8px, 5px) scale(1.03); } 34% { transform: translate(-50%, -50%) translate(-7px, 6px) scale(0.98); } 50% { transform: translate(-50%, -50%) translate(7px, -5px) scale(1.02); } 66% { transform: translate(-50%, -50%) translate(-7px, -4px); } 82% { transform: translate(-50%, -50%) translate(7px, 4px); } }
+    .felt.felt-shake-bid-l1 { animation: feltShakeBidL1 0.24s ease-out; }
+    .felt.felt-shake-bid-l2 { animation: feltShakeBidL2 0.3s ease-out; }
+    .felt.felt-shake-bid-l3 { animation: feltShakeBidL3 0.36s ease-out; }
+    .felt.felt-shake-bid-l4 { animation: feltShakeBidL4 0.42s ease-out; }
+    .felt.felt-shake-bid-h1 { animation: feltShakeBidH1 0.52s ease-out; }
+    .felt.felt-shake-bid-h2 { animation: feltShakeBidH2 0.58s ease-out; }
+    .felt.felt-shake-bid-h3 { animation: feltShakeBidH3 0.64s ease-out; }
+    .felt.felt-shake-bid-h4 { animation: feltShakeBidH4 0.72s ease-out; }
     @keyframes feltShakeRap {
       0%, 100% { transform: translate(-50%, -50%); }
       25% { transform: translate(-50%, -50%) translate(-1px, 0); }
@@ -433,12 +449,13 @@
       height: 6px;
       border-radius: 50%;
       background: var(--gb-lightest);
-      box-shadow: 0 0 0 1px var(--gb-lightest), 0 0 4px 1px rgba(155, 188, 15, 0.6);
+      box-shadow: 0 0 0 1px #fff, 0 0 6px 3px rgba(199, 220, 80, 0.95), 0 0 12px 4px rgba(155, 188, 15, 0.7);
       transform: translate(-50%, -50%);
       pointer-events: none;
       animation: chip-burst-out 0.4s ease-out forwards;
       image-rendering: pixelated;
       image-rendering: crisp-edges;
+      filter: brightness(1.25);
     }
     @keyframes chip-burst-out {
       0% { transform: translate(-50%, -50%) scale(0.3); opacity: 1; }
@@ -1113,6 +1130,10 @@
     .player-avatar.avatar-forbidden img {
       opacity: 0;
     }
+    .player.you .player-avatar.avatar-forbidden {
+      background-image: url(avatars/forbidden.png);
+      background-color: var(--gb-lightest);
+    }
     .human-victory-wrap .human-avatar.human-avatar-typing {
       animation: humanAvatarTypingShake 0.07s ease-in-out infinite;
     }
@@ -1554,11 +1575,46 @@
       top: -20px;
       border-radius: 1px;
       opacity: 0.9;
-      animation: confettiFall linear infinite;
+      animation: confettiFall linear 1 forwards;
     }
     @keyframes confettiFall {
       0% { transform: translateY(0) rotate(0deg); }
       100% { transform: translateY(100vh) rotate(var(--rot, 720deg)); }
+    }
+
+    .winner-banner {
+      position: absolute;
+      left: 50%;
+      top: 14%;
+      transform: translateX(-50%);
+      font-family: "GameFont", "Press Start 2P", monospace;
+      font-size: 18px;
+      color: var(--gb-lightest);
+      text-align: center;
+      white-space: nowrap;
+      z-index: 100;
+      pointer-events: none;
+      text-shadow: 2px 0 0 var(--gb-darkest), -2px 0 0 var(--gb-darkest), 0 2px 0 var(--gb-darkest), 0 -2px 0 var(--gb-darkest), 2px 2px 0 var(--gb-darkest), -2px -2px 0 var(--gb-darkest), 2px -2px 0 var(--gb-darkest), -2px 2px 0 var(--gb-darkest), 0 4px 0 var(--gb-darkest);
+    }
+    .winner-banner.hidden { display: none; }
+    .winner-banner .winner-char {
+      display: inline-block;
+      animation: winner-banner-wave 2.2s ease-in-out infinite;
+    }
+    .winner-banner .winner-char:nth-child(1) { animation-delay: 0s; }
+    .winner-banner .winner-char:nth-child(2) { animation-delay: 0.08s; }
+    .winner-banner .winner-char:nth-child(3) { animation-delay: 0.16s; }
+    .winner-banner .winner-char:nth-child(4) { animation-delay: 0.24s; }
+    .winner-banner .winner-char:nth-child(5) { animation-delay: 0.32s; }
+    .winner-banner .winner-char:nth-child(6) { animation-delay: 0.4s; }
+    .winner-banner .winner-char:nth-child(7) { animation-delay: 0.48s; }
+    .winner-banner .winner-char:nth-child(8) { animation-delay: 0.56s; }
+    .winner-banner .winner-char:nth-child(9) { animation-delay: 0.64s; }
+    .winner-banner .winner-char:nth-child(10) { animation-delay: 0.72s; }
+    .winner-banner .winner-char:nth-child(n+11) { animation-delay: 0.8s; }
+    @keyframes winner-banner-wave {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
     }
 
     .game-over-overlay {
@@ -1645,6 +1701,32 @@
       background: var(--gb-light);
       color: var(--gb-darkest);
       box-shadow: inset 0 0 0 4px var(--gb-dark), 0 2px 0 var(--gb-darkest);
+    }
+    .start-bar-chip-wrap {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: -22px;
+      height: 22px;
+      pointer-events: none;
+      z-index: 2;
+    }
+    .start-bar-chip-wrap .chip {
+      position: absolute;
+      left: 5%;
+      top: 0;
+      width: 22px;
+      height: 22px;
+      margin-left: -11px;
+      border-radius: 50%;
+      background: var(--gb-light);
+      border: 2px solid var(--gb-darkest);
+      box-shadow: inset 0 0 0 3px var(--gb-lightest), 0 2px 0 var(--gb-darkest);
+      animation: start-bar-chip-scroll 2.8s ease-in-out infinite;
+    }
+    @keyframes start-bar-chip-scroll {
+      0%, 100% { left: 5%; margin-left: -11px; }
+      50% { left: 95%; margin-left: -11px; }
     }
     .start-center .game-logo {
       display: block;
@@ -1783,6 +1865,179 @@
       z-index: 2;
     }
     .rules-overlay.hidden { display: none; }
+
+    /* 选角等全屏界面：背景(::before) z-index:0，内容 z-index:1~2，扫描线(::after) 最上层 z-index:999。新界面请同样加扫描线并保持最上层。 */
+    .char-select-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 10002;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      box-sizing: border-box;
+    }
+    .char-select-overlay::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--gb-bg);
+      background-image: radial-gradient(circle, var(--gb-bg-alt) 1px, transparent 1px);
+      background-size: 20px 20px;
+      z-index: 0;
+    }
+    /* 扫描线保持在本界面最上层；新界面也请加 ::after 扫描线并设最高 z-index */
+    .char-select-overlay::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent 0px,
+        transparent 5px,
+        rgba(15,56,15,0.1) 5px,
+        rgba(15,56,15,0.1) 6px
+      );
+      background-size: 100% 6px;
+      animation: scanline-scroll 2.6s linear infinite, scanline-breathe 5s ease-in-out infinite;
+      pointer-events: none;
+      z-index: 999;
+    }
+    .char-select-overlay.hidden { display: none; }
+    .char-select-card .char-select-bubble-wrap {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .char-select-card .char-select-bubble {
+      display: none;
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      margin-bottom: 2px;
+      padding: 6px 10px;
+      background: var(--gb-lightest);
+      border: 3px solid var(--gb-darkest);
+      border-radius: 6px;
+      box-shadow: 3px 3px 0 var(--gb-shadow);
+      font-family: "GameFont", "Press Start 2P", monospace;
+      font-size: 7px;
+      color: var(--gb-text);
+      white-space: nowrap;
+      z-index: 20;
+    }
+    .char-select-card .char-select-bubble::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 6px solid transparent;
+      border-top-color: var(--gb-darkest);
+    }
+    .char-select-card .char-select-bubble.show { display: block; }
+    .char-select-card .char-select-bubble.show.bubble-animate-in {
+      animation: bubbleBounce 0.38s ease-out forwards;
+      transform-origin: bottom center;
+    }
+    .char-select-title {
+      font-family: "GameFont", "Press Start 2P", monospace;
+      font-size: 18px;
+      color: var(--gb-lightest);
+      text-align: center;
+      margin: 0 0 32px;
+      position: relative;
+      z-index: 2;
+      text-shadow: 2px 0 0 var(--gb-darkest), -2px 0 0 var(--gb-darkest), 0 2px 0 var(--gb-darkest), 0 -2px 0 var(--gb-darkest), 2px 2px 0 var(--gb-darkest), -2px -2px 0 var(--gb-darkest), 2px -2px 0 var(--gb-darkest), -2px 2px 0 var(--gb-darkest), 0 4px 0 var(--gb-darkest);
+    }
+    .char-select-title .char-title-char {
+      display: inline-block;
+      animation: char-select-title-wave 2.2s ease-in-out infinite;
+    }
+    .char-select-title .char-title-char:nth-child(1) { animation-delay: 0s; }
+    .char-select-title .char-title-char:nth-child(2) { animation-delay: 0.15s; }
+    .char-select-title .char-title-char:nth-child(3) { animation-delay: 0.3s; }
+    .char-select-title .char-title-char:nth-child(4) { animation-delay: 0.45s; }
+    .char-select-title .char-title-char:nth-child(5) { animation-delay: 0.6s; }
+    @keyframes char-select-title-wave {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+    .char-select-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      gap: 28px;
+      max-width: 360px;
+      position: relative;
+      z-index: 2;
+    }
+    .char-select-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 8px;
+      cursor: pointer;
+      transition: transform 0.15s ease;
+    }
+    .char-select-card:hover {
+      transform: translateY(-4px);
+    }
+    .char-select-card.char-select-card-selected {
+      pointer-events: none;
+    }
+    .char-select-card.char-select-card-selected:hover {
+      transform: none;
+    }
+    .char-select-card.char-select-card-selected .char-avatar-wrap {
+      animation: char-select-card-pick 0.5s ease-out forwards;
+    }
+    @keyframes char-select-card-pick {
+      0%, 100% { filter: brightness(1); transform: translateY(0) scale(1); box-shadow: 0 5px 0 var(--gb-darkest); }
+      35% { filter: brightness(1.3); transform: translateY(-6px) scale(1.08); box-shadow: 0 5px 0 var(--gb-darkest), 0 0 0 2px var(--gb-light); }
+      50% { filter: brightness(1.3); transform: translateY(-4px) scale(1.06); box-shadow: 0 5px 0 var(--gb-darkest), 0 0 0 2px var(--gb-light); }
+      70% { filter: brightness(1.05); transform: translateY(-2px) scale(1.02); box-shadow: 0 5px 0 var(--gb-darkest), 0 0 0 1px var(--gb-light); }
+    }
+    .char-select-card .char-avatar-wrap {
+      width: 88px;
+      height: 88px;
+      border-radius: 5px;
+      overflow: hidden;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--gb-lightest);
+      border: 3px solid var(--gb-darkest);
+      box-shadow: 0 5px 0 var(--gb-darkest);
+    }
+    .char-select-card .char-avatar-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      image-rendering: pixelated;
+      image-rendering: crisp-edges;
+      filter: url(#avatarGreenFilter);
+    }
+    .char-select-card .char-name {
+      font-family: "GameFont", "Press Start 2P", monospace;
+      font-size: 9px;
+      color: var(--gb-lightest);
+      margin-bottom: 4px;
+      text-shadow: 1px 0 0 var(--gb-darkest), -1px 0 0 var(--gb-darkest), 0 1px 0 var(--gb-darkest), 0 -1px 0 var(--gb-darkest), 1px 1px 0 var(--gb-darkest), -1px -1px 0 var(--gb-darkest), 1px -1px 0 var(--gb-darkest), -1px 1px 0 var(--gb-darkest);
+    }
+    .char-select-card .char-intro {
+      font-size: 6px;
+      color: var(--gb-light);
+      text-align: center;
+      line-height: 1.4;
+      text-shadow: 1px 0 0 var(--gb-darkest), -1px 0 0 var(--gb-darkest), 0 1px 0 var(--gb-darkest), 0 -1px 0 var(--gb-darkest), 1px 1px 0 var(--gb-darkest), -1px -1px 0 var(--gb-darkest), 1px -1px 0 var(--gb-darkest), -1px 1px 0 var(--gb-darkest);
+    }
 
     .chip-fly-clone {
       position: fixed;
@@ -1955,7 +2210,7 @@
       justify-content: center;
       overflow: hidden;
     }
-    .player.you .player-avatar { background: var(--gb-light); border-color: var(--gb-darkest); }
+    .player.you .player-avatar { background-color: var(--gb-light); border-color: var(--gb-darkest); }
     .player-avatar img {
       width: 100%;
       height: 100%;
@@ -2100,11 +2355,18 @@
       <button class="btn-start" id="btnStartGame"><span class="btn-start-char" style="animation-delay: 0s">开</span><span class="btn-start-char" style="animation-delay: 0.12s">始</span><span class="btn-start-char" style="animation-delay: 0.24s">游</span><span class="btn-start-char" style="animation-delay: 0.36s">戏</span><span class="btn-start-char" style="animation-delay: 0.48s">!</span></button>
     </div>
     <div class="start-bottom-bar">
+      <div class="start-bar-chip-wrap" id="startChipsRow" aria-hidden="true"><div class="chip"></div></div>
       <button type="button" class="btn-start-menu" id="btnSettings">设置</button>
       <button type="button" class="btn-start-menu" id="btnTutorial">教程</button>
       <button type="button" class="btn-start-menu" id="btnCredits">制作组</button>
       <button type="button" class="btn-start-menu" id="btnExit">退出</button>
     </div>
+  </div>
+
+  <!-- 选择角色界面：全屏展示 4 个角色头像，点击选择 -->
+  <div class="char-select-overlay hidden" id="charSelectOverlay">
+    <h2 class="char-select-title"><span class="char-title-char">选</span><span class="char-title-char">择</span><span class="char-title-char">角</span><span class="char-title-char">色</span><span class="char-title-char">!</span></h2>
+    <div class="char-select-grid" id="charSelectGrid"></div>
   </div>
 
   <!-- 教程说明弹窗 -->
@@ -2145,6 +2407,8 @@
     <button class="btn-add10" id="btnAdd10" type="button" title="全体+10分(测试)">+10分</button>
     <button class="btn-bgm-switch" id="btnBgmSwitch" type="button" title="切换BGM">BGM1</button>
     <button class="new-game" id="newGame" title="新一局" aria-label="新一局"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg></button>
+
+    <div class="winner-banner hidden" id="winnerBanner"></div>
 
     <div class="felt">
       <div class="deck-shuffle-pile hidden" id="deckShufflePile">
@@ -2248,6 +2512,13 @@
     const TARGET_SCORE = 30;
     const HUMAN_INDEX = 0;
 
+    var CHARACTERS = [
+      { name: 'D', avatar: 'cat', intro: '以数据掌控牌局，每一步尽在他的计算中。' },
+      { name: '吱吱', avatar: 'frog', intro: '狠厉黑道角色，牌桌便是他的主场。' },
+      { name: '杉斯', avatar: 'dog', intro: '爱讲冷笑话的骷髅，懒散外表下早已看穿一切套路。' },
+      { name: '小白', avatar: 'hamster', intro: '谁家养的黑猫，叫小白?' }
+    ];
+
     let deck = [];
     let players = [];
     let currentCard = null;
@@ -2275,8 +2546,10 @@
     let bidHistory = [];
 
     var chipSoundCtx = null;
-    var TYPE_TO_KEY = { '跳过':'pass', '中标':'win', '催促':'hurry', '思考前缀':'thinkPrefix', '出价前':'beforeBid', '结束第一句':'gameOverFirst', '结束循环句':'gameOverLoop' };
+    var TYPE_TO_KEY = { '跳过':'pass', '中标':'win', '催促':'hurry', '思考前缀':'thinkPrefix', '出价前':'beforeBid', '结束第一句':'gameOverFirst', '结束循环句':'gameOverLoop', '角色简介':'intro', '被选中':'charSelected' };
     var WHO_TO_INDEX = { '吱吱':1, '杉斯':2, '小白':3, 'D':0 };
+    var charSelectedPendingIndex = -1;
+    var charSelectLocked = false;
 
     function parseCSVRow(row) {
       var parts = [];
@@ -2308,15 +2581,28 @@
             var whoIndex = col - 1;
             var phrases = phraseCell.split(/\|/).map(function(s) { return s.trim(); }).filter(Boolean);
             if (!phrases.length) continue;
-            if (key === 'thinkPrefix' || key === 'gameOverFirst' || key === 'gameOverLoop') out[key][whoIndex] = phrases[0];
+            if (key === 'thinkPrefix' || key === 'gameOverFirst' || key === 'gameOverLoop' || key === 'intro') out[key][whoIndex] = phrases[0];
+            else if (key === 'charSelected') out[key][whoIndex] = phrases;
             else out[key][whoIndex] = phrases;
           }
         }
         window.AI_LINES = out;
+        applyIntroFromAILines();
       }).catch(function() {});
+    }
+    function applyIntroFromAILines() {
+      if (!window.AI_LINES || !window.AI_LINES.intro) return;
+      for (var i = 0; i < CHARACTERS.length; i++) {
+        if (window.AI_LINES.intro[i] != null) CHARACTERS[i].intro = window.AI_LINES.intro[i];
+      }
     }
     loadAILinesFromCSV();
 
+    function getCharIndex(seat) {
+      if (!players.length || seat < 0) return seat;
+      if (players[seat] && players[seat].characterIndex != null) return players[seat].characterIndex;
+      return seat;
+    }
     function getAILine(category, playerIndex, fallback) {
       var lines = window.AI_LINES && window.AI_LINES[category];
       if (!lines) return typeof fallback === 'string' ? fallback : (fallback && fallback[Math.floor(Math.random() * fallback.length)]);
@@ -2360,6 +2646,36 @@
         gain.gain.exponentialRampToValueAtTime(0.001, now + 0.03);
         osc.start(now);
         osc.stop(now + 0.03);
+      } catch (e) {}
+    }
+    function playCharSelectSound() {
+      try {
+        if (!chipSoundCtx) chipSoundCtx = new (window.AudioContext || window.webkitAudioContext)();
+        if (chipSoundCtx.state === 'suspended') chipSoundCtx.resume();
+        var now = chipSoundCtx.currentTime;
+        var ctx = chipSoundCtx;
+        var dur = 0.5;
+        var osc1 = ctx.createOscillator();
+        var osc2 = ctx.createOscillator();
+        var gain = ctx.createGain();
+        osc1.type = osc2.type = 'sine';
+        osc1.frequency.setValueAtTime(523, now);
+        osc1.frequency.setValueAtTime(659, now + 0.08);
+        osc1.frequency.setValueAtTime(784, now + 0.16);
+        osc2.frequency.setValueAtTime(784, now);
+        osc2.frequency.setValueAtTime(988, now + 0.08);
+        osc2.frequency.setValueAtTime(1175, now + 0.16);
+        gain.gain.setValueAtTime(0, now);
+        gain.gain.linearRampToValueAtTime(0.2, now + 0.06);
+        gain.gain.setValueAtTime(0.2, now + 0.2);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + dur);
+        osc1.connect(gain);
+        osc2.connect(gain);
+        gain.connect(ctx.destination);
+        osc1.start(now);
+        osc2.start(now);
+        osc1.stop(now + dur);
+        osc2.stop(now + dur);
       } catch (e) {}
     }
     function playForbiddenSound() {
@@ -2436,6 +2752,25 @@
       } catch (e) {}
     }
 
+    function playZhizhiSlamSound() {
+      try {
+        if (!chipSoundCtx) chipSoundCtx = new (window.AudioContext || window.webkitAudioContext)();
+        if (chipSoundCtx.state === 'suspended') chipSoundCtx.resume();
+        var now = chipSoundCtx.currentTime;
+        var osc = chipSoundCtx.createOscillator();
+        var gain = chipSoundCtx.createGain();
+        osc.connect(gain);
+        gain.connect(chipSoundCtx.destination);
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(85, now);
+        osc.frequency.exponentialRampToValueAtTime(45, now + 0.15);
+        gain.gain.setValueAtTime(0, now);
+        gain.gain.linearRampToValueAtTime(0.35, now + 0.01);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.2);
+        osc.start(now);
+        osc.stop(now + 0.2);
+      } catch (e) {}
+    }
     function playZhizhiNoteSound(accent) {
       try {
         if (!chipSoundCtx) chipSoundCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -2615,16 +2950,19 @@
       } catch (e) {}
     }
 
-    function playBidSound(amount) {
+    function playBidSound(amount, raiseIndex) {
       if (!amount || amount < 1) return;
       try {
         if (!chipSoundCtx) chipSoundCtx = new (window.AudioContext || window.webkitAudioContext)();
         if (chipSoundCtx.state === 'suspended') chipSoundCtx.resume();
-        var heavy = amount >= 8;
+        var raiseLevel = Math.min(4, Math.max(1, raiseIndex || 1));
+        var heavy = amount >= 7;
         var ticks = heavy ? Math.min(amount, 10) : Math.min(amount, 5);
         var gap = heavy ? 0.028 : 0.038;
         var len = heavy ? 0.055 : 0.032;
         var baseFreq = heavy ? 980 : 1580;
+        var pitchRise = (raiseLevel - 1) * 90;
+        baseFreq = baseFreq + pitchRise;
         var freqStep = heavy ? 35 : 50;
         var gainStart = heavy ? 0.88 : 0.56;
         for (var i = 0; i < ticks; i++) {
@@ -2659,32 +2997,72 @@
       { t: 5100, n: 6 }, { t: 5500, n: 5 }, { t: 5950, n: 7 }, { t: 6350, n: 6 }
     ];
 
-    function playBgmNote(noteIndex) {
+    // BGM2：爵士风，C 大调明亮，轻快 + 柔触键
+    var BGM2_MELODY = [131, 165, 196, 220, 196, 165, 131, 147]; // C E G A G E C D
+    var BGM2_CYCLE_MS = 14800;
+    var BGM2_TIMELINE = [
+      { t: 0, n: 0 }, { t: 720, n: 1 }, { t: 1440, n: 2 }, { t: 2160, n: 3 }, { t: 2880, n: 4 }, { t: 3600, n: 5 },
+      { t: 4320, n: 6 }, { t: 5040, n: 7 }, { t: 5760, n: 0 }, { t: 6480, n: 1 }, { t: 7200, n: 2 }, { t: 7920, n: 3 },
+      { t: 8640, n: 4 }, { t: 9360, n: 5 }, { t: 10080, n: 6 }, { t: 10800, n: 7 }, { t: 11520, n: 0 }, { t: 12240, n: 1 },
+      { t: 12960, n: 2 }, { t: 13680, n: 3 }
+    ];
+
+    // BGM3：赌场氛围，C 大调偏暖、低音稀疏
+    var BGM3_MELODY = [131, 165, 196, 131, 196, 220, 196, 165];
+    var BGM3_CYCLE_MS = 13200;
+    var BGM3_TIMELINE = [
+      { t: 0, n: 0 }, { t: 1100, n: 1 }, { t: 2200, n: 2 }, { t: 3300, n: 3 }, { t: 4400, n: 4 }, { t: 5500, n: 5 },
+      { t: 6600, n: 6 }, { t: 7700, n: 7 }, { t: 8800, n: 0 }, { t: 9900, n: 1 }, { t: 11000, n: 2 }
+    ];
+
+    var gameBgmIndex = 0; // 0=BGM1, 1=BGM2, 2=BGM3（游戏中循环）
+    var bgmScheduleToken = 0;
+
+    function playBgmNote(noteIndex, melody, waveType, gain, decaySec, expectedToken, attackSec) {
       if (bgmMode !== 0 || !isMusicOn || !musicGain || !musicCtx) return;
       try {
+        if (expectedToken != null && expectedToken !== bgmScheduleToken) return;
         if (musicCtx.state === 'suspended') musicCtx.resume();
         var now = musicCtx.currentTime;
+        var decay = decaySec != null ? decaySec : 0.5;
+        var attack = attackSec != null ? attackSec : 0;
+        var vol = gain != null ? gain : 0.4;
         var osc = musicCtx.createOscillator();
         var g = musicCtx.createGain();
         osc.connect(g);
         g.connect(musicGain);
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(BGM_MELODY[noteIndex], now);
-        g.gain.setValueAtTime(0.4, now);
-        g.gain.exponentialRampToValueAtTime(0.001, now + 0.5);
+        osc.type = waveType || 'sine';
+        osc.frequency.setValueAtTime(melody[noteIndex], now);
+        if (attack > 0) {
+          g.gain.setValueAtTime(0.001, now);
+          g.gain.linearRampToValueAtTime(vol, now + attack);
+          g.gain.exponentialRampToValueAtTime(0.001, now + decay);
+        } else {
+          g.gain.setValueAtTime(vol, now);
+          g.gain.exponentialRampToValueAtTime(0.001, now + decay);
+        }
         osc.start(now);
-        osc.stop(now + 0.5);
+        osc.stop(now + decay);
       } catch (e) {}
     }
 
     function scheduleBgmCycle() {
       if (!musicGain || !musicCtx) return;
-      for (var i = 0; i < BGM_TIMELINE.length; i++) {
+      bgmScheduleToken++;
+      var token = bgmScheduleToken;
+      var mel = gameBgmIndex === 0 ? BGM_MELODY : (gameBgmIndex === 1 ? BGM2_MELODY : BGM3_MELODY);
+      var tl = gameBgmIndex === 0 ? BGM_TIMELINE : (gameBgmIndex === 1 ? BGM2_TIMELINE : BGM3_TIMELINE);
+      var ms = gameBgmIndex === 0 ? BGM_CYCLE_MS : (gameBgmIndex === 1 ? BGM2_CYCLE_MS : BGM3_CYCLE_MS);
+      var wave = gameBgmIndex === 2 ? 'sine' : (gameBgmIndex === 0 ? 'sine' : 'triangle');
+      var noteGain = gameBgmIndex === 0 ? 0.4 : (gameBgmIndex === 1 ? 0.13 : 0.11);
+      var decay = gameBgmIndex === 0 ? 0.5 : (gameBgmIndex === 1 ? 0.46 : 0.9);
+      var attack = gameBgmIndex === 2 ? 0.06 : (gameBgmIndex === 0 ? 0 : 0.04);
+      for (var i = 0; i < tl.length; i++) {
         (function(ev) {
-          setTimeout(function() { playBgmNote(ev.n); }, ev.t);
-        })(BGM_TIMELINE[i]);
+          setTimeout(function() { playBgmNote(ev.n, mel, wave, noteGain, decay, token, attack); }, ev.t);
+        })(tl[i]);
       }
-      musicCycleTimeoutId = setTimeout(scheduleBgmCycle, BGM_CYCLE_MS);
+      musicCycleTimeoutId = setTimeout(scheduleBgmCycle, ms);
     }
 
     function startBgmIfNeeded() {
@@ -2705,7 +3083,7 @@
       }
     }
 
-    /* BGM2=胜利(与游戏BGM同方式：setTimeout触发单音) | BGM3=失败 */
+    /* 胜利/失败短曲：setTimeout 触发单音；游戏中循环 BGM 为 BGM1 / BGM2 / BGM3 */
     var VICTORY_BGM = [
       { t: 0, f: 523 }, { t: 150, f: 659 }, { t: 300, f: 784 }, { t: 450, f: 1047 }, { t: 600, f: 784 }, { t: 750, f: 1047 }
     ];
@@ -2715,15 +3093,15 @@
 
     function playVictoryNote(noteIndex) {
       if (!musicCtx || !musicGain) return;
-      try {
-        if (musicCtx.state === 'suspended') musicCtx.resume();
+          try {
+            if (musicCtx.state === 'suspended') musicCtx.resume();
         var ev = VICTORY_BGM[noteIndex];
-        var now = musicCtx.currentTime;
-        var osc = musicCtx.createOscillator();
-        var g = musicCtx.createGain();
-        osc.connect(g);
-        g.connect(musicGain);
-        osc.type = 'sine';
+            var now = musicCtx.currentTime;
+            var osc = musicCtx.createOscillator();
+            var g = musicCtx.createGain();
+            osc.connect(g);
+            g.connect(musicGain);
+            osc.type = 'sine';
         osc.frequency.setValueAtTime(ev.f, now);
         g.gain.setValueAtTime(0.56, now);
         g.gain.exponentialRampToValueAtTime(0.001, now + 0.4);
@@ -2745,9 +3123,9 @@
         osc.type = 'sine';
         osc.frequency.setValueAtTime(ev.f, now);
         g.gain.setValueAtTime(0.72, now);
-        g.gain.exponentialRampToValueAtTime(0.001, now + 0.5);
-        osc.start(now);
-        osc.stop(now + 0.5);
+            g.gain.exponentialRampToValueAtTime(0.001, now + 0.5);
+            osc.start(now);
+            osc.stop(now + 0.5);
       } catch (e) {}
     }
 
@@ -2860,13 +3238,14 @@
       return d;
     }
 
-    function initPlayers() {
-      return [
-        { name: 'D', chips: START_CHIPS, score: 0, cards: [], isHuman: true, avatar: 'cat' },
-        { name: '吱吱', chips: START_CHIPS, score: 0, cards: [], isHuman: false, avatar: 'frog' },
-        { name: '杉斯', chips: START_CHIPS, score: 0, cards: [], isHuman: false, avatar: 'dog' },
-        { name: '小白', chips: START_CHIPS, score: 0, cards: [], isHuman: false, avatar: 'hamster' },
-      ];
+    function initPlayers(chosenCharacterIndex) {
+      var idx = typeof chosenCharacterIndex === 'number' ? Math.max(0, Math.min(3, chosenCharacterIndex)) : 0;
+      var others = [(idx + 1) % 4, (idx + 2) % 4, (idx + 3) % 4];
+      var list = [];
+      list.push({ name: CHARACTERS[idx].name, chips: START_CHIPS, score: 0, cards: [], isHuman: true, characterIndex: idx });
+      for (var k = 0; k < 3; k++)
+        list.push({ name: CHARACTERS[others[k]].name, chips: START_CHIPS, score: 0, cards: [], isHuman: false, characterIndex: others[k] });
+      return list;
     }
 
     function getAvatarKaomoji(avatar) {
@@ -2875,11 +3254,103 @@
       return kaomoji[avatar] || '(・ω・)';
     }
 
-    function startGame() {
+    function getSeatByCharacterIndex(characterIndex) {
+      for (var i = 0; i < players.length; i++) if (players[i].characterIndex === characterIndex) return i;
+      return -1;
+    }
+
+    function showCharSelect() {
+      var overlay = document.getElementById('charSelectOverlay');
+      var grid = document.getElementById('charSelectGrid');
+      if (!overlay || !grid) return;
+      /* 刷新后清空上一局状态，避免选角再进时残留筹码/分数 */
+      players = initPlayers(0);
+      var t = document.getElementById('tableChips');
+      if (t) { t.innerHTML = ''; t.removeAttribute('data-bid'); }
+      bidHistory = [];
+      currentBid = 0;
+      currentLeader = -1;
+      currentCard = null;
+      roundIndex = 0;
+      firstBidder = 0;
+      gameOver = false;
+      passedThisRound = [];
+      clearPlayerBubble();
+      scoreAnimatingPlayerIndex = -1;
+      chipsReturnedByPile = null;
+      chipReturnDisplay = null;
+      tableChipsClearedForCardFly = false;
+      tableChipsHideLeader = false;
+      justPlacedBid = false;
+      justAddedChip = false;
+      hideGameOverOverlay();
+      hideWinnerBanner();
+      render();
+      charSelectedPendingIndex = -1;
+      charSelectLocked = false;
+      grid.innerHTML = '';
+      for (var i = 0; i < CHARACTERS.length; i++) {
+        (function(charIndex) {
+          var c = CHARACTERS[charIndex];
+          var card = document.createElement('div');
+          card.className = 'char-select-card';
+          var bubbleWrap = document.createElement('div');
+          bubbleWrap.className = 'char-select-bubble-wrap';
+          var img = document.createElement('img');
+          img.src = 'avatars/head_' + (charIndex + 1) + '.png?v=8';
+          img.alt = c.name;
+          var avatarWrap = document.createElement('div');
+          avatarWrap.className = 'char-avatar-wrap';
+          avatarWrap.appendChild(img);
+          bubbleWrap.appendChild(avatarWrap);
+          var bubble = document.createElement('div');
+          bubble.className = 'char-select-bubble';
+          var bubbleText = document.createElement('span');
+          bubble.appendChild(bubbleText);
+          bubbleWrap.appendChild(bubble);
+          card.appendChild(bubbleWrap);
+          var nameEl = document.createElement('div');
+          nameEl.className = 'char-name';
+          nameEl.textContent = c.name;
+          card.appendChild(nameEl);
+          var introEl = document.createElement('div');
+          introEl.className = 'char-intro';
+          introEl.textContent = c.intro;
+          card.appendChild(introEl);
+          card.onclick = function() {
+            if (charSelectLocked) return;
+            charSelectLocked = true;
+            if (typeof playCharSelectSound === 'function') playCharSelectSound();
+            card.classList.add('char-select-card-selected');
+            var allBubbles = grid.querySelectorAll('.char-select-bubble');
+            allBubbles.forEach(function(b) { b.classList.remove('show', 'bubble-animate-in'); });
+            var line = getAILine('charSelected', charIndex, '目标锁定，程序启动。');
+            bubbleText.textContent = line;
+            bubble.classList.add('show', 'bubble-animate-in');
+            setTimeout(function() {
+              overlay.classList.add('hidden');
+              startGame(charIndex);
+            }, 1800);
+          };
+          grid.appendChild(card);
+        })(i);
+      }
+      overlay.classList.remove('hidden');
+    }
+
+    function startGame(chosenCharacterIndex) {
+      var co = document.getElementById('charSelectOverlay');
+      if (co) co.classList.add('hidden');
+      hideWinnerBanner();
+      gameBgmIndex = 2;
+      currentBgmIndex = 2;
+      stopNormalBgm();
+      var btnBgm = document.getElementById('btnBgmSwitch');
+      if (btnBgm) btnBgm.textContent = BGM_LABELS[2];
       startBgmIfNeeded();
       gameOverTime = 0;
       gameOverAgainScheduled = false;
-      [0, 2, 3].forEach(function(idx) {
+      [0, 1, 2, 3].forEach(function(idx) {
         var el = document.getElementById('player' + idx);
         if (el) el.classList.remove('zhizhi-rap-shake');
       });
@@ -2888,7 +3359,7 @@
       if (gameOverBubbleTimeoutId) { clearTimeout(gameOverBubbleTimeoutId); gameOverBubbleTimeoutId = null; }
       if (gameOverBubbleIntervalId) { clearInterval(gameOverBubbleIntervalId); gameOverBubbleIntervalId = null; }
       deck = makeDeck();
-      players = initPlayers();
+      players = initPlayers(chosenCharacterIndex);
       currentCard = null;
       currentBid = 0;
       currentLeader = -1;
@@ -2956,8 +3427,8 @@
               doFlipStep();
             }, 450);
           }, 1200);
-        } else {
-          doFlipStep();
+      } else {
+        doFlipStep();
         }
       }
     }
@@ -3027,13 +3498,13 @@
           currentLeader = who;
           bidHistory.push({ who: who, amount: bid });
           justPlacedBid = true;
-          setPlayerBubble(who, 'pass', getAILine('beforeBid', who, '牌没问题~'));
+          setPlayerBubble(who, 'pass', getAILine('beforeBid', getCharIndex(who), '牌没问题~'));
           render();
           setTimeout(() => {
             if (gameOver) return;
-            setPlayerBubble(who, 'bid', bid);
+          setPlayerBubble(who, 'bid', bid);
             render();
-            playBidSound(bid);
+            playBidSound(bid, bidHistory.length);
             setTimeout(() => {
               clearPlayerBubble();
               bidIndex++;
@@ -3045,16 +3516,16 @@
         } else {
           passedThisRound.push(who);
           playPassSound();
-          const phrase = getAILine('pass', who, '不要');
+          const phrase = getAILine('pass', getCharIndex(who), '不要');
           setPlayerBubble(who, 'pass', phrase);
+        render();
+        bidIndex++;
+        setTimeout(() => {
+          clearPlayerBubble();
           render();
-          bidIndex++;
-          setTimeout(() => {
-            clearPlayerBubble();
-            render();
-            if (bidIndex < 4) runBidTurn(getCurrentBidder());
-            else resolveBid();
-          }, 800);
+          if (bidIndex < 4) runBidTurn(getCurrentBidder());
+          else resolveBid();
+        }, 800);
         }
         return;
       }, AI_THINK_MS_MIN + Math.floor(Math.random() * (AI_THINK_MS_MAX - AI_THINK_MS_MIN + 1)));
@@ -3081,7 +3552,7 @@
       return Math.min(w, c, 12);
     }
 
-    // AI 与所有人（含其他 AI、人类）平等竞争，为赢而玩；筹码多时更敢叫价
+    // AI 与所有人（含人类）竞争；人类囤筹码时 AI 不在内部互相抬价，保留筹码与玩家抢关键牌
     function aiBid(aiIndex) {
       const p = players[aiIndex];
       const need = TARGET_SCORE - p.score;
@@ -3090,6 +3561,9 @@
       const chips = Math.max(0, p.chips);
       const minBid = currentBid + 1;
       if (minBid > chips) return 0;
+
+      var humanChips = Math.max(0, players[HUMAN_INDEX].chips);
+      var humanPassedThisRound = passedThisRound.indexOf(HUMAN_INDEX) >= 0;
 
       var myOrder = bidIndex;
       var passedCount = passedThisRound.length;
@@ -3109,6 +3583,15 @@
           maxWilling = Math.min(chips, 12, maxWilling + 2);
       }
 
+      // 人类囤筹码时：若人类本轮已过（不要），且人类筹码很多，则 AI 之间不互相抬价，只出到 minBid+1～2，保留筹码后面和玩家抢牌
+      if (humanPassedThisRound && humanChips >= 6) {
+        maxWilling = Math.min(maxWilling, minBid + 2);
+      }
+      // 人类筹码明显多于本 AI 时，本 AI 稍微保守，留一手后面抢关键牌
+      if (humanChips >= chips + 4 && chips <= 8) {
+        maxWilling = Math.max(minBid, Math.min(maxWilling, chips - 1));
+      }
+
       if (maxWilling < minBid) return 0;
 
       // 下家：每人都有意愿与筹码，要压住他们才能拿牌；强对手（分数高/接近赢）多算 1
@@ -3124,9 +3607,16 @@
         var theirNeed = TARGET_SCORE - players[j].score;
         var theirCap = Math.min(theirC, getMaxWillingForCard(j, value));
         if (theirNeed <= 10 && value >= 5) theirCap = Math.min(theirC, theirCap + 1);
+        // 人类还没过且筹码多时，假定人类可能跟价，需要出够高才拿得到
+        if (j === HUMAN_INDEX && !humanPassedThisRound && humanChips >= 6)
+          theirCap = Math.min(theirC, Math.max(theirCap, Math.min(value + 2, 10)));
         if (theirCap > minToBeatFollowers) minToBeatFollowers = theirCap;
       }
       var needToBid = minToBeatFollowers;
+
+      // 人类囤筹码且本轮已过：目标出价不抬太高，尽量 minBid 或 minBid+1 拿下
+      if (humanPassedThisRound && humanChips >= 6)
+        needToBid = Math.min(needToBid, minBid + 1);
 
       if (currentLeader >= 0 && leaderChips < minBid) {
         var bid = Math.min(maxWilling, Math.max(minBid, needToBid));
@@ -3170,7 +3660,7 @@
           var aiIndices = [1, 2, 3];
           var randomAI = aiIndices[Math.floor(Math.random() * 3)];
           hurryAvatarIndex = randomAI;
-        setPlayerBubble(randomAI, 'hurry', getAILine('hurry', randomAI, '麻溜点！'));
+        setPlayerBubble(randomAI, 'hurry', getAILine('hurry', getCharIndex(randomAI), '麻溜点！'));
         render();
           setTimeout(function() {
             hurryAvatarIndex = -1;
@@ -3191,20 +3681,20 @@
       ` : '<span class="bid-picker-value" style="font-size:7px;color:var(--gb-text)">筹码不足，只能跳过</span>';
       confirmPlace.innerHTML = canBid ? '<button class="btn-confirm-bid" type="button" id="bidConfirm">确定</button>' : '';
       if (canBid) {
-        const up = document.getElementById('bidUp');
-        const down = document.getElementById('bidDown');
-        const valEl = document.getElementById('bidValue');
-        const confirm = document.getElementById('bidConfirm');
-        function updateVal() {
-          selectedBid = Math.max(minBid, Math.min(maxBid, selectedBid));
-          valEl.textContent = selectedBid;
-          up.disabled = selectedBid >= maxBid;
-          down.disabled = selectedBid <= minBid;
-        }
-        up.onclick = () => { selectedBid++; updateVal(); };
-        down.onclick = () => { selectedBid--; updateVal(); };
+      const up = document.getElementById('bidUp');
+      const down = document.getElementById('bidDown');
+      const valEl = document.getElementById('bidValue');
+      const confirm = document.getElementById('bidConfirm');
+      function updateVal() {
+        selectedBid = Math.max(minBid, Math.min(maxBid, selectedBid));
+        valEl.textContent = selectedBid;
+        up.disabled = selectedBid >= maxBid;
+        down.disabled = selectedBid <= minBid;
+      }
+      up.onclick = () => { selectedBid++; updateVal(); };
+      down.onclick = () => { selectedBid--; updateVal(); };
         if (confirm) confirm.onclick = () => doBid(who, selectedBid);
-        updateVal();
+      updateVal();
       }
     }
 
@@ -3217,13 +3707,13 @@
           forcedPass = true;
           setMessage('筹码不足，只能跳过。');
         }
-        if (amount > 0) {
-          currentBid = amount;
-          currentLeader = who;
-          bidHistory.push({ who: who, amount: amount });
+      if (amount > 0) {
+        currentBid = amount;
+        currentLeader = who;
+        bidHistory.push({ who: who, amount: amount });
           justPlacedBid = true;
-          playBidSound(amount);
-          setMessage(`你出价 ${amount} 筹码。`);
+          playBidSound(amount, bidHistory.length);
+        setMessage(`你出价 ${amount} 筹码。`);
         }
       }
       if (amount === 0) {
@@ -3255,23 +3745,23 @@
       scoreAnimatingPlayerIndex = leaderIndex;
       scoreAnimatingAdd = card.value;
       p.score += card.value;
-      if (!p.isHuman) {
-        var winPhrase = getAILine('win', leaderIndex, '拿来吧你！');
+        if (!p.isHuman) {
+        var winPhrase = getAILine('win', getCharIndex(leaderIndex), '拿来吧你！');
         setPlayerBubble(leaderIndex, 'pass', winPhrase);
-      }
+        }
       currentCard = null;
-      render();
-      if (p.score >= TARGET_SCORE) {
-        gameOver = true;
-        gameOverByDeck = false;
-        gameOverWinnerName = p.name;
-        gameOverWinnerScore = p.score;
-        gameOverIsYou = p.isHuman;
+        render();
+        if (p.score >= TARGET_SCORE) {
+          gameOver = true;
+          gameOverByDeck = false;
+          gameOverWinnerName = p.name;
+          gameOverWinnerScore = p.score;
+          gameOverIsYou = p.isHuman;
         gameOverWinnerIndex = leaderIndex;
         setTimeout(function() { showGameOverCelebration(); }, 1200);
         return;
       }
-      setTimeout(function() {
+          setTimeout(function() {
         if (gameOver) return;
         if (currentLeader < 0) {
           currentCard = null;
@@ -3429,9 +3919,9 @@
       setTimeout(function() {
         if (gameOver) return;
         if (currentLeader < 0) {
-          currentCard = null;
-          render();
-          setTimeout(nextRound, 800);
+        currentCard = null;
+        render();
+        setTimeout(nextRound, 800);
         }
       }, 800);
     }
@@ -3506,7 +3996,8 @@
       if (tblBubble && tblBubble.parentNode) tblBubble.parentNode.removeChild(tblBubble);
       var wrap = document.getElementById('xiaobaiVictoryWrap');
       if (wrap && wrap.parentNode) wrap.parentNode.removeChild(wrap);
-      var p3 = document.getElementById('player3');
+      var xiaobaiSeat = getSeatByCharacterIndex(3);
+      var p3 = xiaobaiSeat >= 0 ? document.getElementById('player' + xiaobaiSeat) : null;
       if (p3) p3.classList.remove('xiaobai-on-table');
       document.body.classList.remove('xiaobai-left-seat');
       xiaobaiVictoryBubbleShake = false;
@@ -3516,7 +4007,9 @@
       var felt = document.querySelector('.felt');
       if (!felt) return;
       stopXiaobaiVictoryAnimation();
-      var p3 = document.getElementById('player3');
+      var xiaobaiSeat = getSeatByCharacterIndex(3);
+      var zhizhiSeat = getSeatByCharacterIndex(1);
+      var p3 = xiaobaiSeat >= 0 ? document.getElementById('player' + xiaobaiSeat) : null;
       if (p3) p3.classList.remove('winner');
       var caughtFired = false;
       var rect = felt.getBoundingClientRect();
@@ -3599,12 +4092,14 @@
             ballVx = 4;
             ballVy = -2;
             escapeEndTime = now + 2000;
-            setPlayerBubble(3, 'pass', '!');
+            hurryAvatarIndex = xiaobaiSeat;
+            setPlayerBubble(xiaobaiSeat, 'pass', '!');
             render();
             if (typeof playMouseLandSound === 'function') playMouseLandSound();
             if (typeof playChipSound === 'function') playChipSound();
-            setTimeout(function() {
-              if (document.getElementById('xiaobaiVictoryWrap') && currentBubble && currentBubble.playerIndex === 3) {
+      setTimeout(function() {
+              if (document.getElementById('xiaobaiVictoryWrap') && currentBubble && currentBubble.playerIndex === xiaobaiSeat) {
+                hurryAvatarIndex = -1;
                 clearPlayerBubble();
                 render();
               }
@@ -3643,8 +4138,8 @@
         } else if (phase === 'chase') {
           if (!chaseBubbleShown) {
             chaseBubbleShown = true;
-            hurryAvatarIndex = 1;
-            setPlayerBubble(1, 'pass', XIAOBAI_ZHIZHI_LINES[Math.floor(Math.random() * XIAOBAI_ZHIZHI_LINES.length)]);
+            hurryAvatarIndex = zhizhiSeat;
+            setPlayerBubble(zhizhiSeat, 'pass', XIAOBAI_ZHIZHI_LINES[Math.floor(Math.random() * XIAOBAI_ZHIZHI_LINES.length)]);
             render();
             setTimeout(function() {
               if (document.getElementById('xiaobaiVictoryWrap')) { hurryAvatarIndex = -1; render(); }
@@ -3652,8 +4147,8 @@
             if (xiaobaiZhizhiBubbleIntervalId) clearInterval(xiaobaiZhizhiBubbleIntervalId);
             xiaobaiZhizhiBubbleIntervalId = setInterval(function() {
               if (!document.getElementById('xiaobaiVictoryWrap') || !gameOver) return;
-              hurryAvatarIndex = 1;
-              setPlayerBubble(1, 'pass', XIAOBAI_ZHIZHI_LINES[Math.floor(Math.random() * XIAOBAI_ZHIZHI_LINES.length)]);
+              hurryAvatarIndex = zhizhiSeat;
+              setPlayerBubble(zhizhiSeat, 'pass', XIAOBAI_ZHIZHI_LINES[Math.floor(Math.random() * XIAOBAI_ZHIZHI_LINES.length)]);
               render();
               setTimeout(function() {
                 if (document.getElementById('xiaobaiVictoryWrap')) { hurryAvatarIndex = -1; render(); }
@@ -3732,6 +4227,7 @@
             walkTargetX = catchCenterX;
             walkTargetY = catchCenterY;
             nextBubblePopTime = now + 800 + Math.random() * 1000;
+            rectNow = { left: 0, top: 0 };
             if (!tableBubbleEl) {
               tableBubbleEl = document.createElement('div');
               tableBubbleEl.className = 'table-bubble bubble-shake-loop';
@@ -3835,8 +4331,9 @@
     var sansVictorySweatIntervalId = null;
     var humanVictoryRafId = null;
     var humanVictoryTypingIntervalId = null;
+    var humanVictoryWinnerSeat = -1;
     var humanPunishBubbleIntervalId = null;
-    var humanPunishForbiddenPlayers = [false, false, false];
+    var humanPunishForbiddenPlayers = [false, false, false, false];
     var zhizhiRapIntervalId = null;
     var zhizhiRapOtherNotesTimeoutId = null;
     var zhizhiRapOtherNotesIntervalId = null;
@@ -3903,7 +4400,9 @@
       setTimeout(function() {
         if (!document.getElementById('zhizhiVictoryWrap')) return;
         zhizhiRapShakeActive = true;
-        [0, 2, 3].forEach(function(idx) {
+        var zhizhiSeat = getSeatByCharacterIndex(1);
+        [0, 1, 2, 3].forEach(function(idx) {
+          if (idx === zhizhiSeat) return;
           var el = document.getElementById('player' + idx);
           if (el) el.classList.add('zhizhi-rap-shake');
         });
@@ -3919,7 +4418,7 @@
       }
       scheduleBar();
       zhizhiRapIntervalId = setInterval(scheduleBar, ZHIZHI_RAP_BAR_MS);
-      var otherPlayerIndices = [0, 2, 3];
+      var otherPlayerIndices = [0, 1, 2, 3].filter(function(s) { return s !== getSeatByCharacterIndex(1); });
       var noteChars = ['♪', '♫'];
       var otherNoteBaseMs = [400, 520, 480];
       zhizhiRapOtherNotesTimeoutId = setTimeout(function() {
@@ -3972,13 +4471,15 @@
       stopZhizhiRapBgm();
       var felt = document.querySelector('.felt');
       if (felt) felt.classList.remove('felt-shake-zhizhi-land');
-      [0, 2, 3].forEach(function(idx) {
+      var zs = getSeatByCharacterIndex(1);
+      [0, 1, 2, 3].forEach(function(idx) {
+        if (idx === zs) return;
         var el = document.getElementById('player' + idx);
         if (el) el.classList.remove('zhizhi-rap-shake');
       });
       var wrap = document.getElementById('zhizhiVictoryWrap');
       if (wrap && wrap.parentNode) wrap.parentNode.removeChild(wrap);
-      var p1 = document.getElementById('player1');
+      var p1 = zs >= 0 ? document.getElementById('player' + zs) : null;
       if (p1) p1.classList.remove('zhizhi-on-table');
       document.body.classList.remove('zhizhi-on-table');
     }
@@ -3987,7 +4488,8 @@
       var felt = document.querySelector('.felt');
       if (!felt) return;
       stopZhizhiVictoryAnimation();
-      var p1 = document.getElementById('player1');
+      var zhizhiSeat = getSeatByCharacterIndex(1);
+      var p1 = zhizhiSeat >= 0 ? document.getElementById('player' + zhizhiSeat) : null;
       if (p1) p1.classList.remove('winner');
       var rect = felt.getBoundingClientRect();
       var pad = 16;
@@ -4034,7 +4536,7 @@
       var enterStartTime = Date.now();
       var slamStartTime = 0;
       var slamDur = 280;
-      var slamUpPx = 28;
+      var slamUpPx = 52;
       var poseEndTime = 0;
       var patrolSegment = 'toRight';
       var patrolStartTime = 0;
@@ -4099,6 +4601,7 @@
           if (st >= 1) {
             phase = 'pose';
             poseEndTime = now;
+            if (typeof playZhizhiSlamSound === 'function') playZhizhiSlamSound();
             avatar.classList.add('zhizhi-avatar-pop');
             setTimeout(function() {
               if (avatar.parentNode) avatar.classList.remove('zhizhi-avatar-pop');
@@ -4214,13 +4717,15 @@
         clearInterval(sansVictorySweatIntervalId);
         sansVictorySweatIntervalId = null;
       }
-      [0, 1, 3].forEach(function(idx) {
+      var sansSeat = getSeatByCharacterIndex(2);
+      [0, 1, 2, 3].forEach(function(idx) {
+        if (idx === sansSeat) return;
         var el = document.getElementById('player' + idx);
         if (el) el.classList.remove('player-sweat-shake');
       });
       var wrap = document.getElementById('sansVictoryWrap');
       if (wrap && wrap.parentNode) wrap.parentNode.removeChild(wrap);
-      var p2 = document.getElementById('player2');
+      var p2 = sansSeat >= 0 ? document.getElementById('player' + sansSeat) : null;
       if (p2) p2.classList.remove('sans-on-table');
       document.body.classList.remove('sans-on-table');
     }
@@ -4233,8 +4738,11 @@
       if (humanVictoryTypingIntervalId) { clearInterval(humanVictoryTypingIntervalId); humanVictoryTypingIntervalId = null; }
       var wrap = document.getElementById('humanVictoryWrap');
       if (wrap && wrap.parentNode) wrap.parentNode.removeChild(wrap);
-      var p0 = document.getElementById('player0');
-      if (p0) p0.classList.remove('human-on-table');
+      if (humanVictoryWinnerSeat >= 0) {
+        var p0 = document.getElementById('player' + humanVictoryWinnerSeat);
+        if (p0) p0.classList.remove('human-on-table');
+        humanVictoryWinnerSeat = -1;
+      }
       document.body.classList.remove('human-on-table');
       if (humanPunishBubbleIntervalId) {
         clearInterval(humanPunishBubbleIntervalId);
@@ -4243,7 +4751,8 @@
       humanPunishForbiddenPlayers[0] = false;
       humanPunishForbiddenPlayers[1] = false;
       humanPunishForbiddenPlayers[2] = false;
-      [1, 2, 3].forEach(function(i) {
+      humanPunishForbiddenPlayers[3] = false;
+      [0, 1, 2, 3].forEach(function(i) {
         var el = document.getElementById('player' + i);
         if (!el) return;
         var av = el.querySelector('.player-avatar');
@@ -4251,11 +4760,13 @@
       });
     }
 
-    function startHumanVictoryAnimation() {
+    function startHumanVictoryAnimation(winnerIndex) {
       var felt = document.querySelector('.felt');
       if (!felt) return;
       stopHumanVictoryAnimation();
-      var p0 = document.getElementById('player0');
+      var winnerSeat = (typeof winnerIndex === 'number' && winnerIndex >= 0) ? winnerIndex : 0;
+      humanVictoryWinnerSeat = winnerSeat;
+      var p0 = document.getElementById('player' + winnerSeat);
       if (p0) p0.classList.remove('winner');
       var rect = felt.getBoundingClientRect();
       var pad = 16;
@@ -4380,7 +4891,8 @@
     }
 
     function startChipStealFly(fromIdx, wrap) {
-      if (!wrap || !wrap.parentNode || fromIdx < 1 || fromIdx > 3) return;
+      var winnerSeat = (humanVictoryWinnerSeat >= 0) ? humanVictoryWinnerSeat : 0;
+      if (!wrap || !wrap.parentNode || fromIdx < 0 || fromIdx > 3 || fromIdx === winnerSeat) return;
       var total = Math.max(0, players[fromIdx].chips);
       if (total === 0) return;
       var flyCount = Math.min(total, 15);
@@ -4437,11 +4949,11 @@
             chip.removeEventListener('animationend', done);
             if (chip.parentNode) chip.parentNode.removeChild(chip);
             players[fromIdx].chips = Math.max(0, players[fromIdx].chips - 1);
-            players[0].chips = (players[0].chips || 0) + 1;
+            players[winnerSeat].chips = (players[winnerSeat].chips || 0) + 1;
             render();
             if (i + 1 < flyCount) setTimeout(function() { flyOne(i + 1, leftToFly - 1); }, Math.max(16, 32 - i * 1.5));
             else if (players[fromIdx].chips > 0) {
-              players[0].chips += players[fromIdx].chips;
+              players[winnerSeat].chips += players[fromIdx].chips;
               players[fromIdx].chips = 0;
               render();
             }
@@ -4454,24 +4966,27 @@
 
     function startHumanPunishRounds(wrap) {
       if (!wrap || !wrap.parentNode) return;
-      function doRound(idx, next) {
+      var winnerSeat = (humanVictoryWinnerSeat >= 0) ? humanVictoryWinnerSeat : 0;
+      var otherSeats = [(winnerSeat + 1) % 4, (winnerSeat + 2) % 4, (winnerSeat + 3) % 4];
+      function doRound(roundIndex, next) {
         if (humanPunishBubbleIntervalId) {
           clearInterval(humanPunishBubbleIntervalId);
           humanPunishBubbleIntervalId = null;
         }
-        if (idx > 3) {
+        if (roundIndex >= otherSeats.length) {
           clearPlayerBubble();
           render();
           if (next) next();
           return;
         }
+        var seatIdx = otherSeats[roundIndex];
         var keyb = wrap.querySelector('.human-keyboard');
         if (!keyb) { if (next) next(); return; }
         keyb.classList.remove('human-keyboard-swing');
         keyb.offsetHeight;
         keyb.classList.remove('human-keyboard-rotate');
         keyb.classList.add('human-keyboard-swing');
-        var playerEl = document.getElementById('player' + idx);
+        var playerEl = document.getElementById('player' + seatIdx);
         var avatarEl = playerEl ? playerEl.querySelector('.player-avatar') : null;
         setTimeout(function() {
           if (avatarEl) avatarEl.classList.add('avatar-bounce-once');
@@ -4480,17 +4995,17 @@
           if (avatarEl) {
             avatarEl.classList.remove('avatar-bounce-once');
             avatarEl.classList.add('avatar-forbidden');
-            humanPunishForbiddenPlayers[idx - 1] = true;
+            humanPunishForbiddenPlayers[seatIdx] = true;
             playForbiddenSound();
-            startChipStealFly(idx, wrap);
+            startChipStealFly(seatIdx, wrap);
           }
         }, 380);
         setTimeout(function() {
-          setPlayerBubble(idx, 'pass', '?');
+          setPlayerBubble(seatIdx, 'pass', '?');
           render();
           humanPunishBubbleIntervalId = setInterval(function() {
             if (!wrap.parentNode || !gameOver) return;
-            setPlayerBubble(idx, 'pass', '?');
+            setPlayerBubble(seatIdx, 'pass', '?');
             render();
           }, 600);
         }, 880);
@@ -4499,17 +5014,18 @@
             keyb.classList.remove('human-keyboard-swing');
             keyb.classList.add('human-keyboard-rotate');
           }
-          doRound(idx + 1, next);
+          doRound(roundIndex + 1, next);
         }, 1700);
       }
-      doRound(1, null);
+      doRound(0, null);
     }
 
     function startSansVictoryAnimation() {
       var felt = document.querySelector('.felt');
       if (!felt) return;
       stopSansVictoryAnimation();
-      var p2 = document.getElementById('player2');
+      var sansSeat = getSeatByCharacterIndex(2);
+      var p2 = sansSeat >= 0 ? document.getElementById('player' + sansSeat) : null;
       if (p2) p2.classList.remove('winner');
       var rect = felt.getBoundingClientRect();
       var pad = 16;
@@ -4628,7 +5144,7 @@
               }
               showNextChar();
               setTimeout(function() {
-                var otherIndices = [0, 1, 3];
+                var otherIndices = [0, 1, 2, 3].filter(function(s) { return s !== getSeatByCharacterIndex(2); });
                 function spawnSweatForPlayer(idx) {
                   var playerEl = document.getElementById('player' + idx);
                   if (!playerEl || !document.getElementById('sansVictoryWrap')) return;
@@ -4653,9 +5169,9 @@
                   var playerEl = document.getElementById('player' + idx);
                   if (playerEl) playerEl.classList.add('player-sweat-shake');
                 });
-                spawnSweatForPlayer(0);
-                setTimeout(function() { spawnSweatForPlayer(1); }, 70);
-                setTimeout(function() { spawnSweatForPlayer(3); }, 140);
+                if (otherIndices[0] != null) spawnSweatForPlayer(otherIndices[0]);
+                if (otherIndices[1] != null) setTimeout(function() { spawnSweatForPlayer(otherIndices[1]); }, 70);
+                if (otherIndices[2] != null) setTimeout(function() { spawnSweatForPlayer(otherIndices[2]); }, 140);
                 if (sansVictorySweatIntervalId != null) clearInterval(sansVictorySweatIntervalId);
                 sansVictorySweatIntervalId = setInterval(function() {
                   if (!document.getElementById('sansVictoryWrap')) return;
@@ -4688,30 +5204,54 @@
       sansVictoryRafId = requestAnimationFrame(tick);
     }
 
+    function showWinnerBanner() {
+      var wrap = document.getElementById('winnerBanner');
+      if (!wrap) return;
+      var winnerIndex = gameOverWinnerIndex;
+      var charIndex = winnerIndex >= 0 && players[winnerIndex] ? players[winnerIndex].characterIndex : 0;
+      var name = CHARACTERS[charIndex] ? CHARACTERS[charIndex].name : '';
+      var text = '胜利者：' + name + '!';
+      wrap.innerHTML = '';
+      for (var i = 0; i < text.length; i++) {
+        var span = document.createElement('span');
+        span.className = 'winner-char';
+        span.style.animationDelay = (i * 0.08) + 's';
+        span.textContent = text[i];
+        wrap.appendChild(span);
+      }
+      wrap.classList.remove('hidden');
+    }
+    function hideWinnerBanner() {
+      var wrap = document.getElementById('winnerBanner');
+      if (wrap) wrap.classList.add('hidden');
+    }
+
     function showGameOverCelebration() {
       var winnerIndex = gameOverWinnerIndex;
+      var winnerCharIndex = winnerIndex >= 0 && players[winnerIndex] ? players[winnerIndex].characterIndex : -1;
+      if (winnerIndex >= 0) showWinnerBanner();
       if (gameOverIsYou) {
         playVictoryBgm();
-        // startConfetti(); // 彩带已隐藏，需要时去掉注释即可
+        startConfetti();
       } else {
         playFailureBgm();
       }
       if (winnerIndex < 0) return;
-      if (winnerIndex === 0) {
-        setPlayerBubble(0, 'pass', getAILine('gameOverFirst', 0, '在座的各位都是辣鸡~'));
+      if (winnerCharIndex === 0) {
+        setPlayerBubble(winnerIndex, 'pass', getAILine('gameOverFirst', getCharIndex(winnerIndex), '在座的各位都是辣鸡~'));
         render();
         gameOverBubbleTimeoutId = setTimeout(function() {
           gameOverBubbleTimeoutId = null;
           if (gameOver) {
             clearPlayerBubble();
             render();
-            startHumanVictoryAnimation();
+            startHumanVictoryAnimation(winnerIndex);
           }
         }, 2000);
         return;
       }
-      if (winnerIndex === 1) {
-        setPlayerBubble(winnerIndex, 'pass', getAILine('gameOverFirst', winnerIndex, '在座的各位都是辣鸡~'));
+      if (winnerCharIndex === 1) {
+        setPlayerBubble(winnerIndex, 'pass', getAILine('gameOverFirst', getCharIndex(winnerIndex), '在座的各位都是辣鸡~'));
         render();
         gameOverBubbleTimeoutId = setTimeout(function() {
           gameOverBubbleTimeoutId = null;
@@ -4723,8 +5263,8 @@
         }, 2000);
         return;
       }
-      if (winnerIndex === 2) {
-        setPlayerBubble(winnerIndex, 'pass', getAILine('gameOverFirst', winnerIndex, '在座的各位都是辣鸡~'));
+      if (winnerCharIndex === 2) {
+        setPlayerBubble(winnerIndex, 'pass', getAILine('gameOverFirst', getCharIndex(winnerIndex), '在座的各位都是辣鸡~'));
         render();
         gameOverBubbleTimeoutId = setTimeout(function() {
           gameOverBubbleTimeoutId = null;
@@ -4736,59 +5276,31 @@
         }, 2000);
         return;
       }
-      if (winnerIndex === 3) {
-        setPlayerBubble(winnerIndex, 'pass', getAILine('gameOverFirst', winnerIndex, '在座的各位都是辣鸡~'));
+      if (winnerCharIndex === 3) {
+        setPlayerBubble(winnerIndex, 'pass', getAILine('gameOverFirst', getCharIndex(winnerIndex), '在座的各位都是辣鸡~'));
         render();
         gameOverBubbleTimeoutId = setTimeout(function() {
           gameOverBubbleTimeoutId = null;
           if (gameOver) {
             clearPlayerBubble();
             render();
-            startXiaobaiVictoryAnimation(function(bubbleX, bubbleY) {
-              var winIdx = winnerIndex;
-              if (winIdx !== 3) {
-                var x = typeof bubbleX === 'number' ? bubbleX : (window.innerWidth / 2);
-                var y = typeof bubbleY === 'number' ? bubbleY : (window.innerHeight / 2);
-                var bubbleShowDur = 2500;
-                function showOneBubble() {
-                  if (!gameOver) return;
-                  var old = document.getElementById('xiaobaiTableBubble');
-                  if (old && old.parentNode) old.parentNode.removeChild(old);
-                  var el = document.createElement('div');
-                  el.id = 'xiaobaiTableBubble';
-                  el.className = 'table-bubble-fixed bubble-animate-in';
-                  el.textContent = getAILine('gameOverLoop', winIdx, 'HAHAHAHAHA');
-                  el.style.left = x + 'px';
-                  el.style.top = (y - 42) + 'px';
-                  document.body.appendChild(el);
-                  if (xiaobaiTableBubbleTimeoutId) clearTimeout(xiaobaiTableBubbleTimeoutId);
-                  xiaobaiTableBubbleTimeoutId = setTimeout(function() {
-                    xiaobaiTableBubbleTimeoutId = null;
-                    if (!gameOver) return;
-                    var o = document.getElementById('xiaobaiTableBubble');
-                    if (o && o.parentNode) o.parentNode.removeChild(o);
-                    if (xiaobaiTableBubbleTimeoutId) clearTimeout(xiaobaiTableBubbleTimeoutId);
-                    xiaobaiTableBubbleTimeoutId = setTimeout(showOneBubble, 1000 + Math.random() * 1000);
-                  }, bubbleShowDur);
-                }
-                showOneBubble();
-              }
-              /* 小白(3)只用 wrap 内的 tableBubbleEl 一个气泡，不重复创建固定气泡，避免重叠 */
+            startXiaobaiVictoryAnimation(function() {
+              /* 小白只用 wrap 内的 tableBubbleEl 一个气泡（喵/喵呜~），不创建固定气泡，避免多余气泡 */
             });
           }
         }, 2000);
         return;
       }
-      setPlayerBubble(winnerIndex, 'pass', getAILine('gameOverFirst', winnerIndex, '在座的各位都是辣鸡~'));
+      setPlayerBubble(winnerIndex, 'pass', getAILine('gameOverFirst', getCharIndex(winnerIndex), '在座的各位都是辣鸡~'));
       render();
       gameOverBubbleTimeoutId = setTimeout(function() {
         gameOverBubbleTimeoutId = null;
         if (gameOver) return;
-        setPlayerBubble(winnerIndex, 'pass', getAILine('gameOverLoop', winnerIndex, 'HAHAHAHAHA'));
+        setPlayerBubble(winnerIndex, 'pass', getAILine('gameOverLoop', getCharIndex(winnerIndex), 'HAHAHAHAHA'));
         render();
         gameOverBubbleIntervalId = setInterval(function() {
           if (gameOver) return;
-          setPlayerBubble(winnerIndex, 'pass', getAILine('gameOverLoop', winnerIndex, 'HAHAHAHAHA'));
+          setPlayerBubble(winnerIndex, 'pass', getAILine('gameOverLoop', getCharIndex(winnerIndex), 'HAHAHAHAHA'));
           render();
         }, 2500);
       }, 5500);
@@ -4817,6 +5329,7 @@
       var passEl = document.getElementById('tablePassIndicators');
       if (passEl) passEl.innerHTML = '';
       document.getElementById('gameOverOverlay').classList.remove('show');
+      hideWinnerBanner();
       var cw = document.getElementById('confettiWrap');
       if (cw) { cw.classList.add('hidden'); cw.innerHTML = ''; }
       stopXiaobaiVictoryAnimation();
@@ -4902,10 +5415,13 @@
             justPlacedBid = false;
             var feltEl = document.querySelector('.felt');
             if (feltEl) {
-              var isLarge = bidHistory.some(function(e) { return e.amount >= 8; });
-              feltEl.classList.remove('felt-shake', 'felt-shake-heavy', 'felt-shake-light');
+              var isLarge = bidHistory.some(function(e) { return e.amount >= 7; });
+              var raiseLevel = Math.min(4, Math.max(1, bidHistory.length));
+              var shakeClass = isLarge ? ('felt-shake-bid-h' + raiseLevel) : ('felt-shake-bid-l' + raiseLevel);
+              var shakeDur = isLarge ? (500 + raiseLevel * 60) : (240 + raiseLevel * 40);
+              feltEl.classList.remove('felt-shake', 'felt-shake-heavy', 'felt-shake-light', 'felt-shake-bid-l1', 'felt-shake-bid-l2', 'felt-shake-bid-l3', 'felt-shake-bid-l4', 'felt-shake-bid-h1', 'felt-shake-bid-h2', 'felt-shake-bid-h3', 'felt-shake-bid-h4');
               feltEl.offsetHeight;
-              feltEl.classList.add(isLarge ? 'felt-shake-heavy' : 'felt-shake-light');
+              feltEl.classList.add(shakeClass);
               if (isLarge) {
                 var flyLayer = document.getElementById('chipFlyLayer');
                 if (tableChipsEl && flyLayer) {
@@ -4928,15 +5444,15 @@
                     p.style.top = cy + 'px';
                     p.style.setProperty('--tx', tx);
                     p.style.setProperty('--ty', ty);
-                    p.style.opacity = (0.75 + Math.random() * 0.25).toFixed(2);
+                    p.style.opacity = (0.92 + Math.random() * 0.08).toFixed(2);
                     flyLayer.appendChild(p);
                     setTimeout(function(el) { if (el.parentNode) el.parentNode.removeChild(el); }, 450, p);
                   }
                 }
               }
               setTimeout(function() {
-                feltEl.classList.remove('felt-shake', 'felt-shake-heavy', 'felt-shake-light');
-              }, isLarge ? 560 : 240);
+                feltEl.classList.remove('felt-shake', 'felt-shake-heavy', 'felt-shake-light', 'felt-shake-bid-l1', 'felt-shake-bid-l2', 'felt-shake-bid-l3', 'felt-shake-bid-l4', 'felt-shake-bid-h1', 'felt-shake-bid-h2', 'felt-shake-bid-h3', 'felt-shake-bid-h4');
+              }, shakeDur);
             }
           }
         }
@@ -4945,37 +5461,37 @@
       var passEl = document.getElementById('tablePassIndicators');
       passEl.innerHTML = '';
       if (!tableChipsClearedForCardFly) {
-        passedThisRound.forEach(function(pid) {
-          var cx = 50, cy = 50;
-          if (pid === 0) { cx = 50; cy = 83; }
-          else if (pid === 1) { cx = 15; cy = 50; }
-          else if (pid === 2) { cx = 50; cy = 17; }
-          else { cx = 85; cy = 50; }
-          var div = document.createElement('div');
-          div.className = 'pass-indicator';
-          div.style.left = cx + '%';
-          div.style.top = cy + '%';
-          passEl.appendChild(div);
-        });
+      passedThisRound.forEach(function(pid) {
+        var cx = 50, cy = 50;
+        if (pid === 0) { cx = 50; cy = 83; }
+        else if (pid === 1) { cx = 15; cy = 50; }
+        else if (pid === 2) { cx = 50; cy = 17; }
+        else { cx = 85; cy = 50; }
+        var div = document.createElement('div');
+        div.className = 'pass-indicator';
+        div.style.left = cx + '%';
+        div.style.top = cy + '%';
+        passEl.appendChild(div);
+      });
       }
       document.getElementById('bidPoolNum').textContent = currentBid ? '×' + currentBid : '0';
       players.forEach((p, i) => {
         const div = document.getElementById('player' + i);
         var baseClass = 'player player-' + ['bottom','left','top','right'][i] + (i === HUMAN_INDEX ? ' you' : '');
-        if (i === 3 && document.body.classList.contains('xiaobai-left-seat')) baseClass += ' xiaobai-on-table';
-        if (i === 1 && document.getElementById('zhizhiVictoryWrap')) baseClass += ' zhizhi-on-table';
-        if (i === 2 && document.getElementById('sansVictoryWrap')) baseClass += ' sans-on-table';
-        if (i === 0 && document.getElementById('humanVictoryWrap')) baseClass += ' human-on-table';
+        if (getSeatByCharacterIndex(3) === i && document.body.classList.contains('xiaobai-left-seat')) baseClass += ' xiaobai-on-table';
+        if (getSeatByCharacterIndex(1) === i && document.getElementById('zhizhiVictoryWrap')) baseClass += ' zhizhi-on-table';
+        if (getSeatByCharacterIndex(2) === i && document.getElementById('sansVictoryWrap')) baseClass += ' sans-on-table';
+        if (humanVictoryWinnerSeat === i && document.getElementById('humanVictoryWrap')) baseClass += ' human-on-table';
         div.className = baseClass;
         if (p.score >= TARGET_SCORE) div.classList.add('winner'); else div.classList.remove('winner');
-        if (i === 3 && document.getElementById('xiaobaiVictoryWrap')) div.classList.remove('winner');
-        if (i === 1 && document.getElementById('zhizhiVictoryWrap')) div.classList.remove('winner');
-        if (i === 2 && document.getElementById('sansVictoryWrap')) div.classList.remove('winner');
-        if (i === 0 && document.getElementById('humanVictoryWrap')) div.classList.remove('winner');
-        if (zhizhiRapShakeActive && [0, 2, 3].indexOf(i) !== -1) div.classList.add('zhizhi-rap-shake');
-        const xiaobaiOnTable = i === 3 && div.classList.contains('xiaobai-on-table');
-        const zhizhiOnTable = i === 1 && div.classList.contains('zhizhi-on-table');
-        const sansOnTable = i === 2 && div.classList.contains('sans-on-table');
+        if (getSeatByCharacterIndex(3) === i && document.getElementById('xiaobaiVictoryWrap')) div.classList.remove('winner');
+        if (getSeatByCharacterIndex(1) === i && document.getElementById('zhizhiVictoryWrap')) div.classList.remove('winner');
+        if (getSeatByCharacterIndex(2) === i && document.getElementById('sansVictoryWrap')) div.classList.remove('winner');
+        if (humanVictoryWinnerSeat === i && document.getElementById('humanVictoryWrap')) div.classList.remove('winner');
+        if (zhizhiRapShakeActive && i !== getSeatByCharacterIndex(1)) div.classList.add('zhizhi-rap-shake');
+        const xiaobaiOnTable = getSeatByCharacterIndex(3) === i && div.classList.contains('xiaobai-on-table');
+        const zhizhiOnTable = getSeatByCharacterIndex(1) === i && div.classList.contains('zhizhi-on-table');
+        const sansOnTable = getSeatByCharacterIndex(2) === i && div.classList.contains('sans-on-table');
         const bubble = !xiaobaiOnTable && !zhizhiOnTable && !sansOnTable && currentBubble && currentBubble.playerIndex === i;
         let bubbleContent = '';
         var bubbleAnimateIn = false;
@@ -4984,7 +5500,7 @@
           if (currentBubble.type === 'think') {
             bubbleAnimateIn = thinkDots === 0;
             var dots = '.'.repeat(1 + (thinkDots % 3));
-            var thinkPrefix = getAILine('thinkPrefix', currentBubble.playerIndex, '我要验牌');
+            var thinkPrefix = getAILine('thinkPrefix', getCharIndex(currentBubble.playerIndex), '我要验牌');
             bubbleContent = '<span class="think-text">' + thinkPrefix + dots + '</span>';
           } else if (currentBubble.type === 'bid') {
             bubbleAnimateIn = bubbleKey !== lastBubbleAnimatedKey;
@@ -4998,7 +5514,7 @@
             bubbleAnimateIn = bubbleKey !== lastBubbleAnimatedKey;
             if (bubbleAnimateIn) lastBubbleAnimatedKey = bubbleKey;
             var passText = currentBubble.value || '不要';
-            if (currentBubble.playerIndex === 1 && document.getElementById('xiaobaiVictoryWrap')) {
+            if (currentBubble.playerIndex === getSeatByCharacterIndex(1) && document.getElementById('xiaobaiVictoryWrap')) {
               bubbleContent = passText.split('').map(function(c) { return '<span class="bubble-char-shake">' + c + '</span>'; }).join('');
             } else {
               bubbleContent = '<span>' + passText + '</span>';
@@ -5010,7 +5526,8 @@
         const bubbleHtml = bubble
           ? '<div class="player-bubble show ' + (currentBubble.type === 'bid' ? 'bubble-bid ' : '') + (currentBubble.type === 'hurry' ? 'bubble-shake ' : '') + (bubbleAnimateIn ? 'bubble-animate-in' : '') + '">' + bubbleContent + '</div>'
           : '<div class="player-bubble"></div>';
-        const avatarHtml = '<div class="player-avatar' + (i === hurryAvatarIndex ? ' avatar-hurry' : '') + (i >= 1 && i <= 3 && humanPunishForbiddenPlayers[i - 1] ? ' avatar-forbidden' : '') + '"><img src="avatars/head_' + (i + 1) + '.png?v=8" alt=""></div>';
+        var charIdx = (p.characterIndex != null) ? p.characterIndex : i;
+        const avatarHtml = '<div class="player-avatar' + (i === hurryAvatarIndex ? ' avatar-hurry' : '') + (humanPunishForbiddenPlayers[i] ? ' avatar-forbidden' : '') + '"><img src="avatars/head_' + (charIdx + 1) + '.png?v=8" alt=""></div>';
         div.innerHTML = `
           <div class="player-main">
             <div class="player-info">
@@ -5079,9 +5596,9 @@
       }
     }
 
-    document.getElementById('newGame').onclick = startGame;
-    document.getElementById('btnAgain').onclick = () => { hideGameOverOverlay(); startGame(); };
-    document.getElementById('btnAgainInGame').onclick = startGame;
+    document.getElementById('newGame').onclick = showCharSelect;
+    document.getElementById('btnAgain').onclick = function() { hideGameOverOverlay(); showCharSelect(); };
+    document.getElementById('btnAgainInGame').onclick = showCharSelect;
     var rulesOverlayAsHelp = false;
     var startBtnClicked = false;
     document.getElementById('btnStartGame').onclick = function() {
@@ -5093,82 +5610,73 @@
       }
       if (startBtnClicked) return;
       startBtnClicked = true;
-      var chip = document.getElementById('startChipSource');
       var btn = this;
-      if (!chip || !btn) {
+      var row = document.getElementById('startChipsRow');
+      if (!btn) {
         startBtnClicked = false;
         document.getElementById('rulesOverlay').classList.add('hidden');
-        startGame();
+        showCharSelect();
         return;
       }
       var btnR = btn.getBoundingClientRect();
       var chipW = 36;
       var chipH = 36;
-      var startX = btnR.left + btnR.width / 2 - chipW / 2;
-      var startY = btnR.top - 280;
       var endX = btnR.left + btnR.width / 2 - chipW / 2;
       var endY = btnR.top + btnR.height / 2 - chipH / 2;
-      var fly = chip.cloneNode(true);
-      fly.classList.add('chip-fly-clone');
-      fly.style.animation = 'none';
-      fly.style.visibility = 'visible';
-      fly.style.left = startX + 'px';
-      fly.style.top = startY + 'px';
-      fly.style.position = 'fixed';
-      fly.style.margin = '0';
-      fly.style.width = chipW + 'px';
-      fly.style.height = chipH + 'px';
-      document.body.appendChild(fly);
-      var trailStop = false;
-      var trailRafId;
-      var trailFrame = 0;
-      function spawnTrailParticle() {
-        if (trailStop) return;
-        trailFrame++;
-        if (trailFrame % 2 === 0) {
-          var r = fly.getBoundingClientRect();
-          var size = 6 + Math.random() * 10;
-          var offsetX = (Math.random() - 0.5) * 20;
-          var p = document.createElement('div');
-          p.className = 'chip-fly-particle';
-          p.style.left = (r.left + r.width / 2 - size / 2 + offsetX) + 'px';
-          p.style.top = (r.top + r.height) + 'px';
-          p.style.width = size + 'px';
-          p.style.height = size + 'px';
-          p.style.animationDuration = (0.35 + Math.random() * 0.3) + 's';
-          p.style.animationDelay = (Math.random() * 0.08) + 's';
-          p.style.setProperty('--tx', (Math.random() - 0.5) * 16 + 'px');
-          p.style.setProperty('--scale-end', (0.2 + Math.random() * 0.35).toFixed(2));
-          document.body.appendChild(p);
-          setTimeout(function() { if (p.parentNode) p.remove(); }, 700);
-        }
-        if (!trailStop) trailRafId = requestAnimationFrame(spawnTrailParticle);
+      var chip = row && row.firstElementChild ? row.firstElementChild : null;
+      if (!chip) {
+        startBtnClicked = false;
+        document.getElementById('rulesOverlay').classList.add('hidden');
+        showCharSelect();
+        return;
       }
-      trailRafId = requestAnimationFrame(spawnTrailParticle);
-      requestAnimationFrame(function() {
-        requestAnimationFrame(function() {
-          fly.style.transition = 'left 0.55s ease-in, top 0.6s ease-in';
-          fly.style.left = endX + 'px';
-          fly.style.top = endY + 'px';
-        });
-      });
-      fly.addEventListener('transitionend', function done(ev) {
-        if (ev.propertyName !== 'top') return;
-        fly.removeEventListener('transitionend', done);
-        trailStop = true;
-        if (trailRafId) cancelAnimationFrame(trailRafId);
-        fly.remove();
+      var r = chip.getBoundingClientRect();
+      var startX = r.left + r.width / 2 - chipW / 2;
+      var startY = r.top + r.height / 2 - chipH / 2;
+      var centerX = (window.innerWidth || document.documentElement.clientWidth) / 2 - chipW / 2;
+      var highY = (window.innerHeight || document.documentElement.clientHeight) * 0.22 - chipH / 2;
+      chip.style.animation = 'none';
+      chip.style.position = 'fixed';
+      chip.style.left = startX + 'px';
+      chip.style.top = startY + 'px';
+      chip.style.width = chipW + 'px';
+      chip.style.height = chipH + 'px';
+      chip.style.margin = '0';
+      chip.style.transition = 'none';
+      chip.classList.add('chip-fly-clone');
+      document.body.appendChild(chip);
+      function onFlyDone() {
+        if (chip.parentNode) chip.remove();
         var startBtn = document.getElementById('btnStartGame');
-        startBtn.classList.add('btn-start-hit');
+        if (startBtn) startBtn.classList.add('btn-start-hit');
         if (typeof playStartGameSound === 'function') playStartGameSound();
         setTimeout(function() {
-          startBtn.classList.remove('btn-start-hit');
+          if (startBtn) startBtn.classList.remove('btn-start-hit');
           setTimeout(function() {
             document.getElementById('rulesOverlay').classList.add('hidden');
             startBtnClicked = false;
-            startGame();
+            showCharSelect();
           }, 380);
         }, 520);
+      }
+      requestAnimationFrame(function() {
+        requestAnimationFrame(function() {
+          chip.style.transition = 'left 0.42s ease-out, top 0.42s ease-out';
+          chip.style.left = centerX + 'px';
+          chip.style.top = highY + 'px';
+        });
+      });
+      chip.addEventListener('transitionend', function step1(ev) {
+        if (ev.propertyName !== 'top') return;
+        chip.removeEventListener('transitionend', step1);
+        chip.style.transition = 'left 0.32s ease-in, top 0.35s ease-in';
+        chip.style.left = endX + 'px';
+        chip.style.top = endY + 'px';
+        chip.addEventListener('transitionend', function step2(ev2) {
+          if (ev2.propertyName !== 'top') return;
+          chip.removeEventListener('transitionend', step2);
+          onFlyDone();
+        });
       });
     };
     (function() {
@@ -5209,47 +5717,37 @@
         setTimeout(function() { showGameOverCelebration(); }, 1200);
       }
     };
-    function setAiWinner(aiIndex) {
-      if (gameOver || !players.length || aiIndex < 1 || aiIndex > 3) return;
-      var p = players[aiIndex];
-      if (!p || p.isHuman) return;
+    function setCharacterWinner(characterIndex) {
+      if (gameOver || !players.length || characterIndex < 0 || characterIndex > 3) return;
+      var seat = getSeatByCharacterIndex(characterIndex);
+      if (seat < 0) return;
+      var p = players[seat];
+      if (!p) return;
       p.score = 30;
       gameOver = true;
       gameOverByDeck = false;
       gameOverWinnerName = p.name;
       gameOverWinnerScore = p.score;
-      gameOverIsYou = false;
-      gameOverWinnerIndex = aiIndex;
+      gameOverIsYou = p.isHuman;
+      gameOverWinnerIndex = seat;
       render();
       setTimeout(function() { showGameOverCelebration(); }, 1200);
     }
-    function setMeWinner() {
-      if (gameOver || !players.length) return;
-      var p = players[0];
-      if (!p || !p.isHuman) return;
-      p.score = 30;
-      gameOver = true;
-      gameOverByDeck = false;
-      gameOverWinnerName = p.name;
-      gameOverWinnerScore = p.score;
-      gameOverIsYou = true;
-      gameOverWinnerIndex = 0;
-      render();
-      setTimeout(function() { showGameOverCelebration(); }, 1200);
-    }
-    document.getElementById('btnMeWin').onclick = setMeWinner;
-    document.getElementById('btnAiWin1').onclick = function() { setAiWinner(1); };
-    document.getElementById('btnAiWin2').onclick = function() { setAiWinner(2); };
-    document.getElementById('btnAiWin3').onclick = function() { setAiWinner(3); };
+    document.getElementById('btnMeWin').onclick = function() { setCharacterWinner(0); };
+    document.getElementById('btnAiWin1').onclick = function() { setCharacterWinner(1); };
+    document.getElementById('btnAiWin2').onclick = function() { setCharacterWinner(2); };
+    document.getElementById('btnAiWin3').onclick = function() { setCharacterWinner(3); };
+    var BGM_LABELS = ['BGM1', 'BGM2', 'BGM3', '胜利', '失败'];
     document.getElementById('btnBgmSwitch').onclick = function() {
       stopNormalBgm();
-      currentBgmIndex = (currentBgmIndex + 1) % 3;
+      currentBgmIndex = (currentBgmIndex + 1) % 5;
       var btn = document.getElementById('btnBgmSwitch');
-      if (btn) btn.textContent = 'BGM' + (currentBgmIndex + 1);
-      if (currentBgmIndex === 0) {
+      if (btn) btn.textContent = BGM_LABELS[currentBgmIndex];
+      if (currentBgmIndex <= 2) {
+        gameBgmIndex = currentBgmIndex;
         bgmMode = 0;
         startBgmIfNeeded();
-      } else if (currentBgmIndex === 1) {
+      } else if (currentBgmIndex === 3) {
         playVictoryBgm();
       } else {
         playFailureBgm();
