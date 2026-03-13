@@ -3015,8 +3015,11 @@
       { t: 6600, n: 6 }, { t: 7700, n: 7 }, { t: 8800, n: 0 }, { t: 9900, n: 1 }, { t: 11000, n: 2 }
     ];
 
-    var gameBgmIndex = 0; // 0=BGM1, 1=BGM2, 2=BGM3（游戏中循环）
+    var gameBgmIndex = 0; // 0=BGM1, 1=BGM2, 2=BGM3, 3=自定义MP3（游戏中循环）
     var bgmScheduleToken = 0;
+    var customBgmAudio = null;
+    /** 自定义牌桌 BGM：把 MP3 放在与 index.html 同目录，命名为 bgm.mp3；在 BGM 按钮里选「自定义」即可播放 */
+    var CUSTOM_BGM_MP3 = 'bgm.mp3';
 
     function playBgmNote(noteIndex, melody, waveType, gain, decaySec, expectedToken, attackSec) {
       if (bgmMode !== 0 || !isMusicOn || !musicGain || !musicCtx) return;
@@ -3047,7 +3050,7 @@
     }
 
     function scheduleBgmCycle() {
-      if (!musicGain || !musicCtx) return;
+      if (gameBgmIndex === 3 || !musicGain || !musicCtx) return;
       bgmScheduleToken++;
       var token = bgmScheduleToken;
       var mel = gameBgmIndex === 0 ? BGM_MELODY : (gameBgmIndex === 1 ? BGM2_MELODY : BGM3_MELODY);
@@ -3065,7 +3068,29 @@
       musicCycleTimeoutId = setTimeout(scheduleBgmCycle, ms);
     }
 
+    function startCustomBgm() {
+      if (!customBgmAudio) {
+        customBgmAudio = new Audio();
+        customBgmAudio.loop = true;
+        customBgmAudio.src = CUSTOM_BGM_MP3;
+      }
+      customBgmAudio.volume = isMusicOn ? 0.6 : 0;
+      customBgmAudio.play().catch(function() {});
+    }
+
+    function stopCustomBgm() {
+      if (customBgmAudio) {
+        customBgmAudio.pause();
+        customBgmAudio.currentTime = 0;
+      }
+    }
+
     function startBgmIfNeeded() {
+      if (gameBgmIndex === 3) {
+        stopNormalBgm();
+        startCustomBgm();
+        return;
+      }
       if (musicCycleTimeoutId != null) return;
       try {
         musicCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -3077,10 +3102,12 @@
     }
 
     function stopNormalBgm() {
+      bgmScheduleToken++;
       if (musicCycleTimeoutId != null) {
         clearTimeout(musicCycleTimeoutId);
         musicCycleTimeoutId = null;
       }
+      stopCustomBgm();
     }
 
     /* 胜利/失败短曲：setTimeout 触发单音；游戏中循环 BGM 为 BGM1 / BGM2 / BGM3 */
@@ -3172,6 +3199,7 @@
     function toggleMusic() {
       isMusicOn = !isMusicOn;
       if (musicGain) musicGain.gain.value = isMusicOn ? 1.68 : 0;
+      if (customBgmAudio && gameBgmIndex === 3) customBgmAudio.volume = isMusicOn ? 0.6 : 0;
       else if (isMusicOn) startBgmIfNeeded();
       var btn = document.getElementById('btnMusic');
       if (btn) {
@@ -3342,11 +3370,11 @@
       var co = document.getElementById('charSelectOverlay');
       if (co) co.classList.add('hidden');
       hideWinnerBanner();
-      gameBgmIndex = 2;
-      currentBgmIndex = 2;
+      gameBgmIndex = 3;
+      currentBgmIndex = 3;
       stopNormalBgm();
       var btnBgm = document.getElementById('btnBgmSwitch');
-      if (btnBgm) btnBgm.textContent = BGM_LABELS[2];
+      if (btnBgm) btnBgm.textContent = BGM_LABELS[3];
       startBgmIfNeeded();
       gameOverTime = 0;
       gameOverAgainScheduled = false;
@@ -5737,17 +5765,17 @@
     document.getElementById('btnAiWin1').onclick = function() { setCharacterWinner(1); };
     document.getElementById('btnAiWin2').onclick = function() { setCharacterWinner(2); };
     document.getElementById('btnAiWin3').onclick = function() { setCharacterWinner(3); };
-    var BGM_LABELS = ['BGM1', 'BGM2', 'BGM3', '胜利', '失败'];
+    var BGM_LABELS = ['BGM1', 'BGM2', 'BGM3', '自定义', '胜利', '失败'];
     document.getElementById('btnBgmSwitch').onclick = function() {
       stopNormalBgm();
-      currentBgmIndex = (currentBgmIndex + 1) % 5;
+      currentBgmIndex = (currentBgmIndex + 1) % 6;
       var btn = document.getElementById('btnBgmSwitch');
       if (btn) btn.textContent = BGM_LABELS[currentBgmIndex];
-      if (currentBgmIndex <= 2) {
+      if (currentBgmIndex <= 3) {
         gameBgmIndex = currentBgmIndex;
         bgmMode = 0;
         startBgmIfNeeded();
-      } else if (currentBgmIndex === 3) {
+      } else if (currentBgmIndex === 4) {
         playVictoryBgm();
       } else {
         playFailureBgm();
